@@ -27,7 +27,8 @@ public class JExtractor {
         Stack<String> workQueue=new Stack();
         Properties prop = new Properties();
         try{
-            prop.load(new FileInputStream("/home/steve/NetBeansProjects/jExtractor/src/uk/gov/tna/fudge/jExtractor/conf.properties"));
+            //path /home/sprice/NetBeansProjects/jExtractor/src/uk/gov/tna/fudge/jExtractor/
+            prop.load(new FileInputStream("TNAconf.properties"));
         }
         catch(IOException ex)
         {
