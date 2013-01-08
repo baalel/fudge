@@ -118,6 +118,8 @@ public class MongoDoc {
         son.put("StartDate", startdate);
         son.put("EndDate", enddate);
         son.put("Schema", schema);
+        son.put("Catdocref",catDocRef);
+        son.put("Reference", ref.values);
         
         return son;
         
@@ -130,36 +132,37 @@ public class MongoDoc {
         int level=this.sourceLevelId;
         String workingid=this.iaid;
         String currentRef=this.reference;
+        StringBuilder catreference=new StringBuilder("");
         
         String workingRef;
         if(cache.exists(parent)){
             if(level==6 ||level==7){
-                workingRef=cache.loopup(parent)+"/" + currentRef;
-                cache.insert(workingid, workingRef);
+                catreference.append(cache.loopup(parent)).append("/").append(currentRef);
+                cache.insert(workingid, catreference.toString());
             }
             else if(level==3)
             {   
-                workingRef=cache.loopup(parent) + " " +currentRef;
-                cache.insert(workingid, workingRef);
+                catreference.append(cache.loopup(parent)).append(" ").append(currentRef);
+                cache.insert(workingid, catreference.toString());
             }
             else{
-                workingRef=cache.loopup(parent);
-                cache.insert(workingid, workingRef);
+                catreference.append(cache.loopup(parent));
+                cache.insert(workingid, catreference.toString());
             }                     
         }
         else{
-            StringBuilder reference=new StringBuilder("");
+            
             while(!"C0".equals(parent)){
                 if (level==6||level==7){
-                    reference.insert(0, currentRef);
-                    reference.insert(0,"/");
+                    catreference.insert(0, currentRef);
+                    catreference.insert(0,"/");
                 }
                 else if (level==3){
-                    reference.insert(0, currentRef);
-                    reference.insert(0, " ");
+                    catreference.insert(0, currentRef);
+                    catreference.insert(0, " ");
                 }
                 else if(level==1){
-                    reference.insert(0,currentRef);
+                    catreference.insert(0,currentRef);
                 }
                 //go get parent
                 DBObject doc=fetcher.findOne("IAID", parent);
@@ -171,8 +174,8 @@ public class MongoDoc {
             }
             
         }
-        
-        throw new UnsupportedOperationException("Not yet implemented");
+        return reference.toString();
+        //throw new UnsupportedOperationException("Not yet implemented");
     }
     
     private static String cleanTitle(String dirty)
@@ -377,15 +380,20 @@ public class MongoDoc {
     }
     
     private class Reference {
-        ArrayList<String> refList;
+        protected ArrayList<String> values;
+        
         Reference(String rawData){
-            refList=new ArrayList<String>();
-            refList.add(rawData);
+            values=new ArrayList<String>();
+            values.add(rawData);
         }
         
         void append(String ref)
         {
-            refList.add(ref);
+            values.add(ref);
+        }
+        
+        public ArrayList<String> getValues(){
+            return values;
         }
         
     }
