@@ -58,7 +58,7 @@ public class Fetcher {
     
     void store(DBObject doc)
     {
-        destColl.insert(doc);
+        destColl.save(doc);
     }
     
 }

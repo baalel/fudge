@@ -20,6 +20,9 @@ public class MongoDoc {
     private static Pattern title_re=Pattern.compile(">(.*)</");
     private static Pattern desc_re=Pattern.compile("<p>(.*)</p>");
     private static Pattern htmltag_re=Pattern.compile("<[^<]+?>");
+    private static String datetimepart="T00:00:00Z";
+
+
     
     String iaid;
     String parentIaid;
@@ -32,6 +35,8 @@ public class MongoDoc {
     String enddate;
     String title;
     String description;
+    String schema;
+    String reference;
     ObjectId id;
     Reference ref;
     ArrayList<String> references;
@@ -45,10 +50,14 @@ public class MongoDoc {
     ArrayList<String> corpBodies;
     Subject subj;
     ArrayList<String> subjects;
+    Fetcher fetcher;
+    RefCache cache;
     
     
-    MongoDoc(DBObject doc)
+    MongoDoc(DBObject doc, RefCache parentCache,Fetcher fetch)
     {
+        fetcher=fetch;
+        cache=parentCache;
         parentIaid=(String)doc.get("ParentIAID");
         iaid=(String)doc.get("IAID");
         sourceLevelId=(Integer)doc.get("SourceLevelId");
@@ -57,20 +66,36 @@ public class MongoDoc {
         closureType=(String)doc.get("ClosureType");
         id=(ObjectId)doc.get("_id");
         title=MongoDoc.cleanTitle((String)doc.get("Title"));
-        DBObject scopeContent=(DBObject)doc.get("ScopeContent");
-        description=MongoDoc.cleanDescription((String)scopeContent.get("Description"));
-        ref=new Reference((String)doc.get("Reference"));
-        ref.append((String)doc.get("FormerReferencePro"));
-        ref.append((String)doc.get("FormerReferenceDept"));
+        startdate=MongoDoc.convertDate((String)doc.get("CoveringFromDate"),false);
+        enddate=MongoDoc.convertDate((String)doc.get("CoveringToDate"),true);
+        reference=(String)doc.get("Reference");
+
         held=new HeldBy((BasicDBList)doc.get("HeldBy"));
         pers=new Person((BasicDBList)doc.get("Peoples"));
         place=new Place((BasicDBList)doc.get("Places"));
         corp=new CorporateBody((BasicDBList)doc.get("CorporateBodys"));
         subj=new Subject((BasicDBList)doc.get("Subjects"));
         
+        DBObject scopeContent=(DBObject)doc.get("ScopeContent");
+        description=MongoDoc.cleanDescription((String)scopeContent.get("Description"));
+        String occupation=(String)scopeContent.get("Occupation");
+        if(occupation!=null){
+            subj.add(occupation);}
+        String organization=(String)scopeContent.get("Organizations");
+        if (organization!=null){
+            corp.add(organization);}
+        String persName=(String)scopeContent.get("PersonName");
+        if(persName!=null){
+            pers.add(persName);}
+        String placeName=(String)scopeContent.get("PlaceName");
+        if(placeName!=null){
+            place.add(placeName);}
+        schema=(String)scopeContent.get("Schema");
         
-        
-        
+        catDocRef=makeCatDocRef();
+        ref=new Reference(catDocRef);
+        ref.append((String)doc.get("FormerReferencePro"));
+        ref.append((String)doc.get("FormerReferenceDept"));
         
     }
     
@@ -90,9 +115,64 @@ public class MongoDoc {
         son.put("CorpBody", corp.values);
         son.put("Subject", subj.values);
         son.put("Heldby", held.values);
+        son.put("StartDate", startdate);
+        son.put("EndDate", enddate);
+        son.put("Schema", schema);
         
         return son;
         
+    }
+    
+    private String makeCatDocRef() {
+        //does parent exist in cache?
+        //what level am I?
+        String parent=this.parentIaid;
+        int level=this.sourceLevelId;
+        String workingid=this.iaid;
+        String currentRef=this.reference;
+        
+        String workingRef;
+        if(cache.exists(parent)){
+            if(level==6 ||level==7){
+                workingRef=cache.loopup(parent)+"/" + currentRef;
+                cache.insert(workingid, workingRef);
+            }
+            else if(level==3)
+            {   
+                workingRef=cache.loopup(parent) + " " +currentRef;
+                cache.insert(workingid, workingRef);
+            }
+            else{
+                workingRef=cache.loopup(parent);
+                cache.insert(workingid, workingRef);
+            }                     
+        }
+        else{
+            StringBuilder reference=new StringBuilder("");
+            while(!"C0".equals(parent)){
+                if (level==6||level==7){
+                    reference.insert(0, currentRef);
+                    reference.insert(0,"/");
+                }
+                else if (level==3){
+                    reference.insert(0, currentRef);
+                    reference.insert(0, " ");
+                }
+                else if(level==1){
+                    reference.insert(0,currentRef);
+                }
+                //go get parent
+                DBObject doc=fetcher.findOne("IAID", parent);
+                workingid=(String)doc.get("IAID");
+                parent=(String)doc.get("ParentIAID");
+                currentRef=(String)doc.get("Reference");
+                
+                
+            }
+            
+        }
+        
+        throw new UnsupportedOperationException("Not yet implemented");
     }
     
     private static String cleanTitle(String dirty)
@@ -138,6 +218,30 @@ public class MongoDoc {
         return clean;
     }
     
+    private static String convertDate(String coveringDate,boolean isEndDate)
+    {
+        StringBuilder newDate=new StringBuilder();
+        String day,month,year;
+        if(coveringDate!=null && coveringDate.length()==8){
+            year=coveringDate.substring(0,4);
+            month=coveringDate.substring(4,6);
+            day=coveringDate.substring(6, 8);
+        }
+        else if(isEndDate){
+            year="2100";
+            month="12";
+            day="31";
+        }
+        else{
+            year="1000";
+            month="01";
+            day="01";           
+        }
+        
+        newDate.append(year).append("-").append(month).append("-").append(day).append(MongoDoc.datetimepart);
+        return newDate.toString();    
+    }
+    
     private class Entity{
         DBObject data;
         protected ArrayList<String> values;
@@ -150,6 +254,15 @@ public class MongoDoc {
         public ArrayList<String> getValues()
         {
             return values;
+        }
+        
+        public boolean add(String newItem)
+        {
+            if(newItem!=null && newItem.length()>0){
+                boolean rc=values.add(newItem);
+                return rc;
+            }
+            return false;
         }
         
     }

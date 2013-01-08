@@ -24,8 +24,10 @@ public class JExtractor {
     public static void main(String[] args) {
         // TODO code application logic here
         Fetcher fetcher;
+        RefCache parentCache=new RefCache();
         Stack<String> workQueue=new Stack();
         Properties prop = new Properties();
+        int docCounter=0;
         try{
             //path /home/sprice/NetBeansProjects/jExtractor/src/uk/gov/tna/fudge/jExtractor/
             prop.load(new FileInputStream("Resources/TNAconf.properties"));
@@ -49,14 +51,18 @@ public class JExtractor {
                 try {
                     while(cursor.hasNext()) {
                         DBObject doc=cursor.next();
-                        MongoDoc mdoc=new MongoDoc(doc);
+                        MongoDoc mdoc=new MongoDoc(doc,parentCache,fetcher);
                         fetcher.store(mdoc.toMongoSon());
+                        docCounter++;
+                        if (docCounter%1000==0){
+                            System.out.println("Processed "+ docCounter);
+                        }
                         workQueue.push(mdoc.iaid);
                     }
                 } finally {
                     cursor.close();
                 }
-                System.out.println("Queue is now " + workQueue.size());
+                
             }
         }
         catch(Exception e)
