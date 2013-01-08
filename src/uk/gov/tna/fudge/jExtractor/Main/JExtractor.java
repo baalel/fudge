@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package uk.gov.tna.fudge.jExtractor;
+package uk.gov.tna.fudge.jExtractor.Main;
 
 /**
  *
@@ -28,7 +28,7 @@ public class JExtractor {
         Properties prop = new Properties();
         try{
             //path /home/sprice/NetBeansProjects/jExtractor/src/uk/gov/tna/fudge/jExtractor/
-            prop.load(new FileInputStream("TNAconf.properties"));
+            prop.load(new FileInputStream("Resources/TNAconf.properties"));
         }
         catch(IOException ex)
         {

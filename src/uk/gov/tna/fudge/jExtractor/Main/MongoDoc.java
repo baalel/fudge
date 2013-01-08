@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package uk.gov.tna.fudge.jExtractor;
+package uk.gov.tna.fudge.jExtractor.Main;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
