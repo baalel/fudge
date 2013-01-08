@@ -389,7 +389,9 @@ public class MongoDoc {
         
         void append(String ref)
         {
-            values.add(ref);
+            if(ref!=null&&ref.length()>0){
+                values.add(ref);
+            }
         }
         
         public ArrayList<String> getValues(){
