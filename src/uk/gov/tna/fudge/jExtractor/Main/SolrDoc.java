@@ -27,6 +27,8 @@ public class SolrDoc {
     private String closureStatus;
     private String openingDate;
     private String series;
+    private String startdate;
+    private String enddate;
     private ArrayList<String> references;
     private ArrayList<String> people;
     private ArrayList<String> places;
@@ -46,23 +48,47 @@ public class SolrDoc {
         this.heldbys=mdoc.heldbys;
         this.references=mdoc.references;
         this.subjects=mdoc.subjects;
-        this.department=this.getDepartment(mdoc.catDocRef);
-        this.series=this.getSeries(mdoc.catDocRef);
+        this.startdate=mdoc.startdate;
+        this.enddate=mdoc.enddate;
+        this.department=SolrDoc.getDepartment(mdoc.catDocRef);
+        this.series=SolrDoc.getSeries(mdoc.catDocRef);
+        this.period=SolrDoc.getPeriod(this.startdate,this.enddate);
         
     }
     
     
-    private String getDepartment(String ref){
-        String dept="";
-        
+    private static String getDepartment(String ref){
+        String dept;
+        Matcher working=SolrDoc.dept_re.matcher(ref);
+        if(working.find())
+        {
+            dept=working.group(1);
+        }
+        else{
+            dept=ref;
+        }
         return dept;
         
+        
     }
     
-    private String getSeries(String ref){
-        String series="";
-        
+    private static String getSeries(String ref){
+        String series;
+        Matcher working=SolrDoc.series_re.matcher(ref);
+        if(working.find())
+        {
+            series=working.group(1);
+        }
+        else{
+            series=ref;
+        }
         return series;
+    }
+    
+    private static ArrayList<String> getPeriod(String start, String end){
+        ArrayList<String> periods = new ArrayList<String>();
+        
+        return periods;
     }
     
 }
