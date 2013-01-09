@@ -56,6 +56,15 @@ public class Fetcher {
         return doc;
     }
     
+    DBObject findParent(String parent)
+    {
+        BasicDBObject query=new BasicDBObject("IAID", parent);
+        BasicDBObject fieldlist=new BasicDBObject("IAID",1).append("ParentIAID", 1).append("Reference", 1);
+        DBObject doc=sourceColl.findOne(query, fieldlist);
+        
+        return doc;
+    }
+    
     void store(DBObject doc)
     {
         destColl.save(doc);
