@@ -78,16 +78,16 @@ public class MongoDoc {
         
         DBObject scopeContent=(DBObject)doc.get("ScopeContent");
         description=MongoDoc.cleanDescription((String)scopeContent.get("Description"));
-        String occupation=(String)scopeContent.get("Occupation");
+        BasicDBList occupation=(BasicDBList)scopeContent.get("Occupation");
         if(occupation!=null){
             subj.add(occupation);}
-        String organization=(String)scopeContent.get("Organizations");
+        BasicDBList organization=(BasicDBList)scopeContent.get("Organizations");
         if (organization!=null){
             corp.add(organization);}
-        String persName=(String)scopeContent.get("PersonName");
+        BasicDBList persName=(BasicDBList)scopeContent.get("PersonName");
         if(persName!=null){
             pers.add(persName);}
-        String placeName=(String)scopeContent.get("PlaceName");
+        BasicDBList placeName=(BasicDBList)scopeContent.get("PlaceName");
         if(placeName!=null){
             place.add(placeName);}
         schema=(String)scopeContent.get("Schema");
@@ -210,7 +210,11 @@ public class MongoDoc {
         }
         return clean;
     }
-    
+    /**
+     * Removes the unwanted markup from scopec ontent descriptions 
+     * @param dirty the raw text from the information asset description
+     * @return the description cleaned of markup
+     */
     private static String cleanDescription(String dirty)
     {
         String clean;
@@ -225,7 +229,14 @@ public class MongoDoc {
         }
         return clean;
     }
-    
+    /**
+     * Converts a yyyymmdd date string into Solr's Tri date format
+     * yyyy-mm-ddThh:mm:ss.sZ
+     * 
+     * @param coveringdate the informationasset date string
+     *  isEndDate a flag to specify if this is a startdate or enddate to convert
+     * @return the tri-date formated date string
+     */
     private static String convertDate(String coveringDate,boolean isEndDate)
     {
         StringBuilder newDate=new StringBuilder();
@@ -271,6 +282,22 @@ public class MongoDoc {
                 return rc;
             }
             return false;
+        }
+        
+        public boolean add(BasicDBList newItems){
+            if(newItems==null){return false;}
+            for(int i=0;i<newItems.size();i++){
+                try{
+                    String item=(String)newItems.get(i);
+                    values.add(item);
+                }
+                catch(Exception e){
+                    System.out.println(e.getStackTrace());
+                    return false;
+                }
+                
+            }
+            return true;
         }
         
     }
