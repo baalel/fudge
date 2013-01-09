@@ -21,16 +21,20 @@ public class JExtractor {
     /**
      * @param args the command line arguments
      */
+    //@SuppressWarnings("unchecked")
     public static void main(String[] args) {
         // TODO code application logic here
         Fetcher fetcher;
         RefCache parentCache=new RefCache();
         Stack<String> workQueue=new Stack();
         Properties prop = new Properties();
+        Properties p =new Properties(System.getProperties());
         int docCounter=0;
         try{
+            //InputStream in=new InputStream(JExtractor.class.getClassLoader().getResource("/Resource/TNAconf.properties"));
             //path /home/sprice/NetBeansProjects/jExtractor/src/uk/gov/tna/fudge/jExtractor/
-            prop.load(new FileInputStream("Resources/TNAconf.properties"));
+            String path=p.getProperty("user.dir")+"/Resources/TNAconf.properties";
+            prop.load(new FileInputStream(path));
         }
         catch(IOException ex)
         {
