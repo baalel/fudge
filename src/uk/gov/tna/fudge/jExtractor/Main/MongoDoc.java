@@ -152,7 +152,7 @@ public class MongoDoc {
         }
         else{
             
-            while(!"C0".equals(parent)){
+            while(!"C0".equals(workingid)){
                 if (level==6||level==7){
                     catreference.insert(0, currentRef);
                     catreference.insert(0,"/");
@@ -165,10 +165,14 @@ public class MongoDoc {
                     catreference.insert(0,currentRef);
                 }
                 //go get parent
-                DBObject doc=fetcher.findOne("IAID", parent);
+                if("C0".equals(parent)){
+                    return catreference.toString();
+                }
+                DBObject doc=fetcher.findParent(parent);
                 workingid=(String)doc.get("IAID");
                 parent=(String)doc.get("ParentIAID");
                 currentRef=(String)doc.get("Reference");
+                level=(Integer)doc.get("SourceLevelId");
                 
                 
             }
