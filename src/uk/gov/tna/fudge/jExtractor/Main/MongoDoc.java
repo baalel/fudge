@@ -91,6 +91,7 @@ public class MongoDoc {
         if(placeName!=null){
             place.add(placeName);}
         schema=(String)scopeContent.get("Schema");
+        if(schema==null){schema="";}
         
         catDocRef=makeCatDocRef();
         ref=new Reference(catDocRef);
@@ -205,7 +206,7 @@ public class MongoDoc {
             clean=working.replaceAll(" ");
         }
         else{
-            clean="";
+            clean=dirty;
         }
         return clean;
     }
