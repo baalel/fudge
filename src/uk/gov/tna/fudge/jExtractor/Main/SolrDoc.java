@@ -7,7 +7,19 @@ package uk.gov.tna.fudge.jExtractor.Main;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import java.io.File;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+ 
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 /**
  *
  * @author Steve
@@ -25,17 +37,20 @@ public class SolrDoc {
     private String sourceLevelId;
     private String closureType;
     private String closureStatus;
+    private String closureCode;
     private String openingDate;
     private String series;
     private String startdate;
     private String enddate;
+    private String schema;
     private ArrayList<String> references;
     private ArrayList<String> people;
     private ArrayList<String> places;
     private ArrayList<String> heldbys;
     private ArrayList<String> corpBodys;
-    private ArrayList<String> period;
+    private ArrayList<String> periods;
     private ArrayList<String> subjects;
+    private String xmlRepresentation;
     
     SolrDoc(MongoDoc mdoc){
         this.drereference=mdoc.iaid;
@@ -50,13 +65,99 @@ public class SolrDoc {
         this.subjects=mdoc.subjects;
         this.startdate=mdoc.startdate;
         this.enddate=mdoc.enddate;
+        this.closureCode=mdoc.closureCode;
+        this.closureStatus=mdoc.closureStatus;
+        this.closureType=mdoc.closureType;
+        this.schema=mdoc.schema;
         this.department=SolrDoc.getDepartment(mdoc.catDocRef);
         this.series=SolrDoc.getSeries(mdoc.catDocRef);
-        this.period=SolrDoc.getPeriod(this.startdate,this.enddate);
+        this.periods=SolrDoc.getPeriod(this.startdate,this.enddate);
         
     }
     
+    private static Element buildElement(Document doc,String name,String value){
+        Element ele = doc.createElement("field");
+        ele.setAttribute("name", name);
+        ele.appendChild(doc.createTextNode(value));
+        return ele;
+    }
     
+    private Element buildXML(Document doc){
+
+
+        // document elements
+	Element solrdoc = doc.createElement("doc");
+        solrdoc.appendChild(SolrDoc.buildElement(doc, "DREREFERENCE", this.drereference));
+        solrdoc.appendChild(SolrDoc.buildElement(doc, "CATDOCREF", this.catDocRef));
+        solrdoc.appendChild(SolrDoc.buildElement(doc, "TITLE", this.title));
+        solrdoc.appendChild(SolrDoc.buildElement(doc, "DESCRIPTION", this.description));
+        solrdoc.appendChild(SolrDoc.buildElement(doc, "STARTDATE", this.startdate));
+        solrdoc.appendChild(SolrDoc.buildElement(doc, "ENDDATE", this.enddate));
+        solrdoc.appendChild(SolrDoc.buildElement(doc, "DEPARTMENT", this.department));
+        solrdoc.appendChild(SolrDoc.buildElement(doc, "SERIES", this.series));
+        solrdoc.appendChild(SolrDoc.buildElement(doc, "SOURCELEVEL", this.sourceLevelId));
+        solrdoc.appendChild(SolrDoc.buildElement(doc, "CLOSURESTATUS", this.closureStatus));
+        solrdoc.appendChild(SolrDoc.buildElement(doc, "CLOSURETYPE", this.closureType));
+        solrdoc.appendChild(SolrDoc.buildElement(doc, "CLOSURECODE", this.closureCode));
+        solrdoc.appendChild(SolrDoc.buildElement(doc, "URLPARAMS", this.urlParams));
+        solrdoc.appendChild(SolrDoc.buildElement(doc, "SCHEMA", this.schema));
+        for(String subj : this.subjects){
+            solrdoc.appendChild(SolrDoc.buildElement(doc, "SUBJECT", subj));
+        }
+        for(String pers : this.people){
+            solrdoc.appendChild(SolrDoc.buildElement(doc, "PERSON", pers));
+        }
+        for(String place : this.places){
+            solrdoc.appendChild(SolrDoc.buildElement(doc, "PLACE", place));
+        }
+        for(String corp : this.corpBodys){
+            solrdoc.appendChild(SolrDoc.buildElement(doc, "CORPBODY", corp));
+        }
+        for(String held : this.heldbys){
+            solrdoc.appendChild(SolrDoc.buildElement(doc, "HELDBY", held));
+        }
+        for(String period : this.periods){
+            solrdoc.appendChild(SolrDoc.buildElement(doc, "PERIOD", period));
+        }
+        for(String ref : this.references){
+            solrdoc.appendChild(SolrDoc.buildElement(doc, "REFERENCE", ref));
+        }
+             
+        return solrdoc;
+    }
+    
+    public static void writeXML(Integer batchid, ArrayList<SolrDoc> docs){
+        try{
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+        
+        // root elements
+            Document doc = docBuilder.newDocument();
+            Element rootElement = doc.createElement("add");
+            doc.appendChild(rootElement);
+            for(SolrDoc sdoc : docs)
+            {
+                Element solrElement=sdoc.buildXML(doc);
+                rootElement.appendChild(solrElement);
+                
+            }
+            
+            
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File("/opt/sprice/iadata/file-"+batchid.toString()+".xml"));
+        //StreamResult result2 = new StreamResult(System.out);
+            transformer.transform(source, result);
+        }
+        catch (ParserConfigurationException pce) {
+            System.out.println(pce.getStackTrace());
+	}
+        catch (TransformerException tfe) {
+            System.out.println(tfe.getStackTrace());
+        }
+        
+    }
     private static String getDepartment(String ref){
         String dept;
         Matcher working=SolrDoc.dept_re.matcher(ref);
