@@ -13,6 +13,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Stack;
 
@@ -29,12 +30,16 @@ public class JExtractor {
         Stack<String> workQueue=new Stack();
         Properties prop = new Properties();
         Properties p =new Properties(System.getProperties());
+        ArrayList<SolrDoc> solrDocs=new ArrayList<SolrDoc>(1000);
+        String savePath;
+        Integer batchCounter=0;
         int docCounter=0;
         try{
             //InputStream in=new InputStream(JExtractor.class.getClassLoader().getResource("/Resource/TNAconf.properties"));
             //path /home/sprice/NetBeansProjects/jExtractor/src/uk/gov/tna/fudge/jExtractor/
             String path=p.getProperty("user.dir")+"/Resources/TNAconf.properties";
             prop.load(new FileInputStream(path));
+            
         }
         catch(IOException ex)
         {
@@ -43,6 +48,7 @@ public class JExtractor {
         }
         workQueue.push(prop.getProperty("ROOT_NODE", "C0"));
         try{
+            savePath=prop.getProperty("SAVE_PATH","/home/sprice/solrdoc");
             fetcher=new Fetcher(prop.getProperty("MONGO_SERVER", "localhost") ,
                     prop.getProperty("MONGO_PORT", "27017"),
                     prop.getProperty("MONGO_INDB","iadata"),
@@ -56,12 +62,19 @@ public class JExtractor {
                     while(cursor.hasNext()) {
                         DBObject doc=cursor.next();
                         MongoDoc mdoc=new MongoDoc(doc,parentCache,fetcher);
-                        fetcher.store(mdoc.toMongoSon());
+                        //fetcher.store(mdoc.toMongoSon());
+                        workQueue.push(mdoc.iaid);
+                        SolrDoc sdoc=new SolrDoc(mdoc);
+                        solrDocs.add(sdoc);
                         docCounter++;
                         if (docCounter%1000==0){
                             System.out.println("Processed "+ docCounter);
+                            //SolrDoc.writeXML(batchCounter,savePath, solrDocs);
+                            SolrDoc.writeXMLasString(batchCounter,savePath, solrDocs);
+                            batchCounter++;
+                            solrDocs.clear();
                         }
-                        workQueue.push(mdoc.iaid);
+                        
                     }
                 } finally {
                     cursor.close();
