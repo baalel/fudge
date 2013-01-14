@@ -9,6 +9,7 @@ import com.mongodb.DBObject;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.lang.NumberFormatException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -107,8 +108,19 @@ public class SolrDoc {
         solrImportMap.put("SERIES",this.series);
         solrImportMap.put("SCHEMA",this.schema);
         solrImportMap.put("URLPARAMS",this.urlParams);
-        solrImportMap.put("SOURCELEVEL",new Integer(this.sourceLevelId));
-        solrImportMap.put("CLOSURECODE",new Integer(this.closureCode));
+        try{
+            solrImportMap.put("SOURCELEVEL",new Integer(this.sourceLevelId));
+        }
+        catch(NumberFormatException nfe){
+            solrImportMap.put("SOURCELEVEL",null);
+        }
+        try{
+            solrImportMap.put("CLOSURECODE",new Integer(this.closureCode));
+        }
+        catch(NumberFormatException iae){
+            solrImportMap.put("CLOSURECODE",null);
+            
+        }
         solrImportMap.put("CLOSURETYPE",this.closureType);
         solrImportMap.put("CLOSURESTATUS",this.closureStatus);
         solrImportMap.put("HELDBY",this.heldbys);
