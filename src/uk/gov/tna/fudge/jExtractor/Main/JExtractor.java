@@ -65,6 +65,8 @@ public class JExtractor {
         this.solrWebServerA="http://localhost:8080/solr/discovery1";
         this.solrWebServerB="http://localhost:8080/solr/discovery1";
         List<String> solrServerList=new ArrayList<String>(2);
+        solrServerList.add(this.solrWebServerA);
+        solrServerList.add(this.solrWebServerB);
         if(!"TRUE".equals(distribute)){
             this.postie=new SolrPostService(this.solrWebServer);
         }
@@ -175,6 +177,13 @@ public class JExtractor {
                         }
                         
                     }
+                    SolrDoc.writeXMLasString(batchCounter,this.savePath, solrDocs, workingDept);
+                    boolean commitFlag=true;
+                    postie.postDocument(webDocs,commitFlag);
+                    mongoDocs.clear();
+                    solrDocs.clear();
+                    webDocs.clear();
+                    System.gc();
                 } finally {
                     cursor.close();
                 }
