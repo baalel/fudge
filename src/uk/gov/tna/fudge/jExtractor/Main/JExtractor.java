@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Stack;
-import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrInputDocument;
+import uk.gov.tna.fudge.jExtractor.Solr.SolrPostService;
 
 public class JExtractor {
     
@@ -32,6 +32,7 @@ public class JExtractor {
     String solrDatabase;
     String solrCollection;
     String solrWebServer;
+    SolrPostService postie;
     
     JExtractor()
     {
@@ -57,6 +58,7 @@ public class JExtractor {
         this.iaCollection=localProp.getProperty("MONGO_INCOL","informationasset");
         this.solrCollection=localProp.getProperty("MONGO_OUTCOL","solrout");
         this.solrWebServer=localProp.getProperty("SOLR_WEBSERVER","http://localhost:8080/solr/discoverytest");
+        this.postie=new SolrPostService(this.solrWebServer);
         
     }
     
@@ -80,8 +82,8 @@ public class JExtractor {
     private void push()
     {
         String server="http://localhost:8080/solr/discoverytest";
-        uk.gov.tna.fudge.jExtractor.Solr.SolrPostman postie;
-        postie = new uk.gov.tna.fudge.jExtractor.Solr.SolrPostman(server);
+        uk.gov.tna.fudge.jExtractor.Solr.SolrPostService postie;
+        postie = new uk.gov.tna.fudge.jExtractor.Solr.SolrPostService(server);
         postie.querytest();
         
     }
@@ -98,6 +100,7 @@ public class JExtractor {
         
         List<SolrDoc> solrDocs=new ArrayList<SolrDoc>(5000);
         List<DBObject> mongoDocs=new ArrayList<DBObject>(5000) ;
+        List<SolrInputDocument> webDocs=new ArrayList<SolrInputDocument>(5000);
         String workingDept="START";
         String oldDept;
         oldDept = "";
@@ -120,6 +123,7 @@ public class JExtractor {
                         SolrDoc sdoc=new SolrDoc(mdoc);
                         solrDocs.add(sdoc);
                         mongoDocs.add(sdoc.toSon());
+                        webDocs.add(new SolrInputDocument(sdoc.map()));
                         docCounter++;
                         if(sdoc.checkIfDept()){
                             deptList.add(sdoc.getIaid());
@@ -153,6 +157,7 @@ public class JExtractor {
                             startTime=nowTime;
                             //SolrDoc.writeXML(batchCounter,savePath, solrDocs);
                             SolrDoc.writeXMLasString(batchCounter,this.savePath, solrDocs, workingDept);
+                            postie.postDocument(webDocs);
                             batchCounter++;
                             solrDocs.clear();
                             System.gc();
@@ -177,7 +182,7 @@ public class JExtractor {
     public void post()
     {
         String server="http://localhost:8080/solr/discoverytest";
-        uk.gov.tna.fudge.jExtractor.Solr.SolrPostman postie;
+        uk.gov.tna.fudge.jExtractor.Solr.SolrPostService postie;
         SolrInputDocument sDoc;
         sDoc=new SolrInputDocument();
         sDoc.addField("CATDOCREF", "12345");
@@ -200,7 +205,7 @@ public class JExtractor {
         sDoc.addField("CLOSURETYPE","open");
         sDoc.addField("CLOSURESTATUS","open");
         
-        postie = new uk.gov.tna.fudge.jExtractor.Solr.SolrPostman(server);
+        postie = new uk.gov.tna.fudge.jExtractor.Solr.SolrPostService(server);
         postie.postDocument(sDoc);
     }
     
