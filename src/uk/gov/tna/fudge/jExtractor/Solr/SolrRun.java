@@ -15,7 +15,7 @@ public class SolrRun {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        SolrPostman postie=new SolrPostman("http://localhost:8080/solr/discoverytest");
+        SolrPostService postie=new SolrPostService("http://localhost:8080/solr/discoverytest");
         postie.querytest();
     }
 }
