@@ -22,6 +22,7 @@ public class MongoDocTest {
     static MongoDoc mdoc;
     static Fetcher fetcher;
     static RefCache refCache;
+    static UrlParamCache urlCache;
     static CoveringDateCache dateCache;
     
     public MongoDocTest() {
@@ -32,7 +33,8 @@ public class MongoDocTest {
         fetcher=new Fetcher("192.168.0.6","27017","iadata","solrtest","informationasset","solrtestcoll");
         refCache=new RefCache();
         dateCache=new CoveringDateCache();
-        mdoc=new MongoDoc(fetcher.findOne("IAID", "C1"),refCache,dateCache,fetcher);
+        urlCache=new UrlParamCache();
+        mdoc=new MongoDoc(fetcher.findOne("IAID", "C1"),refCache,dateCache,urlCache,fetcher);
     }
     
     @AfterClass
@@ -53,7 +55,7 @@ public class MongoDocTest {
     @Test
     public void testToMongoSon() {
         System.out.println("toMongoSon");
-        MongoDoc instance = new MongoDoc(fetcher.findOne("IAID", "D7738606"),refCache,dateCache,fetcher);
+        MongoDoc instance = new MongoDoc(fetcher.findOne("IAID", "D7738606"),refCache,dateCache,urlCache,fetcher);
         String expResult = "2006";
         String result = (String)instance.toMongoSon().get("closureCode");
         assertEquals(expResult, result);
