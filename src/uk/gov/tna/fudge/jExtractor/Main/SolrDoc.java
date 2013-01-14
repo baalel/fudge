@@ -9,7 +9,6 @@ import com.mongodb.DBObject;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.lang.NumberFormatException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -60,10 +59,10 @@ public class SolrDoc {
     private List<String> periods;
     private List<String> subjects;
     private boolean deptFlag;
-    private Map solrImportMap;
+    private Map<String,Object> solrImportMap;
     
     SolrDoc(MongoDoc mdoc){
-        solrImportMap=new LinkedHashMap();
+        solrImportMap=new LinkedHashMap<String,Object>();
         this.id=mdoc.id;
         this.drereference=mdoc.iaid;
         this.title=XMLHelper.safeText(mdoc.title);
@@ -235,12 +234,10 @@ public class SolrDoc {
         }
         catch (ParserConfigurationException pce) {
             System.out.println(pce.getMessage());
-            pce.printStackTrace();
             System.exit(1);
 	}
         catch (TransformerException tfe) {
             System.out.println(tfe.getMessageAndLocation());
-            tfe.printStackTrace();
             System.exit(1);
         }
         
