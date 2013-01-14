@@ -39,6 +39,7 @@ public class MongoDoc {
     String description;
     String schema;
     String reference;
+    String urlParams;
     Tag tag;
     List<String> tags;
     ObjectId id;
@@ -57,13 +58,15 @@ public class MongoDoc {
     Fetcher fetcher;
     RefCache refCache;
     CoveringDateCache dateCache;
+    UrlParamCache urlCache;
     
     
-    MongoDoc(DBObject doc, RefCache parentCache,CoveringDateCache cdateCache, Fetcher fetch)
+    MongoDoc(DBObject doc, RefCache parentCache,CoveringDateCache cdateCache,UrlParamCache uCache, Fetcher fetch)
     {
         fetcher=fetch;
         refCache=parentCache;
         dateCache=cdateCache;
+        urlCache=uCache;
         parentIaid=(String)doc.get("ParentIAID");
         iaid=(String)doc.get("IAID");
         sourceLevelId=(Integer)doc.get("SourceLevelId");
@@ -121,6 +124,7 @@ public class MongoDoc {
         if(tag.data!=null){
             subjects.addAll(tag.getValues());
         }
+        this.urlParams=makeUrlParams();
         
     }
     
@@ -310,6 +314,37 @@ public class MongoDoc {
         this.refCache.insert(iaid, reference.toString());
         return reference.toString();
         //throw new UnsupportedOperationException("Not yet implemented");
+    }
+    
+    private String makeUrlParams(){
+        StringBuilder temp=new StringBuilder(this.iaid);
+        if(urlCache.exists(this.parentIaid)){
+            temp.insert(0, urlCache.lookup(this.parentIaid)+'/');
+        }
+        else if("C0".equals(this.parentIaid)){
+            temp.insert(0, "066/1/");
+        }
+        else{
+            Integer currentLevel=this.sourceLevelId;
+            String currentParent=this.parentIaid;
+            while (currentLevel!=1){
+                currentLevel--;
+                DBObject doc=fetcher.findParent(currentParent);
+                while((currentLevel-(Integer)doc.get("SourceLevelId"))>0){
+                    temp.insert(0, "0/");
+                    currentLevel--;
+                    
+                }
+                temp.insert(0, (String)doc.get("IAID")+"/");
+                
+            }
+            temp.insert(0, "066/1/");   
+        }
+        
+        urlCache.insert(this.iaid, temp.toString());
+        
+        
+        return temp.toString();
     }
     
     private static String cleanTitle(String dirty)
