@@ -93,6 +93,7 @@ public class JExtractor {
         Fetcher fetcher;
         RefCache parentCache=new RefCache();
         CoveringDateCache dateCache=new CoveringDateCache();
+        UrlParamCache urlCache=new UrlParamCache();
         Stack<String> workQueue=new Stack();
         
         List<SolrDoc> solrDocs=new ArrayList<SolrDoc>(5000);
@@ -114,7 +115,7 @@ public class JExtractor {
                 try {
                     while(cursor.hasNext()) {
                         DBObject doc=cursor.next();
-                        MongoDoc mdoc=new MongoDoc(doc,parentCache,dateCache,fetcher);                      
+                        MongoDoc mdoc=new MongoDoc(doc,parentCache,dateCache,urlCache,fetcher);                      
                         workQueue.push(mdoc.iaid);
                         SolrDoc sdoc=new SolrDoc(mdoc);
                         solrDocs.add(sdoc);
@@ -129,12 +130,13 @@ public class JExtractor {
                                 System.out.println("Cleared cache changed from "+oldDept+" to "+workingDept);
                                 parentCache.clear();
                                 dateCache.clear();
+                                urlCache.clear();
                                 oldDept=workingDept;
                             }
                             
                         }
                         if (docCounter%5000==0){
-                            fetcher.store(mongoDocs);
+//                            fetcher.store(mongoDocs);
                             mongoDocs.clear();
                             nowTime=System.nanoTime();
                             Double elapsed=1/((nowTime-startTime)/5000/1000000000.0);
