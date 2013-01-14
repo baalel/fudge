@@ -40,7 +40,7 @@ public class JExtractor {
         try{
             //InputStream in=new InputStream(JExtractor.class.getClassLoader().getResource("/Resource/TNAconf.properties"));
             //path /home/sprice/NetBeansProjects/jExtractor/src/uk/gov/tna/fudge/jExtractor/
-            String path=sysProp.getProperty("user.dir")+"/Resources/TNAconf.properties";
+            String path=sysProp.getProperty("user.dir")+"/Resources/Homeconf.properties";
             localProp.load(new FileInputStream(path));
             
         }
@@ -94,7 +94,7 @@ public class JExtractor {
         RefCache parentCache=new RefCache();
         CoveringDateCache dateCache=new CoveringDateCache();
         UrlParamCache urlCache=new UrlParamCache();
-        Stack<String> workQueue=new Stack();
+        Stack<String> workQueue=new Stack<String>();
         
         List<SolrDoc> solrDocs=new ArrayList<SolrDoc>(5000);
         List<DBObject> mongoDocs=new ArrayList<DBObject>(5000) ;
