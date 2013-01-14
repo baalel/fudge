@@ -86,6 +86,7 @@ public class SolrDoc {
         this.periods=SolrDoc.getPeriod(this.startdate,this.enddate);
         this.sourceLevelId=mdoc.sourceLevelId.toString();
         this.parent=mdoc.parentIaid;
+        this.urlParams=mdoc.urlParams;
         if(mdoc.sourceLevelId!=1){
             this.deptFlag=false;
         }
@@ -423,7 +424,7 @@ public class SolrDoc {
         }
         //if((endyear>=1700 && endyear<=1799)||(startyear>=1700 && startyear<=1799)){
         if((endyear>=1700 && startyear<=1799)){
-            periods.add("1700Object-1799");
+            periods.add("1700-1799");
         }
         //if((endyear>=1800 && endyear<=1899)||(startyear>=1800 && startyear<=1899)){
         if((endyear>=1800 && startyear<=1899)){
