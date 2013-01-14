@@ -5,6 +5,7 @@
 package uk.gov.tna.fudge.jExtractor.Solr;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
@@ -24,9 +25,20 @@ import org.apache.solr.common.SolrInputDocument;
  
 public class SolrPostService {
     SolrServer server;
+    List<SolrServer> serverList;
+    boolean distributed;
     
     public SolrPostService(String solrServerUrl){
         server = new HttpSolrServer(solrServerUrl);
+        distributed=false;
+    }
+    
+    public SolrPostService(List<String> solrServerUrls){
+        serverList=new ArrayList<SolrServer>(solrServerUrls.size());
+        for(String url : solrServerUrls){
+            serverList.add(new HttpSolrServer(url));
+        }
+        distributed=true;
     }
     
     public void querytest(){
@@ -53,6 +65,10 @@ public class SolrPostService {
         
     }
    public void postDocument(List<SolrInputDocument> docs, boolean commit){
+       if(this.distributed){
+           distribute(docs, commit);
+           return;
+       }
        try{
             server.add(docs);
             if(commit){
@@ -95,6 +111,42 @@ public class SolrPostService {
             System.out.println(ioe.getMessage());
             
         }
+       
+   }
+   
+   private void distribute(List<SolrInputDocument> docs,boolean commit){
+       List<List<SolrInputDocument>> docLists=new ArrayList<List<SolrInputDocument>>(serverList.size());
+       for(int i=0;i<serverList.size();i++){
+           docLists.add(new ArrayList<SolrInputDocument>(5000/serverList.size()+1));
+       }
+       for(SolrInputDocument doc : docs){
+           int s=((String)doc.getFieldValue("DREREFERENCE")).hashCode()%serverList.size();
+           docLists.get(s).add(doc);
+           
+       }
+       try{
+           for(int i=0;i<serverList.size();i++){
+                serverList.get(i).add(docLists.get(i));
+                if(commit){
+                    serverList.get(i).commit();
+                }
+            }
+        }
+        catch(SolrException se){
+            System.out.println("Error posting test document");
+            System.out.println(se.getMessage());
+            
+        }
+        catch(SolrServerException sse){
+            System.out.println("Error posting test document");
+            System.out.println(sse.getMessage());
+        }
+        catch(IOException ioe){
+            System.out.println("Error posting test document");
+            System.out.println(ioe.getMessage());
+            
+        }
+       
        
    }
     
