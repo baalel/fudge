@@ -4,97 +4,102 @@
  */
 package uk.gov.tna.fudge.jExtractor.Solr;
 
-import java.io.IOException;
-import java.util.List;
-import org.apache.solr.client.solrj.SolrQuery;
-import org.apache.solr.client.solrj.SolrServer;
-import org.apache.solr.client.solrj.SolrServerException;
-import org.apache.solr.client.solrj.impl.HttpSolrServer;
-import org.apache.solr.client.solrj.response.QueryResponse;
-import org.apache.solr.common.SolrDocument;
-import org.apache.solr.common.SolrDocumentList;
-import org.apache.solr.common.SolrException;
-import org.apache.solr.common.SolrInputDocument;
-
 /**
  *
- * @author steve
+ * @author Steve
  */
 
- 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+
 public class SolrPostman {
-    SolrServer server;
     
-    public SolrPostman(String solrServerUrl){
-        server = new HttpSolrServer(solrServerUrl);
-    }
+    private String solrserver;
+    private static String charset = "UTF-8";
+    private String commit;
+    private String query;
+    private URLConnection urlConnection;
     
-    public void querytest(){
-        SolrQuery query = new SolrQuery();
-        query.setQuery("TITLE:Lord AND TITLE:Nelson AND DESCRIPTION:Logs AND SOURCELEVEL:6");
-        query.addSortField("CATDOCREF", SolrQuery.ORDER.asc);
-        query.setHighlight(true).setHighlightSnippets(1);
-        query.setParam("hl.fl", "text");
-        query.setParam("shards", "localhost:8080/solr/discovery1,localhost:8080/solr/discovery2");
-        try {
-            QueryResponse rsp = this.server.query( query );
-            SolrDocumentList docs = rsp.getResults();
-            System.out.println(docs.getNumFound());
-            
-            for(SolrDocument doc : docs){
-                System.out.println(doc.toString());
-            }
-        } catch (SolrServerException ex) {
-            //Logger.getLogger(SolrPostman.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("SolrException "+ex.getMessage());
-            ex.printStackTrace();
-        }
-        
-        
-        
-    }
-   private void postDocument(List<SolrInputDocument> docs){
-       try{
-            server.add(docs);
-            server.commit();
-        }
-        catch(SolrException se){
-            System.out.println("Error posting test document");
-            System.out.println(se.getMessage());
-            
-        }
-        catch(SolrServerException sse){
-            System.out.println("Error posting test document");
-            System.out.println(sse.getMessage());
-        }
-        catch(IOException ioe){
-            System.out.println("Error posting test document");
-            System.out.println(ioe.getMessage());
-            
-        }
-       
-   }
-   
-   public void postDocument(SolrInputDocument doc){
+    
+    SolrPostman(String solrUrl){
         try{
-            server.add(doc);
-            server.commit();
-        }
-        catch(SolrException se){
-            System.out.println("Error posting test document");
-            System.out.println(se.getMessage());
-            
-        }
-        catch(SolrServerException sse){
-            System.out.println("Error posting test document");
-            System.out.println(sse.getMessage());
+            urlConnection=new URL(solrUrl).openConnection();
+            query="";
+            commit="";
+            this.solrserver=solrUrl;
+            this.solrserver="http://localhost:8983/solr/update";
+            try{
+                commit = URLEncoder.encode("commit=true", SolrPostman.charset);
+                query=String.format("param1=%s", commit);
+            }
+            catch(UnsupportedEncodingException e)
+            {
+                System.out.println("This shouldn't happen");
+            }
+            urlConnection.setUseCaches(false);
+            urlConnection.setDoOutput(true); // Triggers POST.
+            urlConnection.setRequestProperty("accept-charset", SolrPostman.charset);
+            urlConnection.setRequestProperty("content-type", "text/xml");
+
         }
         catch(IOException ioe){
-            System.out.println("Error posting test document");
-            System.out.println(ioe.getMessage());
+            System.out.println("Unable to open connection to solr" + ioe.getMessage());
+            ioe.printStackTrace();
+            System.exit(1);
             
         }
-       
-   }
+        
+    }
+    public String post(String docs){
+            OutputStreamWriter writer = null;
+            try {
+                writer = new OutputStreamWriter(urlConnection.getOutputStream(), charset);
+                writer.write(query); // Write POST query string (if any needed).
+            } 
+            finally {
+                if (writer != null){
+                    try {
+                        writer.close();
+                    }
+                    catch (IOException logOrIgnore) {}
+                }
+                
+                
+                final char[] buffer=new char[8000];
+                final StringBuilder out = new StringBuilder();
+                try {
+                    InputStream result = urlConnection.getInputStream();
+                    final Reader in = new InputStreamReader(result, "UTF-8");
+                    try {
+                        for (;;) {
+                          int rsz = in.read(buffer, 0, buffer.length);
+                          if (rsz < 0)
+                            break;
+                          out.append(buffer, 0, rsz);
+                        }
+                    }
+                    finally {
+                      in.close();
+                    }
+                }
+                catch (UnsupportedEncodingException ex) {
+                  System.out.println("This shouldn't happen");
+                }
+                catch (IOException ioe) {
+                    System.out.println("Unable to open connection to solr" + ioe.getMessage());
+                    ioe.printStackTrace();
+                    System.exit(1);
+                }
+                return out.toString();
+                
+            }
+    }
     
 }
