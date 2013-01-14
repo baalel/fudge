@@ -40,7 +40,7 @@ public class JExtractor {
         try{
             //InputStream in=new InputStream(JExtractor.class.getClassLoader().getResource("/Resource/TNAconf.properties"));
             //path /home/sprice/NetBeansProjects/jExtractor/src/uk/gov/tna/fudge/jExtractor/
-            String path=sysProp.getProperty("user.dir")+"/Resources/Homeconf.properties";
+            String path=sysProp.getProperty("user.dir")+"/Resources/TNAconf.properties";
             localProp.load(new FileInputStream(path));
             
         }
@@ -204,6 +204,6 @@ public class JExtractor {
     
     public static void main(String[] args) {
         JExtractor indexer=new JExtractor();
-        indexer.run("POST");
+        indexer.run("PULL");
     }
 }
