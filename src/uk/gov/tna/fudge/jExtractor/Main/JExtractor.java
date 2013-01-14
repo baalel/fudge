@@ -32,7 +32,10 @@ public class JExtractor {
     String solrDatabase;
     String solrCollection;
     String solrWebServer;
+    String solrWebServerA;
+    String solrWebServerB;
     SolrPostService postie;
+    String distribute;
     
     JExtractor()
     {
@@ -58,8 +61,16 @@ public class JExtractor {
         this.iaCollection=localProp.getProperty("MONGO_INCOL","informationasset");
         this.solrCollection=localProp.getProperty("MONGO_OUTCOL","solrout");
         this.solrWebServer=localProp.getProperty("SOLR_WEBSERVER","http://localhost:8080/solr/discoverytest");
-        this.postie=new SolrPostService(this.solrWebServer);
-        
+        this.distribute=localProp.getProperty("DISTRIBUTE", "FALSE");
+        this.solrWebServerA="http://localhost:8080/solr/discovery1";
+        this.solrWebServerB="http://localhost:8080/solr/discovery1";
+        List<String> solrServerList=new ArrayList<String>(2);
+        if(!"TRUE".equals(distribute)){
+            this.postie=new SolrPostService(this.solrWebServer);
+        }
+        else{
+            this.postie=new SolrPostService(solrServerList);
+        }
     }
     
     public void run(String mode)
