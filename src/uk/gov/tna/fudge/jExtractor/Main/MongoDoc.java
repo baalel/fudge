@@ -28,6 +28,7 @@ public class MongoDoc {
     
     String iaid;
     String parentIaid;
+    Integer parentLevel;
     Integer sourceLevelId;
     String catDocRef;
     String closureStatus;
@@ -306,6 +307,9 @@ public class MongoDoc {
                 parent=(String)doc.get("ParentIAID");
                 currentRef=(String)doc.get("Reference");
                 level=(Integer)doc.get("SourceLevelId");
+                if(workingid.equals(this.parentIaid)){
+                    this.parentLevel=level;
+                }
                 
                 
             }
@@ -319,6 +323,16 @@ public class MongoDoc {
     private String makeUrlParams(){
         StringBuilder temp=new StringBuilder(this.iaid);
         if(urlCache.exists(this.parentIaid)){
+            Integer currentLevel=this.sourceLevelId-1;
+            if(this.parentLevel==null){
+                DBObject doc=fetcher.findParent(this.parentIaid);
+                this.parentLevel=(Integer)doc.get("SourceLevelId");
+                while(currentLevel>this.parentLevel){
+                    temp.insert(0,"0/");
+                    currentLevel--;
+                }
+                
+            }
             temp.insert(0, urlCache.lookup(this.parentIaid)+'/');
         }
         else if("C0".equals(this.parentIaid)){
