@@ -81,9 +81,6 @@ public class JExtractor {
     
     private void push()
     {
-        String server="http://localhost:8080/solr/discoverytest";
-        uk.gov.tna.fudge.jExtractor.Solr.SolrPostService postie;
-        postie = new uk.gov.tna.fudge.jExtractor.Solr.SolrPostService(server);
         postie.querytest();
         
     }
@@ -123,7 +120,7 @@ public class JExtractor {
                         SolrDoc sdoc=new SolrDoc(mdoc);
                         solrDocs.add(sdoc);
                         mongoDocs.add(sdoc.toSon());
-                        webDocs.add(new SolrInputDocument(sdoc.map()));
+                        webDocs.add(sdoc.map());
                         docCounter++;
                         if(sdoc.checkIfDept()){
                             deptList.add(sdoc.getIaid());
@@ -139,12 +136,11 @@ public class JExtractor {
                             }
                             
                         }
-                        if (docCounter%5000==0){
-//                            fetcher.store(mongoDocs);
-                            mongoDocs.clear();
+                        if (docCounter%1000==0){
+                            //fetcher.store(mongoDocs);                            
                             nowTime=System.nanoTime();
                             Double elapsed=1/((nowTime-startTime)/5000/1000000000.0);
-                            Integer percentDone=docCounter/210000;
+                            Integer percentDone=docCounter/215600;
                             System.out.println("Processed "
                                     + docCounter.toString() 
                                     + " BatchID "
@@ -157,9 +153,12 @@ public class JExtractor {
                             startTime=nowTime;
                             //SolrDoc.writeXML(batchCounter,savePath, solrDocs);
                             SolrDoc.writeXMLasString(batchCounter,this.savePath, solrDocs, workingDept);
-                            postie.postDocument(webDocs);
+                            boolean commitFlag=(batchCounter%20==0);
+                            postie.postDocument(webDocs,commitFlag);
                             batchCounter++;
+                            mongoDocs.clear();
                             solrDocs.clear();
+                            webDocs.clear();
                             System.gc();
                             
                         }
@@ -181,8 +180,6 @@ public class JExtractor {
     
     public void post()
     {
-        String server="http://localhost:8080/solr/discoverytest";
-        uk.gov.tna.fudge.jExtractor.Solr.SolrPostService postie;
         SolrInputDocument sDoc;
         sDoc=new SolrInputDocument();
         sDoc.addField("CATDOCREF", "12345");
@@ -205,7 +202,6 @@ public class JExtractor {
         sDoc.addField("CLOSURETYPE","open");
         sDoc.addField("CLOSURESTATUS","open");
         
-        postie = new uk.gov.tna.fudge.jExtractor.Solr.SolrPostService(server);
         postie.postDocument(sDoc);
     }
     
