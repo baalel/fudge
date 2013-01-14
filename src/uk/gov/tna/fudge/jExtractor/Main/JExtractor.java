@@ -136,7 +136,7 @@ public class JExtractor {
                             }
                             
                         }
-                        if (docCounter%1000==0){
+                        if (docCounter%5000==0){
                             //fetcher.store(mongoDocs);                            
                             nowTime=System.nanoTime();
                             Double elapsed=1/((nowTime-startTime)/5000/1000000000.0);
@@ -153,7 +153,7 @@ public class JExtractor {
                             startTime=nowTime;
                             //SolrDoc.writeXML(batchCounter,savePath, solrDocs);
                             SolrDoc.writeXMLasString(batchCounter,this.savePath, solrDocs, workingDept);
-                            boolean commitFlag=(batchCounter%20==0);
+                            boolean commitFlag=((batchCounter+1)%20==0);
                             postie.postDocument(webDocs,commitFlag);
                             batchCounter++;
                             mongoDocs.clear();
