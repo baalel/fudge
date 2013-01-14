@@ -23,6 +23,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import org.apache.solr.common.SolrInputDocument;
 import org.bson.types.ObjectId;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -59,10 +60,10 @@ public class SolrDoc {
     private List<String> periods;
     private List<String> subjects;
     private boolean deptFlag;
-    private Map<String,Object> solrImportMap;
+    private SolrInputDocument solrImportMap;
     
     SolrDoc(MongoDoc mdoc){
-        solrImportMap=new LinkedHashMap<String,Object>();
+        solrImportMap=new SolrInputDocument();
         this.id=mdoc.id;
         this.drereference=mdoc.iaid;
         this.title=XMLHelper.safeText(mdoc.title);
@@ -97,43 +98,53 @@ public class SolrDoc {
     }
     
     private void makeMap(){
-        solrImportMap.put("DREREFERENCE", this.drereference);
-        solrImportMap.put("CATDOCREF",this.catDocRef);
-        solrImportMap.put("TITLE",this.title);
-        solrImportMap.put("DESCRIPTION",this.description);
-        solrImportMap.put("PERIOD",this.periods);
-        solrImportMap.put("STARTDATE",this.startdate);
-        solrImportMap.put("ENDDATE",this.enddate);
-        solrImportMap.put("DEPARTMENT",this.department);
-        solrImportMap.put("SERIES",this.series);
-        solrImportMap.put("SCHEMA",this.schema);
-        solrImportMap.put("URLPARAMS",this.urlParams);
+        solrImportMap.addField("DREREFERENCE", this.drereference);
+        solrImportMap.addField("CATDOCREF",this.catDocRef);
+        if(this.catDocRef!=null){
+            solrImportMap.addField("TITLE",this.title);
+        }
+        if(this.description!=null){
+            solrImportMap.addField("DESCRIPTION",this.description);
+        }
+        solrImportMap.addField("PERIOD",this.periods);
+        solrImportMap.addField("STARTDATE",this.startdate);
+        solrImportMap.addField("ENDDATE",this.enddate);
+        solrImportMap.addField("DEPARTMENT",this.department);
+        solrImportMap.addField("SERIES",this.series);
+        if(this.schema!=null){
+            solrImportMap.addField("SCHEMA",this.schema);
+        }
+        solrImportMap.addField("URLPARAMS",this.urlParams);
         try{
-            solrImportMap.put("SOURCELEVEL",new Integer(this.sourceLevelId));
+            solrImportMap.addField("SOURCELEVEL",new Integer(this.sourceLevelId));
         }
         catch(NumberFormatException nfe){
-            solrImportMap.put("SOURCELEVEL",null);
+            solrImportMap.addField("SOURCELEVEL",null);
         }
         try{
-            solrImportMap.put("CLOSURECODE",new Integer(this.closureCode));
+            solrImportMap.addField("CLOSURECODE",new Integer(this.closureCode));
         }
         catch(NumberFormatException iae){
-            solrImportMap.put("CLOSURECODE",null);
+            solrImportMap.addField("CLOSURECODE",null);
             
         }
-        solrImportMap.put("CLOSURETYPE",this.closureType);
-        solrImportMap.put("CLOSURESTATUS",this.closureStatus);
-        solrImportMap.put("HELDBY",this.heldbys);
-        solrImportMap.put("PLACE",this.places);
-        solrImportMap.put("PERSON",this.people);
-        solrImportMap.put("REFERENCE",this.references);
-        solrImportMap.put("CORPBODY",this.corpBodys);
-        solrImportMap.put("SUBJECT",this.subjects);
+        if(this.closureCode!=null){
+            solrImportMap.addField("CLOSURETYPE",this.closureType);
+        }
+        if(this.closureStatus!=null){
+            solrImportMap.addField("CLOSURESTATUS",this.closureStatus);
+        }
+        solrImportMap.addField("HELDBY",this.heldbys);
+        solrImportMap.addField("PLACE",this.places);
+        solrImportMap.addField("PERSON",this.people);
+        solrImportMap.addField("REFERENCE",this.references);
+        solrImportMap.addField("CORPBODY",this.corpBodys);
+        solrImportMap.addField("SUBJECT",this.subjects);
         
         
     }
     
-    public Map map(){
+    public SolrInputDocument map(){
         return this.solrImportMap;
     }
     
