@@ -52,10 +52,12 @@ public class SolrPostService {
         
         
     }
-   public void postDocument(List<SolrInputDocument> docs){
+   public void postDocument(List<SolrInputDocument> docs, boolean commit){
        try{
             server.add(docs);
-            server.commit();
+            if(commit){
+                server.commit();
+            }
         }
         catch(SolrException se){
             System.out.println("Error posting test document");
