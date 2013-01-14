@@ -4,14 +4,17 @@
  */
 package uk.gov.tna.fudge.jExtractor.Main;
 
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -20,7 +23,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
- 
+import org.bson.types.ObjectId;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 /**
@@ -29,8 +32,9 @@ import org.w3c.dom.Element;
  */
 public class SolrDoc {
     private static Pattern dept_re=Pattern.compile("^(\\w+)");
-    private static Pattern series_re=Pattern.compile("^(\\w+\\s?\\w?)");
+    private static Pattern series_re=Pattern.compile("^(\\w+\\s\\d+)");
     
+    ObjectId id;
     private String drereference;    
     private String title;
     private String description;
@@ -46,16 +50,20 @@ public class SolrDoc {
     private String startdate;
     private String enddate;
     private String schema;
-    private ArrayList<String> references;
-    private ArrayList<String> people;
-    private ArrayList<String> places;
-    private ArrayList<String> heldbys;
-    private ArrayList<String> corpBodys;
-    private ArrayList<String> periods;
-    private ArrayList<String> subjects;
-    //private String xmlRepresentation;
+    private String parent;
+    private List<String> references;
+    private List<String> people;
+    private List<String> places;
+    private List<String> heldbys;
+    private List<String> corpBodys;
+    private List<String> periods;
+    private List<String> subjects;
+    private boolean deptFlag;
+    private Map solrImportMap;
     
     SolrDoc(MongoDoc mdoc){
+        solrImportMap=new LinkedHashMap();
+        this.id=mdoc.id;
         this.drereference=mdoc.iaid;
         this.title=XMLHelper.safeText(mdoc.title);
         this.description=XMLHelper.safeText(mdoc.description);
@@ -75,7 +83,51 @@ public class SolrDoc {
         this.department=SolrDoc.getDepartment(mdoc.catDocRef);
         this.series=SolrDoc.getSeries(mdoc.catDocRef);
         this.periods=SolrDoc.getPeriod(this.startdate,this.enddate);
+        this.sourceLevelId=mdoc.sourceLevelId.toString();
+        this.parent=mdoc.parentIaid;
+        if(mdoc.sourceLevelId!=1){
+            this.deptFlag=false;
+        }
+        else{
+            this.deptFlag=true;
+        }
+        this.makeMap();
         
+    }
+    
+    private void makeMap(){
+        solrImportMap.put("DREREFERENCE", this.drereference);
+        solrImportMap.put("CATDOCREF",this.catDocRef);
+        solrImportMap.put("TITLE",this.title);
+        solrImportMap.put("DESCRIPTION",this.description);
+        solrImportMap.put("PERIOD",this.periods);
+        solrImportMap.put("STARTDATE",this.startdate);
+        solrImportMap.put("ENDDATE",this.enddate);
+        solrImportMap.put("DEPARTMENT",this.department);
+        solrImportMap.put("SERIES",this.series);
+        solrImportMap.put("SCHEMA",this.schema);
+        solrImportMap.put("URLPARAMS",this.urlParams);
+        solrImportMap.put("SOURCELEVEL",new Integer(this.sourceLevelId));
+        solrImportMap.put("CLOSURECODE",new Integer(this.closureCode));
+        solrImportMap.put("CLOSURETYPE",this.closureType);
+        solrImportMap.put("CLOSURESTATUS",this.closureStatus);
+        solrImportMap.put("HELDBY",this.heldbys);
+        solrImportMap.put("PLACE",this.places);
+        solrImportMap.put("PERSON",this.people);
+        solrImportMap.put("REFERENCE",this.references);
+        solrImportMap.put("CORPBODY",this.corpBodys);
+        solrImportMap.put("SUBJECT",this.subjects);
+        
+        
+    }
+    
+    public Map map(){
+        return this.solrImportMap;
+    }
+    
+    public boolean checkIfDept()
+    {
+        return this.deptFlag;
     }
     
     private static Element buildElement(Document doc,String name,String value){
@@ -144,7 +196,7 @@ public class SolrDoc {
         return doc;
     }
     
-    public static void writeXML(Integer batchid, String savePath, ArrayList<SolrDoc> docs){
+    public static void writeXML(Integer batchid, String savePath, List<SolrDoc> docs){
         try{
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -196,7 +248,7 @@ public class SolrDoc {
         
     }
     
-    private static String buildXMLStringDoc(ArrayList<SolrDoc> docs){
+    private static String buildXMLStringDoc(List<SolrDoc> docs){
         StringBuilder saveDoc=new StringBuilder();
         saveDoc.append("<add>\n");
         for(SolrDoc sdoc : docs){
@@ -286,10 +338,10 @@ public class SolrDoc {
         return saveDoc.toString();
     }
     
-    public static void writeXMLasString(Integer batchid, String savePath, ArrayList<SolrDoc> docs)
+    public static boolean writeXMLasString(Integer batchid, String savePath, List<SolrDoc> docs,String currDeptName)
     {
         String docToWrite=SolrDoc.buildXMLStringDoc(docs);
-        String pathToWrite=savePath+"File-"+batchid.toString()+".xml";
+        String pathToWrite=savePath+currDeptName+batchid.toString()+".xml";
         try {
             PrintWriter out=new PrintWriter(pathToWrite);
             out.print(docToWrite);
@@ -297,8 +349,9 @@ public class SolrDoc {
         } catch (FileNotFoundException ex) {
             System.out.println("Unable to save batch "+batchid.toString());
             ex.printStackTrace();
-            
+            return false;
         }
+        return true;
         
     }
     
@@ -315,46 +368,61 @@ public class SolrDoc {
         return series;
     }
     
-    private static ArrayList<String> getPeriod(String start, String end){
-        ArrayList<String> periods = new ArrayList<String>();
+    private static List<String> getPeriod(String start, String end){
+        List<String> periods = new ArrayList<String>();
         int startyear;
         int endyear;
         startyear=new Integer(start.substring(0, 4));
         endyear=new Integer(end.substring(0, 4));
+        if(startyear==1000 && endyear==2100){
+            periods.add("Uknown");
+            return periods;
+        }
         if((endyear<=1000)||(startyear<=1000)){
             periods.add("pre-1000");
         }
-        if((endyear>=1000 & endyear<=1099)||(startyear>=1000 & startyear<=1099)){
+        //if((endyear>=1000 && endyear<=1099)||(startyear>=1000 && startyear<=1099)){
+        if((endyear>=1000 && startyear<=1099)){
             periods.add("1000-1099");
         }
-        if((endyear>=1100 & endyear<=1199)||(startyear>=1100 & startyear<=1199)){
+        //if((endyear>=1100 && endyear<=1199)||(startyear>=1100 && startyear<=1199)){
+        if((endyear>=1100 && startyear<=1199)){
             periods.add("1100-1199");
         }
-        if((endyear>=1200 & endyear<=1299)||(startyear>=1200 & startyear<=1299)){
+        //if((endyear>=1200 && endyear<=1299)||(startyear>=1200 && startyear<=1299)){
+        if((endyear>=1200 && startyear<=1299)){
             periods.add("1200-1299");
         }
-        if((endyear>=1300 & endyear<=1399)||(startyear>=1300 & startyear<=1399)){
+        //if((endyear>=1300 && endyear<=1399)||(startyear>=1300 && startyear<=1399)){
+        if((endyear>=1300 && startyear<=1399)){
             periods.add("1300-1399");
         }
-        if((endyear>=1400 & endyear<=1499)||(startyear>=1400 & startyear<=1499)){
+        //if((endyear>=1400 && endyear<=1499)||(startyear>=1400 && startyear<=1499)){
+        if((endyear>=1400 && startyear<=1499)){
             periods.add("1400-1499");
         }
-        if((endyear>=1500 & endyear<=1599)||(startyear>=1500 & startyear<=1599)){
+        //if((endyear>=1500 && endyear<=1599)||(startyear>=1500 && startyear<=1599)){
+        if((endyear>=1500 && startyear<=1599)){
             periods.add("1500-1599");
         }
-        if((endyear>=1600 & endyear<=1699)||(startyear>=1600 & startyear<=1699)){
+        //if((endyear>=1600 && endyear<=1699)||(startyear>=1600 && startyear<=1699)){
+        if((endyear>=1600 && startyear<=1699)){
             periods.add("1600-1699");
         }
-        if((endyear>=1700 & endyear<=1799)||(startyear>=1700 & startyear<=1799)){
-            periods.add("1700-1799");
+        //if((endyear>=1700 && endyear<=1799)||(startyear>=1700 && startyear<=1799)){
+        if((endyear>=1700 && startyear<=1799)){
+            periods.add("1700Object-1799");
         }
-        if((endyear>=1800 & endyear<=1899)||(startyear>=1800 & startyear<=1899)){
+        //if((endyear>=1800 && endyear<=1899)||(startyear>=1800 && startyear<=1899)){
+        if((endyear>=1800 && startyear<=1899)){
             periods.add("1800-1899");
         }
-        if((endyear>=1900 & endyear<=1924)||(startyear>=1900 & startyear<=1924)){
+        //if((endyear>=1900 && endyear<=1924)||(startyear>=1900 && startyear<=1924)){
+        if((endyear>=1900 && startyear<=1924)){
             periods.add("1900-1924");
         }
-        if((endyear>=1925 & endyear<=1949)||(startyear>=1925 & startyear<=1949)){
+        //if((endyear>=1925 && endyear<=1949)||(startyear>=1925 && startyear<=1949)){
+        if((endyear>=1925 && startyear<=1949)){
             periods.add("1925-1949");
         }
         if((endyear>=1950)||(startyear>=1950)){
@@ -363,5 +431,46 @@ public class SolrDoc {
         
         return periods;
     }
+    
+    public String getIaid(){
+        return this.drereference;
+        
+    }
+
+    public String getDepartment() {
+        return this.department;
+    }
+    
+    public String getParent(){
+        return this.parent;
+    }
+    
+    public DBObject toSon(){
+        DBObject son=new BasicDBObject("_id",id);
+        son.put("DREREFERENCE", this.drereference);
+        son.put("CATDOCREF",this.catDocRef);
+        son.put("TITLE", this.title);
+        son.put("DESCRIPTION", this.description);
+        son.put("STARTDATE", this.startdate);
+        son.put("ENDDATE", this.enddate);
+        son.put("DEPARTMENT", this.department);
+        son.put("SERIES", this.series);
+        son.put("SOURCELEVEL", this.sourceLevelId);
+        son.put("SCHEMA", this.schema);
+        son.put("URLPARAMS", this.urlParams);
+        son.put("CLOSURETYPE", this.closureType);
+        son.put("CLOSURESTATUS", this.closureStatus);
+        son.put("CLOSURECODE", this.closureCode);
+        son.put("PERSON", this.people);
+        son.put("PLACE", this.places);
+        son.put("CORPBODY", this.corpBodys);
+        son.put("SUBJECT", this.subjects);
+        son.put("HELDBY", this.heldbys);
+        son.put("PERIOD", this.periods);
+        son.put("REFERENCE", this.references);
+        
+        
+        return son;
+    } 
     
 }

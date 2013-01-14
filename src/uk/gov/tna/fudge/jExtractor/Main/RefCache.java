@@ -27,14 +27,19 @@ public class RefCache {
 
     }
     
-    public String loopup(String id)
+    public String lookup(String id)
     {
         return refLookup.get(id);
     }
     
     public boolean exists(String key)
     {
-        return refLookup.containsValue(key);
+        return refLookup.containsKey(key);
+    }
+    
+    public void clear(){
+        this.refLookup.clear();
+        System.gc();
     }
 
 }

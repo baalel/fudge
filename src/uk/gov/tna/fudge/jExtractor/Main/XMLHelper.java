@@ -5,6 +5,7 @@
 package uk.gov.tna.fudge.jExtractor.Main;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -50,11 +51,11 @@ public class XMLHelper {
         return stringBuffer.toString();
     }
     
-    public static ArrayList<String> safeText(ArrayList<String> originalStrings) {
+    public static List<String> safeText(List<String> originalStrings) {
         if(originalStrings==null){
             return null;
         }
-        ArrayList<String> safeStrings=new ArrayList<String>(originalStrings.size());
+        List<String> safeStrings=new ArrayList<String>(originalStrings.size());
         for(String s : originalStrings)
         {
             safeStrings.add(XMLHelper.safeText(s));
