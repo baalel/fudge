@@ -78,24 +78,32 @@ public class SolrPostService {
         catch(SolrException se){
             System.out.println("Error posting test document");
             System.out.println(se.getMessage());
+            System.exit(1);
             
         }
         catch(SolrServerException sse){
             System.out.println("Error posting test document");
             System.out.println(sse.getMessage());
+            System.exit(1);
         }
         catch(IOException ioe){
             System.out.println("Error posting test document");
             System.out.println(ioe.getMessage());
-            
+            System.exit(1);
         }
        
    }
    
-   public void postDocument(SolrInputDocument doc){
+   public void postDocument(SolrInputDocument doc, boolean commit){
+       if(this.distributed){
+           distribute(doc, commit);
+           return;
+       }
         try{
             server.add(doc);
-            server.commit();
+            if(commit){
+                server.commit();
+            }
         }
         catch(SolrException se){
             System.out.println("Error posting test document");
@@ -113,7 +121,15 @@ public class SolrPostService {
         }
        
    }
-   
+   /**
+    * This method divides a set of SolrInputDocuments amongst the known
+    * SolrServers, distributing is done by the String.hash() of the DREREFERENCE
+    * If the server list remains the same, then a particular document
+    * should always be sent to the same server.
+    * @param docs A List of SolrInputDocuments to post to solr
+    * @param commit a boolean flag that determines whether a commit is performed
+    *               after the documents have been sent
+    */
    private void distribute(List<SolrInputDocument> docs,boolean commit){
        List<List<SolrInputDocument>> docLists=new ArrayList<List<SolrInputDocument>>(serverList.size());
        for(int i=0;i<serverList.size();i++){
@@ -129,23 +145,64 @@ public class SolrPostService {
        }
        try{
            for(int i=0;i<serverList.size();i++){
-                serverList.get(i).add(docLists.get(i));
+                SolrServer s=serverList.get(i);
+                List l=docLists.get(i);
+                //serverList.get(i).add(docLists.get(i));
+                s.add(l);
                 if(commit){
                     serverList.get(i).commit();
                 }
             }
         }
         catch(SolrException se){
-            System.out.println("Error posting test document");
+            System.out.println("Solr Error posting document");
+            System.out.println(se.getMessage());
+            System.exit(1);
+            
+        }
+        catch(SolrServerException sse){
+            System.out.println("Server Error posting document\nCheck your firewall");
+            System.out.println(sse.getMessage());
+            System.exit(1);
+        }
+        catch(IOException ioe){
+            System.out.println("IO Error posting documents");
+            System.out.println(ioe.getMessage());
+            System.exit(1);
+            
+        }
+       catch(IllegalArgumentException e){
+           System.out.println("Failed to index to Solr\nCheck server spellings in config");
+           System.out.print(e.getMessage());
+           e.printStackTrace();
+           System.exit(1);
+       }
+       
+       
+   }
+   
+    private void distribute(SolrInputDocument doc ,boolean commit){
+       
+       int s=Math.abs(((String)doc.getFieldValue("DREREFERENCE")).hashCode()%serverList.size()); 
+       try{
+           
+                serverList.get(s).add(doc);
+                if(commit){
+                    serverList.get(s).commit();
+                }
+            
+        }
+        catch(SolrException se){
+            System.out.println("Solr Error posting test document");
             System.out.println(se.getMessage());
             
         }
         catch(SolrServerException sse){
-            System.out.println("Error posting test document");
+            System.out.println("Server Error posting test document");
             System.out.println(sse.getMessage());
         }
         catch(IOException ioe){
-            System.out.println("Error posting test document");
+            System.out.println("IO Error posting test document");
             System.out.println(ioe.getMessage());
             
         }
