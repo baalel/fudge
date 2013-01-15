@@ -14,6 +14,7 @@ import com.mongodb.DBObject;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.Stack;
@@ -36,6 +37,7 @@ public class JExtractor {
     String solrWebServerB;
     SolrPostService postie;
     String distribute;
+    List<String> solrServerList;
     
     JExtractor()
     {
@@ -44,7 +46,7 @@ public class JExtractor {
         try{
             //InputStream in=new InputStream(JExtractor.class.getClassLoader().getResource("/Resource/TNAconf.properties"));
             //path /home/sprice/NetBeansProjects/jExtractor/src/uk/gov/tna/fudge/jExtractor/
-            String path=sysProp.getProperty("user.dir")+"/Resources/Homeconf.properties";
+            String path=sysProp.getProperty("user.dir")+"/Resources/TNAconf.properties";
             localProp.load(new FileInputStream(path));
             
         }
@@ -62,11 +64,9 @@ public class JExtractor {
         this.solrCollection=localProp.getProperty("MONGO_OUTCOL","solrout");
         this.solrWebServer=localProp.getProperty("SOLR_WEBSERVER","http://localhost:8080/solr/discoverytest");
         this.distribute=localProp.getProperty("DISTRIBUTE", "FALSE");
-        this.solrWebServerA="http://localhost:8080/solr/discovery1";
-        this.solrWebServerB="http://localhost:8080/solr/discovery2";
-        List<String> solrServerList=new ArrayList<String>(2);
-        solrServerList.add(this.solrWebServerA);
-        solrServerList.add(this.solrWebServerB);
+        String[] distservers=localProp.getProperty("DIST_SOLR_SERVERS", "http://localhost:8080/solr/discovery1,http://localhost:8080/solr/discovery2").split(",");
+        this.solrServerList=new ArrayList<String>(2);
+        solrServerList.addAll(Arrays.asList(distservers));
         if(!"TRUE".equals(distribute)){
             this.postie=new SolrPostService(this.solrWebServer);
         }
@@ -223,7 +223,7 @@ public class JExtractor {
         sDoc.addField("CLOSURETYPE","open");
         sDoc.addField("CLOSURESTATUS","open");
         
-        postie.postDocument(sDoc);
+        postie.postDocument(sDoc,true);
     }
     
     public static void main(String[] args) {
