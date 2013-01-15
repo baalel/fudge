@@ -120,7 +120,10 @@ public class SolrPostService {
            docLists.add(new ArrayList<SolrInputDocument>(5000/serverList.size()+1));
        }
        for(SolrInputDocument doc : docs){
-           int s=((String)doc.getFieldValue("DREREFERENCE")).hashCode()%serverList.size();
+           int s=Math.abs(((String)doc.getFieldValue("DREREFERENCE")).hashCode()%serverList.size());
+           if(s<0 || s>1){
+               System.out.println("ack");
+           }
            docLists.get(s).add(doc);
            
        }
