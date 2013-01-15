@@ -88,6 +88,9 @@ public class JExtractor {
         else if("QUERY".equals(mode)){
             this.query();
         }
+        else if("EXPORTXML".equals(mode)){
+            this.exportXML("", 1000);
+        }
         else if("POST".equals(mode)){
             this.post();
         }
@@ -245,8 +248,9 @@ public class JExtractor {
      * @param fPath Path to export files to
      * @param batchsize number of documents per file
      */
-    public void exportXML(String fPath, int batchsize)
+    public void exportXML(String fPath, int batchSize)
     {
+        postie.exportTest(fPath,batchSize);
         
     }
     
@@ -278,6 +282,6 @@ public class JExtractor {
 
     public static void main(String[] args) {
         JExtractor indexer=new JExtractor();
-        indexer.run("PULL");
+        indexer.run("EXPORTXML");
     }
 }

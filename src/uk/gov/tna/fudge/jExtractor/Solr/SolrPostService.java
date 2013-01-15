@@ -35,6 +35,7 @@ public class SolrPostService {
     
     public SolrPostService(List<String> solrServerUrls){
         serverList=new ArrayList<SolrServer>(solrServerUrls.size());
+        server=new HttpSolrServer(solrServerUrls.get(0));
         for(String url : solrServerUrls){
             serverList.add(new HttpSolrServer(url));
         }
@@ -43,10 +44,10 @@ public class SolrPostService {
     
     public void querytest(){
         SolrQuery query = new SolrQuery();
-        query.setQuery("TITLE:Lord AND TITLE:Nelson AND DESCRIPTION:Logs AND SOURCELEVEL:6");
-        query.addSortField("CATDOCREF", SolrQuery.ORDER.asc);
-        query.setHighlight(true).setHighlightSnippets(1);
-        query.setParam("hl.fl", "text");
+        query.setQuery("*:*");
+        query.addSortField("DREREFERENCE", SolrQuery.ORDER.asc);
+        query.setRows(100);
+        query.setStart(0);
         query.setParam("shards", "localhost:8080/solr/discovery1,localhost:8080/solr/discovery2");
         try {
             QueryResponse rsp = this.server.query( query );
@@ -59,11 +60,41 @@ public class SolrPostService {
         } catch (SolrServerException ex) {
             //Logger.getLogger(SolrPostman.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("SolrException "+ex.getMessage());
+        }      
+    }
+    
+    public void exportTest(String savePath, int batchSize){
+        
+        SolrQuery query = new SolrQuery();
+        query.setQuery("*:*");
+        query.addSortField("DREREFERENCE", SolrQuery.ORDER.asc);
+        query.setParam("shards", "localhost:8080/solr/discovery1,localhost:8080/solr/discovery2");
+        query.setRows(0);
+        
+        try {
+            long totalSize=this.server.query( query ).getResults().getNumFound();
+            query.setRows(batchSize);
+            for(long batchCount=0;batchCount<totalSize/batchSize;batchCount++){
+                query.setStart((int)(batchSize*batchCount));
+
+                    QueryResponse rsp = this.server.query( query );
+                    SolrDocumentList docs = rsp.getResults();
+                    System.out.println(docs.getNumFound());
+
+                    for(SolrDocument doc : docs){
+                        System.out.println(doc.toString());
+                    }
+            }
+        } catch (SolrServerException ex) {
+        //Logger.getLogger(SolrPostman.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("SolrException "+ex.getMessage());
+        } 
+        catch(NullPointerException npe){
+            System.out.println("Server not set");
         }
         
-        
-        
     }
+    
    public void postDocument(List<SolrInputDocument> docs, boolean commit){
        if(this.distributed){
            distribute(docs, commit);
