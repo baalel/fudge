@@ -189,7 +189,9 @@ public class JExtractor {
             }
             SolrDoc.writeXMLasString(batchCounter,this.savePath, solrDocs, workingDept);
             boolean commitFlag=true;
-            postie.postDocument(webDocs,commitFlag);
+            if(this.doSolrPost){
+                postie.postDocument(webDocs,commitFlag);
+            }
             mongoDocs.clear();
             solrDocs.clear();
             webDocs.clear();
