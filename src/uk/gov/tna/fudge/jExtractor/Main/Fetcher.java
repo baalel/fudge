@@ -128,4 +128,13 @@ public class Fetcher {
         mongoClient.close();
     }
     
+    public int docCount(){
+        BasicDBObject query=new BasicDBObject("IAID", "/.+/");
+        
+        int doccount=sourceColl.find().count();
+        
+        return doccount;
+        
+    }
+    
 }
