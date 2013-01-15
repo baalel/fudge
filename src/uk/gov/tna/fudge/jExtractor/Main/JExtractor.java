@@ -39,6 +39,7 @@ public class JExtractor {
     String distribute;
     List<String> solrServerList;
     boolean doSolrPost;
+    boolean doMongoStore;
     
     JExtractor()
     {
@@ -47,7 +48,7 @@ public class JExtractor {
         try{
             //InputStream in=new InputStream(JExtractor.class.getClassLoader().getResource("/Resource/TNAconf.properties"));
             //path /home/sprice/NetBeansProjects/jExtractor/src/uk/gov/tna/fudge/jExtractor/
-            String path=sysProp.getProperty("user.dir")+"/Resources/TNAconf.properties";
+            String path=sysProp.getProperty("user.dir")+"/Resources/Homeconf.properties";
             localProp.load(new FileInputStream(path));
             
         }
@@ -66,6 +67,7 @@ public class JExtractor {
         this.solrWebServer=localProp.getProperty("SOLR_WEBSERVER","http://localhost:8080/solr/discoverytest");
         this.distribute=localProp.getProperty("DISTRIBUTE", "FALSE");
         this.doSolrPost=("TRUE".equals(localProp.getProperty("INDEXSOLR", "FALSE")));
+        this.doMongoStore=("TRUE".equals(localProp.getProperty("MONGOSAVE", "FALSE")));
         String[] distservers=localProp.getProperty("DIST_SOLR_SERVERS", "http://localhost:8080/solr/discovery1,http://localhost:8080/solr/discovery2").split(",");
         this.solrServerList=new ArrayList<String>(2);
         solrServerList.addAll(Arrays.asList(distservers));
@@ -79,31 +81,29 @@ public class JExtractor {
     
     public void run(String mode)
     {
+   
         if ("PULL".equals(mode)){
             this.pull();
         }
-        else if("PUSH".equals(mode)){
-            this.push();
+        else if("QUERY".equals(mode)){
+            this.query();
         }
         else if("POST".equals(mode)){
             this.post();
         }
         else{
-            System.out.println("Supported modes are POST, PUSH and PULL");
+            System.out.println("Supported modes are POST, QUERY and PULL");
         }
         
     }
     
-    private void push()
+    private void query()
     {
         postie.querytest();
         
     }
     
     private void pull(){
- 
-        long startTime = System.nanoTime();
-        long nowTime;
         Fetcher fetcher;
         RefCache parentCache=new RefCache();
         CoveringDateCache dateCache=new CoveringDateCache();
@@ -113,6 +113,8 @@ public class JExtractor {
         List<SolrDoc> solrDocs=new ArrayList<SolrDoc>(5000);
         List<DBObject> mongoDocs=new ArrayList<DBObject>(5000) ;
         List<SolrInputDocument> webDocs=new ArrayList<SolrInputDocument>(5000);
+        long startTime = System.nanoTime();
+        long nowTime;
         String workingDept="START";
         String oldDept;
         oldDept = "";
@@ -124,6 +126,7 @@ public class JExtractor {
         try{
             
             fetcher=new Fetcher( mongoServer,mongoPort,iaDatabase,solrDatabase,iaCollection,solrCollection);
+            int totalDocs=fetcher.docCount();
             while(!workQueue.isEmpty()){
                 String docid=workQueue.pop();
                 DBCursor cursor=fetcher.findMany("ParentIAID", docid);
@@ -152,10 +155,12 @@ public class JExtractor {
                             
                         }
                         if (docCounter%5000==0){
-                            //fetcher.store(mongoDocs);                            
+                            if(this.doMongoStore){
+                                fetcher.store(mongoDocs);
+                            }
                             nowTime=System.nanoTime();
                             Double elapsed=1/((nowTime-startTime)/5000/1000000000.0);
-                            Integer percentDone=docCounter/215600;
+                            Integer percentDone=docCounter/totalDocs*100;
                             System.out.println("Processed "
                                     + docCounter.toString() 
                                     + " BatchID "
@@ -189,6 +194,9 @@ public class JExtractor {
             }
             SolrDoc.writeXMLasString(batchCounter,this.savePath, solrDocs, workingDept);
             boolean commitFlag=true;
+            if(this.doMongoStore){
+                                fetcher.store(mongoDocs);
+                            }
             if(this.doSolrPost){
                 postie.postDocument(webDocs,commitFlag);
             }
@@ -232,6 +240,42 @@ public class JExtractor {
         postie.postDocument(sDoc,true);
     }
     
+    /**
+     * Exports contents of Solr Server to file as XML files
+     * @param fPath Path to export files to
+     * @param batchsize number of documents per file
+     */
+    public void exportXML(String fPath, int batchsize)
+    {
+        
+    }
+    
+    /**
+     * Imports XML files and indexes them to Solr
+     * @param fPath Path to export files to
+     */
+    public void importXML(String fPath){
+        
+    }
+    
+    /**
+     * Imports JSON files and indexes them to Solr
+     * @param fPath Path to export files to
+     */
+    public void importJSON(String fPath){
+    
+    }
+    
+    /**
+     * Exports contents of Solr Server to file as JSON files
+     * @param fPath Path to export files to
+     * @param batchsize number of documents per file
+     */
+    public void exportJSON(String fPath, int batchsize){
+        
+    }
+    
+
     public static void main(String[] args) {
         JExtractor indexer=new JExtractor();
         indexer.run("PULL");
