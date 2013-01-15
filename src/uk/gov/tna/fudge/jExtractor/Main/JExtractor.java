@@ -38,6 +38,7 @@ public class JExtractor {
     SolrPostService postie;
     String distribute;
     List<String> solrServerList;
+    boolean doSolrPost;
     
     JExtractor()
     {
@@ -64,6 +65,7 @@ public class JExtractor {
         this.solrCollection=localProp.getProperty("MONGO_OUTCOL","solrout");
         this.solrWebServer=localProp.getProperty("SOLR_WEBSERVER","http://localhost:8080/solr/discoverytest");
         this.distribute=localProp.getProperty("DISTRIBUTE", "FALSE");
+        this.doSolrPost=("TRUE".equals(localProp.getProperty("INDEXSOLR", "FALSE")));
         String[] distservers=localProp.getProperty("DIST_SOLR_SERVERS", "http://localhost:8080/solr/discovery1,http://localhost:8080/solr/discovery2").split(",");
         this.solrServerList=new ArrayList<String>(2);
         solrServerList.addAll(Arrays.asList(distservers));
@@ -167,7 +169,9 @@ public class JExtractor {
                             //SolrDoc.writeXML(batchCounter,savePath, solrDocs);
                             SolrDoc.writeXMLasString(batchCounter,this.savePath, solrDocs, workingDept);
                             boolean commitFlag=((batchCounter+1)%20==0);
-                            postie.postDocument(webDocs,commitFlag);
+                            if(this.doSolrPost){
+                                postie.postDocument(webDocs,commitFlag);
+                            }
                             batchCounter++;
                             mongoDocs.clear();
                             solrDocs.clear();
