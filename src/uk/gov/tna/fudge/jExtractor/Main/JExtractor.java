@@ -63,7 +63,7 @@ public class JExtractor {
         this.solrWebServer=localProp.getProperty("SOLR_WEBSERVER","http://localhost:8080/solr/discoverytest");
         this.distribute=localProp.getProperty("DISTRIBUTE", "FALSE");
         this.solrWebServerA="http://localhost:8080/solr/discovery1";
-        this.solrWebServerB="http://localhost:8080/solr/discovery1";
+        this.solrWebServerB="http://localhost:8080/solr/discovery2";
         List<String> solrServerList=new ArrayList<String>(2);
         solrServerList.add(this.solrWebServerA);
         solrServerList.add(this.solrWebServerB);
@@ -177,18 +177,19 @@ public class JExtractor {
                         }
                         
                     }
-                    SolrDoc.writeXMLasString(batchCounter,this.savePath, solrDocs, workingDept);
-                    boolean commitFlag=true;
-                    postie.postDocument(webDocs,commitFlag);
-                    mongoDocs.clear();
-                    solrDocs.clear();
-                    webDocs.clear();
-                    System.gc();
+
                 } finally {
                     cursor.close();
                 }
                 
             }
+            SolrDoc.writeXMLasString(batchCounter,this.savePath, solrDocs, workingDept);
+            boolean commitFlag=true;
+            postie.postDocument(webDocs,commitFlag);
+            mongoDocs.clear();
+            solrDocs.clear();
+            webDocs.clear();
+            System.gc();
         }
         catch(Exception e)
         {
