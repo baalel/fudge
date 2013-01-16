@@ -63,6 +63,45 @@ public class SolrPostService {
         }      
     }
     
+    public void tagCategoryQuery(String queryText, String tag){
+        List<SolrInputDocument> results=new ArrayList<SolrInputDocument>();
+        SolrQuery query = new SolrQuery();
+        query.setQuery(queryText);
+        query.addField("DREREFERENCE");
+        query.setStart(0);
+        query.setRows(0);
+        try {
+            QueryResponse rsp = this.server.query( query );
+            Long docCount=rsp.getResults().getNumFound();
+            query.setRows(docCount.intValue());
+            rsp=this.server.query( query );
+            SolrDocumentList docs = rsp.getResults();
+            for(SolrDocument doc : docs){
+                doc.addField("TAXONOMY", tag);
+                SolrInputDocument inDoc=SolrPostService.reindexMapper(doc);
+                results.add(inDoc);
+            }
+            try{
+                server.add(results);
+                server.commit();
+            }
+            catch(SolrException se){
+                
+            }
+            catch(SolrServerException sse){
+                
+            }
+            catch(IOException ioe){
+            System.out.println("Error posting test document");
+            System.out.println(ioe.getMessage());
+            System.exit(1);
+        }
+        } catch (SolrServerException ex) {
+            System.out.println("SolrException "+ex.getMessage());
+        }   
+        
+    }
+    
     public void exportTest(String savePath, int batchSize){
         
         SolrQuery query = new SolrQuery();
@@ -205,7 +244,6 @@ public class SolrPostService {
        catch(IllegalArgumentException e){
            System.out.println("Failed to index to Solr\nCheck server spellings in config");
            System.out.print(e.getMessage());
-           e.printStackTrace();
            System.exit(1);
        }
        
@@ -240,5 +278,36 @@ public class SolrPostService {
        
        
    }
+    static SolrInputDocument reindexMapper(SolrDocument oldDoc){
+        SolrInputDocument newDoc=new SolrInputDocument();
+        List<String> fields=new ArrayList<String>();
+        fields.add("DREREFERENCE");
+        fields.add("CATDOCREF");
+        fields.add("TITLE");
+        fields.add("DESCRIPTION");
+        fields.add("PERIOD");
+        fields.add("STARTDATE");
+        fields.add("ENDDATE");
+        fields.add("DEPARTMENT");
+        fields.add("SERIES");
+        fields.add("SCHEMA");
+        fields.add("URLPARAMS");
+        fields.add("SOURCELEVEL");
+        fields.add("CLOSURECODE");
+        fields.add("CLOSURESTATUS");
+        fields.add("CLOSURETYPE");
+        fields.add("HELDBY");
+        fields.add("PLACE");
+        fields.add("PERSON");
+        fields.add("REFERENCE");
+        fields.add("SUBJECT");
+        fields.add("TAXONOMY");
+        
+        for(String fieldname : fields){
+            newDoc.addField(fieldname, (String)oldDoc.getFieldValue(fieldname));
+        }
+        return newDoc;
+        
+    }
     
 }
