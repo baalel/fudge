@@ -10,9 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
@@ -62,32 +60,32 @@ public class SolrDoc {
     private boolean deptFlag;
     private SolrInputDocument solrImportMap;
     
-    SolrDoc(MongoDoc mdoc){
+    SolrDoc(IMongoDoc mdoc){
         solrImportMap=new SolrInputDocument();
-        this.id=mdoc.id;
-        this.drereference=mdoc.iaid;
-        this.title=XMLHelper.safeText(mdoc.title);
-        this.description=XMLHelper.safeText(mdoc.description);
-        this.catDocRef=XMLHelper.safeText(mdoc.catDocRef);
-        this.corpBodys=XMLHelper.safeText(mdoc.corpBodies);
-        this.people=XMLHelper.safeText(mdoc.peoples);
-        this.places=XMLHelper.safeText(mdoc.places);
-        this.heldbys=XMLHelper.safeText(mdoc.heldbys);
-        this.references=XMLHelper.safeText(mdoc.references);
-        this.subjects=XMLHelper.safeText(mdoc.subjects);
-        this.startdate=mdoc.startdate;
-        this.enddate=mdoc.enddate;
-        this.closureCode=mdoc.closureCode;
-        this.closureStatus=mdoc.closureStatus;
-        this.closureType=mdoc.closureType;
-        this.schema=mdoc.schema;
-        this.department=SolrDoc.getDepartment(mdoc.catDocRef);
-        this.series=SolrDoc.getSeries(mdoc.catDocRef);
+        this.id=mdoc.getObjectId();
+        this.drereference=mdoc.getIaid();
+        this.title=XMLHelper.safeText(mdoc.getTitle());
+        this.description=XMLHelper.safeText(mdoc.getDescription());
+        this.catDocRef=XMLHelper.safeText(mdoc.getCatDocRef());
+        this.corpBodys=XMLHelper.safeText(mdoc.getCorpBodies());
+        this.people=XMLHelper.safeText(mdoc.getPeoples());
+        this.places=XMLHelper.safeText(mdoc.getPlaces());
+        this.heldbys=XMLHelper.safeText(mdoc.getHeldbys());
+        this.references=XMLHelper.safeText(mdoc.getReferences());
+        this.subjects=XMLHelper.safeText(mdoc.getSubjects());
+        this.startdate=mdoc.getStartdate();
+        this.enddate=mdoc.getEnddate();
+        this.closureCode=mdoc.getClosureCode();
+        this.closureStatus=mdoc.getClosureStatus();
+        this.closureType=mdoc.getClosureType();
+        this.schema=mdoc.getSchema();
+        this.department=SolrDoc.getDepartment(mdoc.getCatDocRef());
+        this.series=SolrDoc.getSeries(mdoc.getCatDocRef());
         this.periods=SolrDoc.getPeriod(this.startdate,this.enddate);
-        this.sourceLevelId=mdoc.sourceLevelId.toString();
-        this.parent=mdoc.parentIaid;
-        this.urlParams=mdoc.urlParams;
-        if(mdoc.sourceLevelId!=1){
+        this.sourceLevelId=mdoc.getSourceLevelId().toString();
+        this.parent=mdoc.getParentIaid();
+        this.urlParams=mdoc.getUrlParams();
+        if(mdoc.getSourceLevelId()!=1){
             this.deptFlag=false;
         }
         else{
@@ -369,7 +367,6 @@ public class SolrDoc {
             out.close();
         } catch (FileNotFoundException ex) {
             System.out.println("Unable to save batch "+batchid.toString());
-            ex.printStackTrace();
             return false;
         }
         return true;

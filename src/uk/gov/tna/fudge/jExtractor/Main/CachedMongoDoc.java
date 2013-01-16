@@ -15,66 +15,57 @@ import org.bson.types.ObjectId;
 
 /**
  *
- * @author steve
+ * @author sprice
  */
-public class MongoDoc implements IMongoDoc{
+public class CachedMongoDoc implements IMongoDoc{
     private static Pattern title_re=Pattern.compile(">(.*)</");
     private static Pattern desc_re=Pattern.compile("<p>(.*)</p>");
     private static Pattern htmltag_re=Pattern.compile("<[^<]+?>");
     private static Pattern schema_re=Pattern.compile("=\\\"(.+)\\\"");
     private static String datetimepart="T00:00:00Z";
 
-    /**
-     * @return the datetimepart
-     */
-    public static String getDatetimepart() {
-        return datetimepart;
-    }
-
 
     
-    private String iaid;
-    private String parentIaid;
-    private Integer parentLevel;
-    private Integer sourceLevelId;
-    private String catDocRef;
-    private String closureStatus;
-    private String closureCode;
-    private String closureType;
-    private String startdate;
-    private String enddate;
-    private String title;
-    private String description;
-    private String schema;
-    private String reference;
-    private String urlParams;
-    private Tag tag;
-    private List<String> tags;
-    private ObjectId id;
+    String iaid;
+    String parentIaid;
+    Integer parentLevel;
+    Integer sourceLevelId;
+    String catDocRef;
+    String closureStatus;
+    String closureCode;
+    String closureType;
+    String startdate;
+    String enddate;
+    String title;
+    String description;
+    String schema;
+    String reference;
+    String urlParams;
+    Tag tag;
+    List<String> tags;
+    ObjectId id;
     Reference ref;
-    private List<String> references;
+    List<String> references;
     HeldBy held;
-    private List<String> heldbys;
+    List<String> heldbys;
     Person pers;
-    private List<String> peoples;
+    List<String> peoples;
     Place place;
-    private List<String> places;
+    List<String> places;
     CorporateBody corp;
-    private List<String> corpBodies;
+    List<String> corpBodies;
     Subject subj;
-    private List<String> subjects;
+    List<String> subjects;
     Fetcher fetcher;
-    RefCache refCache;
-    CoveringDateCache dateCache;
-    UrlParamCache urlCache;
+    GeneralCache cache;
     
-    
-    MongoDoc(DBObject doc, RefCache parentCache,CoveringDateCache cdateCache,UrlParamCache uCache, Fetcher fetch)
+CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
     {
         fetcher=fetch;
-        refCache=parentCache;
-        dateCache=cdateCache;
-        urlCache=uCache;
+        //refCache=parentCache;
+        //dateCache=cdateCache;
+        //urlCache=uCache;
+        cache=gCache;
         parentIaid=(String)doc.get("ParentIAID");
         iaid=(String)doc.get("IAID");
         sourceLevelId=(Integer)doc.get("SourceLevelId");
@@ -82,7 +73,7 @@ public class MongoDoc implements IMongoDoc{
         closureCode=(String)doc.get("ClosureCode");
         closureType=(String)doc.get("ClosureType");
         id=(ObjectId)doc.get("_id");
-        title=MongoDoc.cleanTitle((String)doc.get("Title"));
+        title=CachedMongoDoc.cleanTitle((String)doc.get("Title"));
         //startdate=MongoDoc.convertDate((String)doc.get("CoveringFromDate"),true);
         //enddate=MongoDoc.convertDate((String)doc.get("CoveringToDate"),false);
         try{
@@ -103,7 +94,7 @@ public class MongoDoc implements IMongoDoc{
         tag=new Tag((BasicDBList)doc.get("Tag"));
         
         DBObject scopeContent=(DBObject)doc.get("ScopeContent");
-        description=MongoDoc.cleanDescription((String)scopeContent.get("Description"));
+        description=CachedMongoDoc.cleanDescription((String)scopeContent.get("Description"));
         BasicDBList occupation=(BasicDBList)scopeContent.get("Occupation");
         if(occupation!=null){
             subj.add(occupation);}
@@ -116,11 +107,11 @@ public class MongoDoc implements IMongoDoc{
         BasicDBList placeName=(BasicDBList)scopeContent.get("PlaceName");
         if(placeName!=null){
             place.add(placeName);}
-        schema=MongoDoc.extractSchema((String)scopeContent.get("Schema"));
+        schema=CachedMongoDoc.extractSchema((String)scopeContent.get("Schema"));
         //if(schema==null){schema="";}
         
         catDocRef=makeCatDocRef();
-        ref=new Reference(this.reference);
+        ref=new Reference(catDocRef);
         ref.append((String)doc.get("FormerReferencePro"));
         ref.append((String)doc.get("FormerReferenceDep"));
         references=ref.getValues();
@@ -138,24 +129,24 @@ public class MongoDoc implements IMongoDoc{
     
     private DBObject toMongoSon()
     {
-        DBObject son=new BasicDBObject("_id", getObjectId());
-        son.put("ParentIAID", getParentIaid());
-        son.put("IAID", getIaid());
-        son.put("SourceLevelId", getSourceLevelId());
-        son.put("closureStatus", getClosureStatus());
-        son.put("closureCode", getClosureCode());
-        son.put("closureType", getClosureType());
-        son.put("Title", getTitle());
-        son.put("Description", getDescription());
+        DBObject son=new BasicDBObject("_id",id);
+        son.put("ParentIAID",parentIaid);
+        son.put("IAID",iaid);
+        son.put("SourceLevelId", sourceLevelId);
+        son.put("closureStatus", closureStatus);
+        son.put("closureCode", closureCode);
+        son.put("closureType", closureType);
+        son.put("Title", title);
+        son.put("Description", description);
         son.put("Person", pers.values);
         son.put("Place", place.values);
         son.put("CorpBody", corp.values);
         son.put("Subject", subj.values);
         son.put("Heldby", held.values);
-        son.put("StartDate", getStartdate());
-        son.put("EndDate", getEnddate());
-        son.put("Schema", getSchema());
-        son.put("Catdocref", getCatDocRef());
+        son.put("StartDate", startdate);
+        son.put("EndDate", enddate);
+        son.put("Schema", schema);
+        son.put("Catdocref",catDocRef);
         son.put("Reference", ref.values);
         
         return son;
@@ -165,12 +156,12 @@ public class MongoDoc implements IMongoDoc{
     private String makeDate(String date, boolean isStartDate){
         String workingDate=date;
         if (workingDate!=null && workingDate.length()==8){
-            workingDate=MongoDoc.convertDate(workingDate, isStartDate);
+            workingDate=CachedMongoDoc.convertDate(workingDate, isStartDate);
             if(isStartDate){
-                dateCache.insertStart(this.getIaid(), workingDate);
+                cache.insertStart(this.iaid, workingDate);
             }
             else{
-                dateCache.insertEnd(this.getIaid(), workingDate);
+                cache.insertEnd(this.iaid, workingDate);
             }
             return workingDate;
         }
@@ -178,31 +169,31 @@ public class MongoDoc implements IMongoDoc{
             boolean flag=false;
             while(!flag){
                 if(isStartDate){
-                    if(dateCache.existsStart(this.getParentIaid())){
-                        workingDate=dateCache.lookupStart(this.getParentIaid());
-                        dateCache.insertStart(this.getIaid(), workingDate);
+                    if(cache.existsStart(this.parentIaid)){
+                        workingDate=cache.lookupStart(this.parentIaid);
+                        cache.insertStart(this.iaid, workingDate);
                         break;
                     }
                     else{
                         flag=false;
-                        String workingid=this.getParentIaid();
+                        String workingid=this.parentIaid;
                         while(!flag){
                             DBObject doc=fetcher.findParent(workingid);
                             String pDate=(String)doc.get("CoveringDateTo");
                             if(pDate!=null && pDate.length()==8)
                             {
                                 flag=true;
-                                workingDate=MongoDoc.convertDate(pDate,isStartDate);
-                                dateCache.insertStart(workingid, workingDate);
-                                if(this.getSourceLevelId()<7){
-                                    dateCache.insertStart(this.getIaid(), workingDate);
+                                workingDate=CachedMongoDoc.convertDate(pDate,isStartDate);
+                                cache.insertStart(workingid, workingDate);
+                                if(this.sourceLevelId<7){
+                                    cache.insertStart(this.iaid, workingDate);
                                 }
                                 break;
                             }
                             else{
                                 workingid=(String)doc.get("ParentIAID");
-                                if(dateCache.existsStart(workingid)){
-                                    workingDate=dateCache.lookupStart(workingid);
+                                if(cache.existsStart(workingid)){
+                                    workingDate=cache.lookupStart(workingid);
                                     flag=true;
                                     break;
                                 }
@@ -215,31 +206,32 @@ public class MongoDoc implements IMongoDoc{
                     
                 }
                 else{
-                    if(dateCache.existsEnd(this.getParentIaid())){
-                        workingDate=dateCache.lookupEnd(this.getParentIaid());
-                        dateCache.insertEnd(this.getIaid(),workingDate);
+                    if(cache.existsEnd(this.parentIaid)){
+                        workingDate=cache.lookupEnd(this.parentIaid);
+                        cache.insertEnd(this.iaid,workingDate);
+                        //flag=true;
                         break;
                     }
                     else{
                         
-                        String workingid=this.getParentIaid();
+                        String workingid=this.parentIaid;
                         while(!flag){
                             DBObject doc=fetcher.findParent(workingid);
                             String pDate=(String)doc.get("CoveringDateTo");
                             if(pDate!=null && pDate.length()==8)
                             {                   
-                                workingDate=MongoDoc.convertDate(pDate,isStartDate);
-                                dateCache.insertEnd(workingid, workingDate);
-                                if(this.getSourceLevelId()<7){
-                                    dateCache.insertEnd(this.getIaid(), workingDate);
+                                workingDate=CachedMongoDoc.convertDate(pDate,isStartDate);
+                                cache.insertEnd(workingid, workingDate);
+                                if(this.sourceLevelId<7){
+                                    cache.insertEnd(this.iaid, workingDate);
                                 }
                                 flag=true;
                                 break;
                             }
                             else{
                                 workingid=(String)doc.get("ParentIAID");
-                                if(dateCache.existsStart(workingid)){
-                                    workingDate=dateCache.lookupEnd(workingid);
+                                if(cache.existsStart(workingid)){
+                                    workingDate=cache.lookupEnd(workingid);
                                     flag=true;
                                     break;
                                 }
@@ -260,32 +252,32 @@ public class MongoDoc implements IMongoDoc{
     private String makeCatDocRef() {
         //does parent exist in cache?
         //what level am I?
-        String parent=this.getParentIaid();
-        int level=this.getSourceLevelId();
-        String workingid=this.getIaid();
-        String currentRef=this.getReference();
+        String parent=this.parentIaid;
+        int level=this.sourceLevelId;
+        String workingid=this.iaid;
+        String currentRef=this.reference;
         StringBuilder catreference=new StringBuilder("");
         
         //String workingRef;
-        if(refCache.exists(parent)){
+        if(cache.existsRef(parent)){
             if(level==6){
-                catreference.append(refCache.lookup(parent)).append("/").append(currentRef);
-                refCache.insert(workingid, catreference.toString());
+                catreference.append(cache.lookupRef(parent)).append("/").append(currentRef);
+                cache.insertRef(workingid, catreference.toString());
                 return catreference.toString();
             }
             else if(level==7){
-                catreference.append(refCache.lookup(parent)).append("/").append(currentRef);
+                catreference.append(cache.lookupRef(parent)).append("/").append(currentRef);
                 return catreference.toString();
             }
             else if(level==3)
             {   
-                catreference.append(refCache.lookup(parent)).append(" ").append(currentRef);
-                refCache.insert(workingid, catreference.toString());
+                catreference.append(cache.lookupRef(parent)).append(" ").append(currentRef);
+                cache.insertRef(workingid, catreference.toString());
                 return catreference.toString();
             }
             else{
-                catreference.append(refCache.lookup(parent));
-                refCache.insert(workingid, catreference.toString());
+                catreference.append(cache.lookupRef(parent));
+                cache.insertRef(workingid, catreference.toString());
                 return catreference.toString();
             }                     
         }
@@ -305,7 +297,7 @@ public class MongoDoc implements IMongoDoc{
                 }
                 //go get parent
                 if("C0".equals(parent)){
-                    this.refCache.insert(getIaid(), catreference.toString());
+                    this.cache.insertRef(iaid, catreference.toString());
                     return catreference.toString();
                 }
                 DBObject doc=fetcher.findParent(parent);
@@ -313,7 +305,7 @@ public class MongoDoc implements IMongoDoc{
                 parent=(String)doc.get("ParentIAID");
                 currentRef=(String)doc.get("Reference");
                 level=(Integer)doc.get("SourceLevelId");
-                if(workingid.equals(this.getParentIaid())){
+                if(workingid.equals(this.parentIaid)){
                     this.parentLevel=level;
                 }
                 
@@ -321,32 +313,32 @@ public class MongoDoc implements IMongoDoc{
             }
             
         }
-        this.refCache.insert( getIaid(), getReference().toString());
-        return getReference().toString();
+        this.cache.insertRef(iaid, reference.toString());
+        return reference.toString();
         //throw new UnsupportedOperationException("Not yet implemented");
     }
     
     private String makeUrlParams(){
-        StringBuilder temp=new StringBuilder(this.getIaid());
-        if(urlCache.exists(this.getParentIaid())){
-            Integer currentLevel=this.getSourceLevelId()-1;
-            if(this.getParentLevel()==null){
-                DBObject doc=fetcher.findParent(this.getParentIaid());
+        StringBuilder temp=new StringBuilder(this.iaid);
+        if(cache.existsUrl(this.parentIaid)){
+            Integer currentLevel=this.sourceLevelId-1;
+            if(this.parentLevel==null){
+                DBObject doc=fetcher.findParent(this.parentIaid);
                 this.parentLevel=(Integer)doc.get("SourceLevelId");
-                while(currentLevel>this.getParentLevel()){
+                while(currentLevel>this.parentLevel){
                     temp.insert(0,"0/");
                     currentLevel--;
                 }
                 
             }
-            temp.insert(0, urlCache.lookup(this.getParentIaid())+'/');
+            temp.insert(0, cache.lookupUrl(this.parentIaid)+'/');
         }
-        else if("C0".equals(this.getParentIaid())){
+        else if("C0".equals(this.parentIaid)){
             temp.insert(0, "066/1/");
         }
         else{
-            Integer currentLevel=this.getSourceLevelId();
-            String currentParent=this.getParentIaid();
+            Integer currentLevel=this.sourceLevelId;
+            String currentParent=this.parentIaid;
             while (currentLevel!=1){
                 currentLevel--;
                 DBObject doc=fetcher.findParent(currentParent);
@@ -361,7 +353,7 @@ public class MongoDoc implements IMongoDoc{
             temp.insert(0, "066/1/");   
         }
         
-        urlCache.insert(this.getIaid(), temp.toString());
+        cache.insertUrl(this.iaid, temp.toString());
         
         
         return temp.toString();
@@ -370,7 +362,7 @@ public class MongoDoc implements IMongoDoc{
     private static String cleanTitle(String dirty)
     {
         String clean;
-        Matcher working = MongoDoc.title_re.matcher(dirty);
+        Matcher working = CachedMongoDoc.title_re.matcher(dirty);
         if(working.find())
         {
             clean=working.group(1);
@@ -384,7 +376,7 @@ public class MongoDoc implements IMongoDoc{
     private static String removeTags(String dirty)
     {
         String clean;
-        Matcher working=MongoDoc.htmltag_re.matcher(dirty);
+        Matcher working=CachedMongoDoc.htmltag_re.matcher(dirty);
         if(working.find())
         {
             clean=working.replaceAll(" ");
@@ -402,10 +394,10 @@ public class MongoDoc implements IMongoDoc{
     private static String cleanDescription(String dirty)
     {
         String clean;
-        Matcher working=MongoDoc.desc_re.matcher(dirty);
+        Matcher working=CachedMongoDoc.desc_re.matcher(dirty);
         if(working.find()){
             clean=working.group(1);
-            clean=MongoDoc.removeTags(clean);
+            clean=CachedMongoDoc.removeTags(clean);
         }
         else{
             clean="";
@@ -418,7 +410,7 @@ public class MongoDoc implements IMongoDoc{
         if(rawschema==null || "".equals(rawschema)){
             return null;
         }
-        Matcher working=MongoDoc.schema_re.matcher(rawschema);
+        Matcher working=CachedMongoDoc.schema_re.matcher(rawschema);
         if(working.find()){
             schema=working.group(1);
         }
@@ -454,20 +446,21 @@ public class MongoDoc implements IMongoDoc{
             day="01";           
         }
         
-        newDate.append(year).append("-").append(month).append("-").append(day).append(MongoDoc.getDatetimepart());
+        newDate.append(year).append("-").append(month).append("-").append(day).append(CachedMongoDoc.datetimepart);
         return newDate.toString();    
     }
-
-    /**
+     /**
+     * @return the iaid
+     */
+    @Override
+    public String getDreReference() {
+        return iaid;
+    }
+     /**
      * @return the iaid
      */
     @Override
     public String getIaid() {
-        return iaid;
-    }
-    
-    @Override
-    public String getDreReference() {
         return iaid;
     }
 

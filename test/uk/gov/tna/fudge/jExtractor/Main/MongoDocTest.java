@@ -4,14 +4,10 @@
  */
 package uk.gov.tna.fudge.jExtractor.Main;
 
-import com.mongodb.DBObject;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
-import static org.junit.Assert.*;
 
 
 /**
@@ -47,17 +43,5 @@ public class MongoDocTest {
     
     @After
     public void tearDown() {
-    }
-
-    /**
-     * Test of toMongoSon method, of class MongoDoc.
-     */
-    @Test
-    public void testToMongoSon() {
-        System.out.println("toMongoSon");
-        MongoDoc instance = new MongoDoc(fetcher.findOne("IAID", "D7738606"),refCache,dateCache,urlCache,fetcher);
-        String expResult = "2006";
-        String result = (String)instance.toMongoSon().get("closureCode");
-        assertEquals(expResult, result);
     }
 }

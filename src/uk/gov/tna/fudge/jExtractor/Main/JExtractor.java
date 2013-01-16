@@ -18,6 +18,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.Stack;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.PosixParser;
 import org.apache.solr.common.SolrInputDocument;
 import uk.gov.tna.fudge.jExtractor.Solr.SolrPostService;
 
@@ -33,27 +39,27 @@ public class JExtractor {
     String solrDatabase;
     String solrCollection;
     String solrWebServer;
-    String solrWebServerA;
-    String solrWebServerB;
     SolrPostService postie;
     String distribute;
     List<String> solrServerList;
     boolean doSolrPost;
     boolean doMongoStore;
+    boolean doFileStore;
+    boolean verbose;
     
     /**
      * Constructor for Application main class
      * Loads configuration from properties file in ./Resources directory
      * If distributed flag is true configures Solr servers in distributed mode.
+     * @param cfgFileName The name of the configuration file to load
      */
-    JExtractor()
+    JExtractor(String cfgFileName)
     {
+        this.verbose=false;
         this.localProp = new Properties();
         this.sysProp =new Properties(System.getProperties());
         try{
-            //InputStream in=new InputStream(JExtractor.class.getClassLoader().getResource("/Resource/TNAconf.properties"));
-            //path /home/sprice/NetBeansProjects/jExtractor/src/uk/gov/tna/fudge/jExtractor/
-            String path=sysProp.getProperty("user.dir")+"/Resources/Homeconf.properties";
+            String path=sysProp.getProperty("user.dir")+"/Resources/"+cfgFileName+".properties";
             localProp.load(new FileInputStream(path));
             
         }
@@ -73,6 +79,7 @@ public class JExtractor {
         this.distribute=localProp.getProperty("DISTRIBUTE", "FALSE");
         this.doSolrPost=("TRUE".equals(localProp.getProperty("INDEXSOLR", "FALSE")));
         this.doMongoStore=("TRUE".equals(localProp.getProperty("MONGOSAVE", "FALSE")));
+        this.doFileStore=("TRUE".equals(localProp.getProperty("FILESAVE", "FALSE")));
         String[] distservers=localProp.getProperty("DIST_SOLR_SERVERS", "http://localhost:8080/solr/discovery1,http://localhost:8080/solr/discovery2").split(",");
         this.solrServerList=new ArrayList<String>(2);
         solrServerList.addAll(Arrays.asList(distservers));
@@ -89,9 +96,9 @@ public class JExtractor {
      * @param mode Determines which action the application should perform. Eventually should be set by
      * command line, but currently hard coded into main()
      */
-    public void run(String mode)
+    public void run(String mode,boolean verboseFlag)
     {
-   
+        this.verbose=verboseFlag;
         if ("PULL".equals(mode)){
             this.pull();
         }
@@ -128,16 +135,21 @@ public class JExtractor {
      */
     private void pull(){
         Fetcher fetcher;
+
         RefCache parentCache=new RefCache();
         CoveringDateCache dateCache=new CoveringDateCache();
         UrlParamCache urlCache=new UrlParamCache();
+
+        GeneralCache cache=new GeneralCache();
         Stack<String> workQueue=new Stack<String>();
         
         List<SolrDoc> solrDocs=new ArrayList<SolrDoc>(5000);
         List<DBObject> mongoDocs=new ArrayList<DBObject>(5000) ;
         List<SolrInputDocument> webDocs=new ArrayList<SolrInputDocument>(5000);
-        long startTime = System.nanoTime();
-        long nowTime;
+        long beginTime= System.nanoTime(); //stores job start time in nanoseconds
+        long startTime = beginTime; //stored batch start time in nanoseconds
+        long nowTime; //used to determine batch duration
+        Long elapsedTime; //duration of batch in nanoseconds
         String workingDept="START";
         String oldDept;
         oldDept = "";
@@ -156,8 +168,11 @@ public class JExtractor {
                 try {
                     while(cursor.hasNext()) {
                         DBObject doc=cursor.next();
-                        MongoDoc mdoc=new MongoDoc(doc,parentCache,dateCache,urlCache,fetcher);                      
-                        workQueue.push(mdoc.iaid);
+
+                        IMongoDoc mdoc=new MongoDoc(doc,parentCache,dateCache,urlCache,fetcher);                      
+
+                        //IMongoDoc cmdoc=new CachedMongoDoc(doc,cache,fetcher);
+                        workQueue.push(mdoc.getIaid());
                         SolrDoc sdoc=new SolrDoc(mdoc);
                         solrDocs.add(sdoc);
                         mongoDocs.add(sdoc.toSon());
@@ -170,32 +185,23 @@ public class JExtractor {
                             workingDept=sdoc.getDepartment();
                             if(!workingDept.equals(oldDept)){
                                 System.out.println("Cleared cache changed from "+oldDept+" to "+workingDept);
+                                /*
                                 parentCache.clear();
                                 dateCache.clear();
                                 urlCache.clear();
+                                */
+                                cache.clear();
                                 oldDept=workingDept;
                             }
                             
                         }
-                        if (docCounter%5000==0){
+                        if (docCounter%5000==0){ //5000 is the number of documents per batch, seems to be a good compromise
                             if(this.doMongoStore){
                                 fetcher.store(mongoDocs);
                             }
-                            nowTime=System.nanoTime();
-                            Double elapsed=1/((nowTime-startTime)/5000/1000000000.0);
-                            Integer percentDone=docCounter/totalDocs*100;
-                            System.out.println("Processed "
-                                    + docCounter.toString() 
-                                    + " BatchID "
-                                    + batchCounter.toString()
-                                    + " completed "
-                                    + percentDone+"% in "
-                                    + elapsed.intValue()+" dps"
-                                    +" Queue is "
-                                    + workQueue.size());
-                            startTime=nowTime;
-                            //SolrDoc.writeXML(batchCounter,savePath, solrDocs);
-                            SolrDoc.writeXMLasString(batchCounter,this.savePath, solrDocs, workingDept);
+                            if(this.doFileStore){
+                                SolrDoc.writeXMLasString(batchCounter,this.savePath, solrDocs, workingDept);
+                            }
                             boolean commitFlag=((batchCounter+1)%20==0);
                             if(this.doSolrPost){
                                 postie.postDocument(webDocs,commitFlag);
@@ -205,17 +211,36 @@ public class JExtractor {
                             solrDocs.clear();
                             webDocs.clear();
                             System.gc();
+                            nowTime=System.nanoTime();
+                            elapsedTime=nowTime-startTime;
+                            //converts reported nanoseconds to documents per second based on batch size of 5000
+                            Double dps=1/(elapsedTime/5000/1000000000.0); 
+                            Integer percentDone=docCounter*100/totalDocs;
+                            System.out.println("Processed "
+                                    + docCounter.toString() 
+                                    + " BatchID "
+                                    + batchCounter.toString()
+                                    + " completed "
+                                    + percentDone+"% in "
+                                    + dps.intValue()+" dps"
+                                    +" Queue is "
+                                    + workQueue.size());
+                            startTime=nowTime; //updates start time for new batch
+                            //SolrDoc.writeXML(batchCounter,savePath, solrDocs);
                             
                         }
                         
                     }
 
                 } finally {
+                    //we are opening cursor with no timeout so lets make sure we close it.
                     cursor.close();
                 }
                 
             }
-            SolrDoc.writeXMLasString(batchCounter,this.savePath, solrDocs, workingDept);
+            if(this.doFileStore){
+                SolrDoc.writeXMLasString(batchCounter,this.savePath, solrDocs, workingDept);
+            }
             boolean commitFlag=true;
             if(this.doMongoStore){
                                 fetcher.store(mongoDocs);
@@ -223,10 +248,30 @@ public class JExtractor {
             if(this.doSolrPost){
                 postie.postDocument(webDocs,commitFlag);
             }
+            nowTime=System.nanoTime();
+            //converts reported nanoseconds to documents per second based on batch size of 5000
+            Double elapsed=1/((nowTime-startTime)/(docCounter%5000)/1000000000.0); 
+            Integer percentDone;
+            percentDone = docCounter*100/totalDocs;
+            System.out.println("Processed "
+                    + docCounter.toString() 
+                    + " BatchID "
+                    + batchCounter.toString()
+                    + " completed "
+                    + percentDone+"% in "
+                    + elapsed.intValue()+" dps"
+                    +" Queue is "
+                    + workQueue.size());
+            
+                           
             mongoDocs.clear();
             solrDocs.clear();
             webDocs.clear();
             System.gc();
+            System.out.println("Job completed. "+ docCounter.toString()+" documents processed");
+            elapsedTime = (nowTime-beginTime)/1000000000;
+            System.out.println("Duration was: "+elapsedTime.toString()+" seconds");
+            
         }
         catch(Exception e)
         {
@@ -314,7 +359,58 @@ public class JExtractor {
      * @param args 
      */
     public static void main(String[] args) {
-        JExtractor indexer=new JExtractor();
-        indexer.run("EXPORTXML");
+        String cfgFile;
+        String commandAction="";
+        boolean verboseFlag;
+        // create the command line parser
+        CommandLineParser parser = new PosixParser();
+        // create the Options
+        Options options = new Options();
+        options.addOption("h","help",false,"displays this help message");
+        options.addOption("a", "action", true, "The action to perform.");
+        options.addOption("c","config-file",true, "The config file to read");
+        options.addOption("v","verbose",false,"increases information reported to stdout");
+        HelpFormatter formatter = new HelpFormatter();
+        try {
+            // parse the command line arguments
+            CommandLine line = parser.parse( options, args );
+            if( line.hasOption( "help" ) ) {
+                
+                formatter.printHelp( "jExtractor", options );
+            }
+            if(line.hasOption("action")){
+                commandAction=line.getOptionValue("action").toUpperCase();
+            }
+            else{
+                System.out.println("No Action specified");
+                formatter.printHelp( "jExtractor", options );
+                System.exit(0);
+            }
+            if(line.hasOption("config-file")){
+                cfgFile=line.getOptionValue("config-file");
+            }
+            else{
+                System.out.println("No Config file specified");
+                System.out.println("Using default, TNAConfig");
+                cfgFile="TNAConfig";
+            }
+            verboseFlag=line.hasOption("verbose");
+            
+            
+            
+            JExtractor indexer=new JExtractor(cfgFile);
+            indexer.run(commandAction,verboseFlag);
+        }
+        catch(ParseException pe){
+            System.out.println("Unable to parse command line options");
+            System.out.println("Reason: "+pe.getMessage());
+            System.exit(1);
+        }
+        
+        
+        
+        
+        
+        
     }
 }
