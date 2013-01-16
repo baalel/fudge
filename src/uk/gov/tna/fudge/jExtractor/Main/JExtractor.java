@@ -185,11 +185,11 @@ public class JExtractor {
                             workingDept=sdoc.getDepartment();
                             if(!workingDept.equals(oldDept)){
                                 System.out.println("Cleared cache changed from "+oldDept+" to "+workingDept);
-                                /*
+                                
                                 parentCache.clear();
                                 dateCache.clear();
                                 urlCache.clear();
-                                */
+                                
                                 cache.clear();
                                 oldDept=workingDept;
                             }
@@ -267,6 +267,7 @@ public class JExtractor {
             mongoDocs.clear();
             solrDocs.clear();
             webDocs.clear();
+            cache.clear();
             System.gc();
             System.out.println("Job completed. "+ docCounter.toString()+" documents processed");
             elapsedTime = (nowTime-beginTime)/1000000000;
