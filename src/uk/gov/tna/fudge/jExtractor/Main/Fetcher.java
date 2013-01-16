@@ -58,6 +58,26 @@ public class Fetcher {
         }
     }
     
+    public Fetcher(String server, String port, String indb, String incoll)
+    {
+        Integer iPort=Integer.parseInt(port);
+        try{
+            mongoClient=new MongoClient( server , iPort );
+            sourceDb=mongoClient.getDB(indb);
+            storeDb=null;
+            sourceColl=sourceDb.getCollection(incoll);
+            destColl=null;
+            destColl.drop();
+            System.out.println("Connected to Mongo");
+            
+        }
+        catch (Exception e)
+        {
+            System.out.println("Unable to connect to Mongo "+ e.getMessage());
+            System.exit(1);
+        }
+    }
+    
     /**
      * Returns a cursor pointing to assets that match pattern in field
      * @param field the field to be searched on
@@ -135,6 +155,10 @@ public class Fetcher {
         
         return doccount;
         
+    }
+    
+    public BasicDBObject loadCategory(String catid){
+            return null;
     }
     
 }
