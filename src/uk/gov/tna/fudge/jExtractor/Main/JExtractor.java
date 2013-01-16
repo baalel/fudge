@@ -41,6 +41,11 @@ public class JExtractor {
     boolean doSolrPost;
     boolean doMongoStore;
     
+    /**
+     * Constructor for Application main class
+     * Loads configuration from properties file in ./Resources directory
+     * If distributed flag is true configures Solr servers in distributed mode.
+     */
     JExtractor()
     {
         this.localProp = new Properties();
@@ -79,6 +84,11 @@ public class JExtractor {
         }
     }
     
+    /**
+     * Main() calls this to start the application. Application mode is controlled by parameter
+     * @param mode Determines which action the application should perform. Eventually should be set by
+     * command line, but currently hard coded into main()
+     */
     public void run(String mode)
     {
    
@@ -100,12 +110,22 @@ public class JExtractor {
         
     }
     
+    /**
+     * Runs a query against the configured Solr Server(s)
+     * This method is currently for testing purposes only
+     */
     private void query()
     {
         postie.querytest();
         
     }
     
+    /**
+     * The meat of the application. Pull connects to mongo, extracts Information assets
+     * then can write back to mongo, write to xml and/or index to solr.
+     * On a reasonably fast PC with 8GB of RAM and a local Mongodb it takes approx 3hrs
+     * to processes the current 21.5M Information Assets
+     */
     private void pull(){
         Fetcher fetcher;
         RefCache parentCache=new RefCache();
@@ -216,6 +236,11 @@ public class JExtractor {
         
     }
     
+    /**
+     * A test method for indexing a document to Solr.
+     * In distributed mode, the server indexed to is based on
+     * the String.hash() of the DREREFERENCE field.
+     */
     public void post()
     {
         SolrInputDocument sDoc;
@@ -247,6 +272,7 @@ public class JExtractor {
      * Exports contents of Solr Server to file as XML files
      * @param fPath Path to export files to
      * @param batchsize number of documents per file
+     * THIS IS CURRENTLY VERY SLOW and not fully implemented
      */
     public void exportXML(String fPath, int batchSize)
     {
@@ -257,6 +283,7 @@ public class JExtractor {
     /**
      * Imports XML files and indexes them to Solr
      * @param fPath Path to export files to
+     * not yet Implemented
      */
     public void importXML(String fPath){
         
@@ -265,6 +292,7 @@ public class JExtractor {
     /**
      * Imports JSON files and indexes them to Solr
      * @param fPath Path to export files to
+     * not yet implemented
      */
     public void importJSON(String fPath){
     
@@ -274,12 +302,17 @@ public class JExtractor {
      * Exports contents of Solr Server to file as JSON files
      * @param fPath Path to export files to
      * @param batchsize number of documents per file
+     * THIS IS CURRENTLY VERY SLOW and not fully implemented
      */
     public void exportJSON(String fPath, int batchsize){
         
     }
     
-
+    /**
+     * boot strap code.
+     * need to add handling of command line args
+     * @param args 
+     */
     public static void main(String[] args) {
         JExtractor indexer=new JExtractor();
         indexer.run("EXPORTXML");
