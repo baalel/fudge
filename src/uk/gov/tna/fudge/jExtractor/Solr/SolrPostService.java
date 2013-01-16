@@ -68,7 +68,7 @@ public class SolrPostService {
         SolrQuery query = new SolrQuery();
         query.setQuery("*:*");
         query.addSortField("DREREFERENCE", SolrQuery.ORDER.asc);
-        query.setParam("shards", "localhost:8080/solr/discovery1,localhost:8080/solr/discovery2");
+        //query.setParam("shards", "localhost:8080/solr/discovery1,localhost:8080/solr/discovery2");
         query.setRows(0);
         
         try {
