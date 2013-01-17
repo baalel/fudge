@@ -12,7 +12,6 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.PosixParser;
-import org.apache.solr.common.SolrDocumentList;
 import uk.gov.tna.fudge.jExtractor.Main.Fetcher;
 import uk.gov.tna.fudge.jExtractor.Solr.SolrPostService;
 
@@ -34,7 +33,7 @@ public class JCategorizer {
     public JCategorizer(String config, boolean verbose){
         fetch=new Fetcher("localhost","27017","catdb","catcol");
         solrServer="http://localhost:8080/solr/discoverytest";
-        catList=new ArrayList<String>();
+        catList=new ArrayList<>();
         verboseFlag=verbose;
         
     }
@@ -49,19 +48,20 @@ public class JCategorizer {
     }
     
     public void load(String dataSource){
-        if ("MONGO".equals(dataSource)){
-            catList=getCatsFromMongo();
-            
-        }
-        else if("FILE".equals(dataSource)){
-            catList=getCatsFromFile();
-        }
-        else if("SOLR".equals(dataSource)){
-            catList=getCatsFromSolr();
-        }
-        else{
-            System.out.println("Category source should be MONGO, FILE or SOLR");
-            System.exit(1);
+        switch (dataSource) {
+            case "MONGO":
+                catList=getCatsFromMongo();
+                break;
+            case "FILE":
+                catList=getCatsFromFile();
+                break;
+            case "SOLR":
+                catList=getCatsFromSolr();
+                break;
+            default:
+                System.out.println("Category source should be MONGO, FILE or SOLR");
+                System.exit(1);
+                break;
             
         }
         for(String cat : this.catList){
@@ -74,20 +74,20 @@ public class JCategorizer {
         
     }
     
-    private List getCatsFromMongo(){
-        List<String> cats=new ArrayList<String>();
+    private List<String> getCatsFromMongo(){
+        List<String> cats=new ArrayList<>();
         cats.add("TESTCAT");
         return cats;
     }
     
-    private List getCatsFromFile(){
-        List<String> cats=new ArrayList<String>();
+    private List<String> getCatsFromFile(){
+        List<String> cats=new ArrayList<>();
         cats.add("TESTCAT");
         return cats;
     }
     
-    private List getCatsFromSolr(){
-        List<String> cats=new ArrayList<String>();
+    private List<String> getCatsFromSolr(){
+        List<String> cats=new ArrayList<>();
         cats.add("TESTCAT");
         return cats;
     }
