@@ -34,7 +34,7 @@ public class SolrPostService {
     }
     
     public SolrPostService(List<String> solrServerUrls){
-        serverList=new ArrayList<SolrServer>(solrServerUrls.size());
+        serverList=new ArrayList<>(solrServerUrls.size());
         server=new HttpSolrServer(solrServerUrls.get(0));
         for(String url : solrServerUrls){
             serverList.add(new HttpSolrServer(url));
@@ -64,7 +64,7 @@ public class SolrPostService {
     }
     
     public void tagCategoryQuery(String queryText, String tag){
-        List<SolrInputDocument> results=new ArrayList<SolrInputDocument>();
+        List<SolrInputDocument> results=new ArrayList<>();
         SolrQuery query = new SolrQuery();
         query.setQuery(queryText);
         query.addField("DREREFERENCE");
@@ -85,10 +85,7 @@ public class SolrPostService {
                 server.add(results);
                 server.commit();
             }
-            catch(SolrException se){
-                
-            }
-            catch(SolrServerException sse){
+            catch(SolrException | SolrServerException se){
                 
             }
             catch(IOException ioe){
@@ -145,21 +142,11 @@ public class SolrPostService {
                 server.commit();
             }
         }
-        catch(SolrException se){
+        catch(SolrException | SolrServerException | IOException se){
             System.out.println("Error posting test document");
             System.out.println(se.getMessage());
             System.exit(1);
             
-        }
-        catch(SolrServerException sse){
-            System.out.println("Error posting test document");
-            System.out.println(sse.getMessage());
-            System.exit(1);
-        }
-        catch(IOException ioe){
-            System.out.println("Error posting test document");
-            System.out.println(ioe.getMessage());
-            System.exit(1);
         }
        
    }
@@ -175,18 +162,9 @@ public class SolrPostService {
                 server.commit();
             }
         }
-        catch(SolrException se){
+        catch(SolrException | SolrServerException | IOException se){
             System.out.println("Error posting test document");
             System.out.println(se.getMessage());
-            
-        }
-        catch(SolrServerException sse){
-            System.out.println("Error posting test document");
-            System.out.println(sse.getMessage());
-        }
-        catch(IOException ioe){
-            System.out.println("Error posting test document");
-            System.out.println(ioe.getMessage());
             
         }
        
@@ -201,7 +179,7 @@ public class SolrPostService {
     *               after the documents have been sent
     */
    private void distribute(List<SolrInputDocument> docs,boolean commit){
-       List<List<SolrInputDocument>> docLists=new ArrayList<List<SolrInputDocument>>(serverList.size());
+       List<List<SolrInputDocument>> docLists=new ArrayList<>(serverList.size());
        for(int i=0;i<serverList.size();i++){
            docLists.add(new ArrayList<SolrInputDocument>(5000/serverList.size()+1));
        }
@@ -216,7 +194,7 @@ public class SolrPostService {
        try{
            for(int i=0;i<serverList.size();i++){
                 SolrServer s=serverList.get(i);
-                List l=docLists.get(i);
+                List<SolrInputDocument> l=docLists.get(i);
                 //serverList.get(i).add(docLists.get(i));
                 s.add(l);
                 if(commit){
@@ -280,7 +258,7 @@ public class SolrPostService {
    }
     static SolrInputDocument reindexMapper(SolrDocument oldDoc){
         SolrInputDocument newDoc=new SolrInputDocument();
-        List<String> fields=new ArrayList<String>();
+        List<String> fields=new ArrayList<>();
         fields.add("DREREFERENCE");
         fields.add("CATDOCREF");
         fields.add("TITLE");
