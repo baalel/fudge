@@ -19,10 +19,10 @@ Map<String, String> refLookup;
 static String urlParamPrefix="066/1/";
     
     GeneralCache(){
-        urlLookup=new HashMap<String, String>();
-        startLookup = new HashMap<String,String>();
-        endLookup = new HashMap<String,String>();
-        refLookup = new HashMap<String,String>();
+        urlLookup=new HashMap<>();
+        startLookup = new HashMap<>();
+        endLookup = new HashMap<>();
+        refLookup = new HashMap<>();
         //urlLookup.put("C0", "");
         startLookup.put("C0", "1000-01-01T00:00:00.0Z");
         endLookup.put("C0", "2100-12-31T23:59:59.9Z");

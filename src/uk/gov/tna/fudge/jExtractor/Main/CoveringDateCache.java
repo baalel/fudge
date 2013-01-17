@@ -23,8 +23,8 @@ public class CoveringDateCache {
      */
     CoveringDateCache()
     {
-        startLookup = new HashMap<String,String>();
-        endLookup = new HashMap<String,String>();
+        startLookup = new HashMap<>();
+        endLookup = new HashMap<>();
         startLookup.put("C0", "1000-01-01T00:00:00.0Z");
         endLookup.put("C0", "2100-12-31T23:59:59.9Z");
     }

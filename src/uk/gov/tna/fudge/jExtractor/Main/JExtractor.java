@@ -81,7 +81,7 @@ public class JExtractor {
         this.doMongoStore=("TRUE".equals(localProp.getProperty("MONGOSAVE", "FALSE")));
         this.doFileStore=("TRUE".equals(localProp.getProperty("FILESAVE", "FALSE")));
         String[] distservers=localProp.getProperty("DIST_SOLR_SERVERS", "http://localhost:8080/solr/discovery1,http://localhost:8080/solr/discovery2").split(",");
-        this.solrServerList=new ArrayList<String>(2);
+        this.solrServerList=new ArrayList<>(2);
         solrServerList.addAll(Arrays.asList(distservers));
         if(!"TRUE".equals(distribute)){
             this.postie=new SolrPostService(this.solrWebServer);
@@ -99,20 +99,22 @@ public class JExtractor {
     public void run(String mode,boolean verboseFlag)
     {
         this.verbose=verboseFlag;
-        if ("PULL".equals(mode)){
-            this.pull();
-        }
-        else if("QUERY".equals(mode)){
-            this.query();
-        }
-        else if("EXPORTXML".equals(mode)){
-            this.exportXML("", 1000);
-        }
-        else if("POST".equals(mode)){
-            this.post();
-        }
-        else{
-            System.out.println("Supported modes are POST, QUERY and PULL");
+        switch (mode) {
+            case "PULL":
+                this.pull();
+                break;
+            case "QUERY":
+                this.query();
+                break;
+            case "EXPORTXML":
+                this.exportXML("", 1000);
+                break;
+            case "POST":
+                this.post();
+                break;
+            default:
+                System.out.println("Supported modes are POST, QUERY and PULL");
+                break;
         }
         
     }
@@ -141,11 +143,11 @@ public class JExtractor {
         UrlParamCache urlCache=new UrlParamCache();
 
         GeneralCache cache=new GeneralCache();
-        Stack<String> workQueue=new Stack<String>();
+        Stack<String> workQueue=new Stack<>();
         
-        List<SolrDoc> solrDocs=new ArrayList<SolrDoc>(5000);
-        List<DBObject> mongoDocs=new ArrayList<DBObject>(5000) ;
-        List<SolrInputDocument> webDocs=new ArrayList<SolrInputDocument>(5000);
+        List<SolrDoc> solrDocs=new ArrayList<>(5000);
+        List<DBObject> mongoDocs=new ArrayList<>(5000) ;
+        List<SolrInputDocument> webDocs=new ArrayList<>(5000);
         long beginTime= System.nanoTime(); //stores job start time in nanoseconds
         long startTime = beginTime; //stored batch start time in nanoseconds
         long nowTime; //used to determine batch duration
@@ -153,7 +155,7 @@ public class JExtractor {
         String workingDept="START";
         String oldDept;
         oldDept = "";
-        List<String> deptList=new ArrayList<String>(500);
+        List<String> deptList=new ArrayList<>(500);
         Integer batchCounter=0;
         Integer docCounter=0;
         
@@ -164,8 +166,7 @@ public class JExtractor {
             int totalDocs=fetcher.docCount();
             while(!workQueue.isEmpty()){
                 String docid=workQueue.pop();
-                DBCursor cursor=fetcher.findMany("ParentIAID", docid);
-                try {
+                try (DBCursor cursor = fetcher.findMany("ParentIAID", docid)) {
                     while(cursor.hasNext()) {
                         DBObject doc=cursor.next();
 
@@ -232,9 +233,6 @@ public class JExtractor {
                         
                     }
 
-                } finally {
-                    //we are opening cursor with no timeout so lets make sure we close it.
-                    cursor.close();
                 }
                 
             }

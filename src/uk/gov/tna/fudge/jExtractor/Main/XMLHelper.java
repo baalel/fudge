@@ -55,7 +55,7 @@ public class XMLHelper {
         if(originalStrings==null){
             return null;
         }
-        List<String> safeStrings=new ArrayList<String>(originalStrings.size());
+        List<String> safeStrings=new ArrayList<>(originalStrings.size());
         for(String s : originalStrings)
         {
             safeStrings.add(XMLHelper.safeText(s));

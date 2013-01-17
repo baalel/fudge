@@ -362,9 +362,9 @@ public class SolrDoc {
         String docToWrite=SolrDoc.buildXMLStringDoc(docs);
         String pathToWrite=savePath+currDeptName+batchid.toString()+".xml";
         try {
-            PrintWriter out=new PrintWriter(pathToWrite);
-            out.print(docToWrite);
-            out.close();
+            try (PrintWriter out = new PrintWriter(pathToWrite)) {
+                out.print(docToWrite);
+            }
         } catch (FileNotFoundException ex) {
             System.out.println("Unable to save batch "+batchid.toString());
             return false;
@@ -387,7 +387,7 @@ public class SolrDoc {
     }
     
     private static List<String> getPeriod(String start, String end){
-        List<String> periods = new ArrayList<String>();
+        List<String> periods = new ArrayList<>();
         int startyear;
         int endyear;
         startyear=new Integer(start.substring(0, 4));

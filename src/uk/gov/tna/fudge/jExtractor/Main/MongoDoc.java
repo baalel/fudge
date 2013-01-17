@@ -653,7 +653,7 @@ public class MongoDoc implements IMongoDoc{
         
         Entity(BasicDBList rawData){
             data=rawData;
-            values=new ArrayList<String>();
+            values=new ArrayList<>();
         }
         
         public List<String> getValues()
@@ -801,7 +801,7 @@ public class MongoDoc implements IMongoDoc{
         protected List<String> values;
         
         Reference(String rawData){
-            values=new ArrayList<String>();
+            values=new ArrayList<>();
             values.add(rawData);
         }
         

@@ -646,7 +646,7 @@ CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
         
         Entity(BasicDBList rawData){
             data=rawData;
-            values=new ArrayList<String>();
+            values=new ArrayList<>();
         }
         
         public List<String> getValues()
@@ -794,7 +794,7 @@ CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
         protected List<String> values;
         
         Reference(String rawData){
-            values=new ArrayList<String>();
+            values=new ArrayList<>();
             values.add(rawData);
         }
         

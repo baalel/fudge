@@ -16,7 +16,7 @@ public class RefCache {
     
     RefCache()
     {
-        refLookup = new HashMap<String,String>();
+        refLookup = new HashMap<>();
     }
     
     public void insert(String id, String reference)

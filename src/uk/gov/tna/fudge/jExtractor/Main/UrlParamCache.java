@@ -16,7 +16,7 @@ public class UrlParamCache {
     static String urlParamPrefix="066/1/";
     
     UrlParamCache(){
-        urlLookup=new HashMap<String, String>();
+        urlLookup=new HashMap<>();
         //urlLookup.put("C0", "");
         
     }
