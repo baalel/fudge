@@ -28,6 +28,29 @@ public class MongoDoc implements IMongoDoc{
     private static Pattern desc_corpname_re=Pattern.compile("<corpname>(.+?)</corpname>");
     private static Pattern desc_regnumber_re=Pattern.compile("regno\\\">(.+?)<");
     private static Pattern desc_rank_re=Pattern.compile("rank\\\">(.+?)<>");
+    private static Pattern desc_title_re=Pattern.compile("perstitle\\\">(.+?)</emph");
+    private static Pattern desc_occupation_re=Pattern.compile("<occupation>(.+)</occupation>");
+    private static Pattern desc_geo_re=Pattern.compile("<geogname>(.+)</geogname>");
+    private static Pattern desc_rating_re=Pattern.compile( "rating\">(.+?)</emph>");
+    private static Pattern desc_corp_re=Pattern.compile("corpname\"(.+?)1</emph>");
+    private static Pattern desc_nation_re=Pattern.compile("nation\">(.+?)</emph>");
+    private static Pattern desc_scope_re=Pattern.compile("scope\">(.+?)</emph>");
+    private static Pattern desc_discharge_re=Pattern.compile("dischargeno\">R284299</emph>");
+    private static Pattern desc_name1_re=Pattern.compile("name1\">Gudvang</emph>");
+    private static Pattern desc_name2_re=Pattern.compile("name2\">(.+?)</emph>");
+    private static Pattern desc_tonnage_re=Pattern.compile("size\">(.+?)</emph>");
+    private static Pattern desc_num_re=Pattern.compile("num\">(.+?)</emph>");
+    private static Pattern desc_award_re=Pattern.compile("award\">(.+?)</emph>");
+    private static Pattern desc_division_re=Pattern.compile("division\">(.+?)</emph>");
+    private static Pattern desc_campaign_re=Pattern.compile("campaign\">(.+?)</emph>");
+    private static Pattern desc_court_re=Pattern.compile("court\">(.+?)</emph>");
+    private static Pattern desc_offence_re=Pattern.compile("offence\\\">(.+?)</emph>");
+            
+
+    public MongoDoc() {
+    }
+            
+    
     private static String datetimepart="T00:00:00Z";
 
     /**
