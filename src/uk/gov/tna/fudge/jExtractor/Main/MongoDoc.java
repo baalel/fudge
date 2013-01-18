@@ -716,8 +716,10 @@ public class MongoDoc implements IMongoDoc{
         public boolean add(String newItem)
         {
             if(newItem!=null && newItem.length()>0){
-                boolean rc=values.add(newItem);
-                return rc;
+                if(!values.contains(newItem)){
+                    boolean rc=values.add(newItem);
+                    return rc;
+                }
             }
             return false;
         }
@@ -867,7 +869,9 @@ public class MongoDoc implements IMongoDoc{
         void add(String ref)
         {
             if(ref!=null&&ref.length()>0){
-                values.add(ref);
+                if(!values.contains(ref)){
+                    values.add(ref);
+                }
             }
         }
         
