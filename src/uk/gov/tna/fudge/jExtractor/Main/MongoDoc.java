@@ -123,6 +123,9 @@ public class MongoDoc implements IMongoDoc{
         if(placeName!=null){
             place.add(placeName);}
         schema=MongoDoc.extractSchema((String)scopeContent.get("Schema"));
+        if(schema!=null){
+            subj.add(schema);
+        }
         ref=new Reference(this.reference);
         checkDescriptionForMetaData((String)scopeContent.get("Description"));
         
@@ -130,6 +133,7 @@ public class MongoDoc implements IMongoDoc{
         
         ref.add((String)doc.get("FormerReferencePro"));
         ref.add((String)doc.get("FormerReferenceDep"));
+        ref.add(this.catDocRef);
         references=ref.getValues();
         this.peoples=pers.getValues();
         this.places=place.getValues();
