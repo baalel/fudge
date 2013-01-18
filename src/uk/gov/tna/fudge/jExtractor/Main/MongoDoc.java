@@ -22,6 +22,10 @@ public class MongoDoc implements IMongoDoc{
     private static Pattern desc_re=Pattern.compile("<p>(.*)</p>");
     private static Pattern htmltag_re=Pattern.compile("<[^<]+?>");
     private static Pattern schema_re=Pattern.compile("=\\\"(.+)\\\"");
+    private static Pattern desc_persname_re=Pattern.compile("<persname>(.+?)</persname>");
+    private static Pattern desc_corpname_re=Pattern.compile("<corpname>(.+?)<corpname>");
+    private static Pattern desc_regnumber_re=Pattern.compile("regno\\\">(.+?)</emph>");
+    private static Pattern desc_rank_re=Pattern.compile("rank\\\">(.+?)</emph>");
     private static String datetimepart="T00:00:00Z";
 
     /**
@@ -117,7 +121,7 @@ public class MongoDoc implements IMongoDoc{
         if(placeName!=null){
             place.add(placeName);}
         schema=MongoDoc.extractSchema((String)scopeContent.get("Schema"));
-        //if(schema==null){schema="";}
+        checkDescriptionForMetaData((String)scopeContent.get("Description"));
         
         catDocRef=makeCatDocRef();
         ref=new Reference(this.reference);
@@ -354,8 +358,10 @@ public class MongoDoc implements IMongoDoc{
                     temp.insert(0, "0/");
                     currentLevel--;
                     
+                    
                 }
                 temp.insert(0, (String)doc.get("IAID")+"/");
+                currentParent=(String)doc.get("ParentIAID");
                 
             }
             temp.insert(0, "066/1/");   
@@ -645,6 +651,10 @@ public class MongoDoc implements IMongoDoc{
     @Override
     public List<String> getSubjects() {
         return subjects;
+    }
+    
+    private void checkDescriptionForMetaData(String description){
+        
     }
     
     private class Entity{
