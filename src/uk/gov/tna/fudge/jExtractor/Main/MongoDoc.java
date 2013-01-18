@@ -23,9 +23,11 @@ public class MongoDoc implements IMongoDoc{
     private static Pattern htmltag_re=Pattern.compile("<[^<]+?>");
     private static Pattern schema_re=Pattern.compile("=\\\"(.+)\\\"");
     private static Pattern desc_persname_re=Pattern.compile("<persname>(.+?)</persname>");
-    private static Pattern desc_corpname_re=Pattern.compile("<corpname>(.+?)<corpname>");
-    private static Pattern desc_regnumber_re=Pattern.compile("regno\\\">(.+?)</emph>");
-    private static Pattern desc_rank_re=Pattern.compile("rank\\\">(.+?)</emph>");
+    private static Pattern desc_forename_re=Pattern.compile("forenames\\\">(.+?)</emph>");
+    private static Pattern desc_surname_re=Pattern.compile("surname\\\">(.+?)</emph>");
+    private static Pattern desc_corpname_re=Pattern.compile("<corpname>(.+?)</corpname>");
+    private static Pattern desc_regnumber_re=Pattern.compile("regno\\\">(.+?)<");
+    private static Pattern desc_rank_re=Pattern.compile("rank\\\">(.+?)<>");
     private static String datetimepart="T00:00:00Z";
 
     /**
@@ -121,12 +123,13 @@ public class MongoDoc implements IMongoDoc{
         if(placeName!=null){
             place.add(placeName);}
         schema=MongoDoc.extractSchema((String)scopeContent.get("Schema"));
+        ref=new Reference(this.reference);
         checkDescriptionForMetaData((String)scopeContent.get("Description"));
         
         catDocRef=makeCatDocRef();
-        ref=new Reference(this.reference);
-        ref.append((String)doc.get("FormerReferencePro"));
-        ref.append((String)doc.get("FormerReferenceDep"));
+        
+        ref.add((String)doc.get("FormerReferencePro"));
+        ref.add((String)doc.get("FormerReferenceDep"));
         references=ref.getValues();
         this.peoples=pers.getValues();
         this.places=place.getValues();
@@ -654,6 +657,45 @@ public class MongoDoc implements IMongoDoc{
     }
     
     private void checkDescriptionForMetaData(String description){
+        String person;
+        String fullname;
+        Matcher persMatcher=MongoDoc.desc_persname_re.matcher(description);
+        while(persMatcher.find()){
+            String forename;
+            String surname;
+            person=persMatcher.group(1);
+            Matcher forenameMatcher=MongoDoc.desc_forename_re.matcher(person);
+            if(forenameMatcher.find()){
+                forename=forenameMatcher.group(1);
+            }
+            else{
+                forename="";
+            }
+            Matcher surnameMatcher=MongoDoc.desc_surname_re.matcher(person);
+            if(surnameMatcher.find()){
+                surname=surnameMatcher.group(1);
+            }
+            else{
+                surname="";
+            }
+            fullname=forename+" "+surname;
+            this.pers.add(fullname);
+        }
+
+        String corpname;
+        Matcher corpMatcher=MongoDoc.desc_corpname_re.matcher(description);
+        while(corpMatcher.find()){
+            corpname=corpMatcher.group(1);
+            this.corp.add(corpname);
+        }
+        
+        String regname;
+        Matcher regMatcher=MongoDoc.desc_regnumber_re.matcher(description);
+        while(regMatcher.find()){
+            regname=regMatcher.group(1);
+            this.ref.add(regname);
+        }
+        
         
     }
     
@@ -816,6 +858,13 @@ public class MongoDoc implements IMongoDoc{
         }
         
         void append(String ref)
+        {
+            if(ref!=null&&ref.length()>0){
+                values.add(ref);
+            }
+        }
+        
+        void add(String ref)
         {
             if(ref!=null&&ref.length()>0){
                 values.add(ref);
