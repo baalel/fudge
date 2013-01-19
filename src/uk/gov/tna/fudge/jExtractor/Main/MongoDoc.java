@@ -22,29 +22,7 @@ public class MongoDoc implements IMongoDoc{
     private static Pattern desc_re=Pattern.compile("<p>(.*)</p>");
     private static Pattern htmltag_re=Pattern.compile("<[^<]+?>");
     private static Pattern schema_re=Pattern.compile("=\\\"(.+)\\\"");
-    private static Pattern desc_persname_re=Pattern.compile("<persname>(.+?)</persname>");
-    private static Pattern desc_forename_re=Pattern.compile("forenames\\\">(.+?)</emph>");
-    private static Pattern desc_surname_re=Pattern.compile("surname\\\">(.+?)</emph>");
-    private static Pattern desc_corpname_re=Pattern.compile("<corpname>(.+?)</corpname>");
-    private static Pattern desc_regnumber_re=Pattern.compile("regno\\\">(.+?)<");
-    private static Pattern desc_rank_re=Pattern.compile("rank\\\">(.+?)<>");
-    private static Pattern desc_title_re=Pattern.compile("perstitle\\\">(.+?)</emph");
-    private static Pattern desc_occupation_re=Pattern.compile("<occupation>(.+)</occupation>");
-    private static Pattern desc_geo_re=Pattern.compile("<geogname>(.+)</geogname>");
-    private static Pattern desc_rating_re=Pattern.compile( "rating\">(.+?)</emph>");
-    private static Pattern desc_corp_re=Pattern.compile("corpname\"(.+?)1</emph>");
-    private static Pattern desc_nation_re=Pattern.compile("nation\">(.+?)</emph>");
-    private static Pattern desc_scope_re=Pattern.compile("scope\">(.+?)</emph>");
-    private static Pattern desc_discharge_re=Pattern.compile("dischargeno\">R284299</emph>");
-    private static Pattern desc_name1_re=Pattern.compile("name1\">Gudvang</emph>");
-    private static Pattern desc_name2_re=Pattern.compile("name2\">(.+?)</emph>");
-    private static Pattern desc_tonnage_re=Pattern.compile("size\">(.+?)</emph>");
-    private static Pattern desc_num_re=Pattern.compile("num\">(.+?)</emph>");
-    private static Pattern desc_award_re=Pattern.compile("award\">(.+?)</emph>");
-    private static Pattern desc_division_re=Pattern.compile("division\">(.+?)</emph>");
-    private static Pattern desc_campaign_re=Pattern.compile("campaign\">(.+?)</emph>");
-    private static Pattern desc_court_re=Pattern.compile("court\">(.+?)</emph>");
-    private static Pattern desc_offence_re=Pattern.compile("offence\\\">(.+?)</emph>");
+    
             
 
     public MongoDoc() {
@@ -150,7 +128,14 @@ public class MongoDoc implements IMongoDoc{
             subj.add(schema);
         }
         ref=new Reference(this.reference);
-        checkDescriptionForMetaData((String)scopeContent.get("Description"));
+        DolExtractor dol=new DolExtractor(
+                (String)scopeContent.get("Description"),
+                this.peoples,
+                this.places,
+                this.references,
+                this.subjects,
+                this.corpBodies);
+        dol.checkMetaData();
         
         catDocRef=makeCatDocRef();
         
@@ -683,48 +668,7 @@ public class MongoDoc implements IMongoDoc{
         return subjects;
     }
     
-    private void checkDescriptionForMetaData(String description){
-        String person;
-        String fullname;
-        Matcher persMatcher=MongoDoc.desc_persname_re.matcher(description);
-        while(persMatcher.find()){
-            String forename;
-            String surname;
-            person=persMatcher.group(1);
-            Matcher forenameMatcher=MongoDoc.desc_forename_re.matcher(person);
-            if(forenameMatcher.find()){
-                forename=forenameMatcher.group(1);
-            }
-            else{
-                forename="";
-            }
-            Matcher surnameMatcher=MongoDoc.desc_surname_re.matcher(person);
-            if(surnameMatcher.find()){
-                surname=surnameMatcher.group(1);
-            }
-            else{
-                surname="";
-            }
-            fullname=forename+" "+surname;
-            this.pers.add(fullname);
-        }
-
-        String corpname;
-        Matcher corpMatcher=MongoDoc.desc_corpname_re.matcher(description);
-        while(corpMatcher.find()){
-            corpname=corpMatcher.group(1);
-            this.corp.add(corpname);
-        }
-        
-        String regname;
-        Matcher regMatcher=MongoDoc.desc_regnumber_re.matcher(description);
-        while(regMatcher.find()){
-            regname=regMatcher.group(1);
-            this.ref.add(regname);
-        }
-        
-        
-    }
+    
     
     private class Entity{
         DBObject data;
