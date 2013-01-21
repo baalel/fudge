@@ -142,17 +142,19 @@ public class MongoDoc implements IMongoDoc{
         this.corpBodies=corp.getValues();
         this.heldbys=held.getValues();
         this.subjects=subj.getValues();
-        DolExtractor dol=new DolExtractor(
-                (String)scopeContent.get("Description"),
-                this.peoples,
-                this.places,
-                this.references,
-                this.subjects,
-                this.corpBodies,
-                collType);
-        String extraDesc=dol.checkMetaData();
-        if(!"".equals(extraDesc)){
-            description=description+" "+extraDesc;
+        if(collType!=null){
+            DolExtractor dol=new DolExtractor(
+                    (String)scopeContent.get("Description"),
+                    this.peoples,
+                    this.places,
+                    this.references,
+                    this.subjects,
+                    this.corpBodies,
+                    collType);
+            String extraDesc=dol.checkMetaData();
+            if(!"".equals(extraDesc)){
+                description=description+" "+extraDesc;
+            }
         }
         if(tag.data!=null){
             subjects.addAll(tag.getValues());
