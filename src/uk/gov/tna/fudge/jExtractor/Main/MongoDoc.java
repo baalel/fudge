@@ -112,6 +112,7 @@ public class MongoDoc implements IMongoDoc{
         DBObject scopeContent=(DBObject)doc.get("ScopeContent");
         description=MongoDoc.cleanDescription((String)scopeContent.get("Description"));
         BasicDBList occupation=(BasicDBList)scopeContent.get("Occupation");
+        String collType=(String)scopeContent.get("Schema");
         if(occupation!=null){
             subj.add(occupation);}
         BasicDBList organization=(BasicDBList)scopeContent.get("Organizations");
@@ -128,14 +129,7 @@ public class MongoDoc implements IMongoDoc{
             subj.add(schema);
         }
         ref=new Reference(this.reference);
-        DolExtractor dol=new DolExtractor(
-                (String)scopeContent.get("Description"),
-                this.peoples,
-                this.places,
-                this.references,
-                this.subjects,
-                this.corpBodies);
-        dol.checkMetaData();
+        
         
         catDocRef=makeCatDocRef();
         
@@ -148,6 +142,18 @@ public class MongoDoc implements IMongoDoc{
         this.corpBodies=corp.getValues();
         this.heldbys=held.getValues();
         this.subjects=subj.getValues();
+        DolExtractor dol=new DolExtractor(
+                (String)scopeContent.get("Description"),
+                this.peoples,
+                this.places,
+                this.references,
+                this.subjects,
+                this.corpBodies,
+                collType);
+        String extraDesc=dol.checkMetaData();
+        if(!"".equals(extraDesc)){
+            description=description+" "+extraDesc;
+        }
         if(tag.data!=null){
             subjects.addAll(tag.getValues());
         }
