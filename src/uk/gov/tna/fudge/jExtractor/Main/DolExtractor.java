@@ -61,7 +61,7 @@ public class DolExtractor {
     String description;
     String collType;
     
-    public DolExtractor(String desc, List pers, List place, List ref, List subj, List corp){
+    public DolExtractor(String desc, List pers, List place, List ref, List subj, List corp, String colltype){
         this.description=desc;
         this.ref=ref;
         this.pers=pers;
@@ -69,7 +69,7 @@ public class DolExtractor {
         this.place=place;
         this.corp=corp;
         
-        this.collType=DolExtractor.getCollType(desc);
+        this.collType=DolExtractor.getCollType(colltype);
         
     }
     
