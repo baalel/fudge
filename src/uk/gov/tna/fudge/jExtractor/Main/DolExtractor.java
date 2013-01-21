@@ -25,7 +25,7 @@ public class DolExtractor {
     private static Pattern desc_rating_re=Pattern.compile("rating\\\">(.+?)</emph>");
     private static Pattern desc_title_re=Pattern.compile("perstitle\\\">(.+?)</emph");
     private static Pattern desc_occupation_re=Pattern.compile("<occupation>(.+)</occupation>");
-    private static Pattern desc_geo_re=Pattern.compile("<geogname>(.+)</geogname>");
+    private static Pattern desc_geo_re=Pattern.compile("<geogname>(.+?)</geogname>");
     private static Pattern desc_corp_re=Pattern.compile("corpname\"(.+?)1</emph>");
     private static Pattern desc_nation_re=Pattern.compile("nation\">(.+?)</emph>");
     private static Pattern desc_scope_re=Pattern.compile("scope(?:2?)\">(.+?)</emph>");
