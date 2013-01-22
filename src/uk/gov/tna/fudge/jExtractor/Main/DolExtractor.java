@@ -731,12 +731,12 @@ public class DolExtractor {
         working=DolExtractor.desc_tag_re.matcher(clean);
         if(working.find())
         {
-            clean=working.replaceAll("");
+            clean=working.replaceAll(" ");
         }
         else{
             clean=dirty;
         }
-        return clean;
+        return clean.trim();
     }
 
     
