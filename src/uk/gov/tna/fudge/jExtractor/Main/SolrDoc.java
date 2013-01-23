@@ -44,7 +44,7 @@ public class SolrDoc {
     private String closureType;
     private String closureStatus;
     private String closureCode;
-    private String openingDate;
+    private String openingdate;
     private String series;
     private String startdate;
     private String enddate;
@@ -75,6 +75,7 @@ public class SolrDoc {
         this.subjects=XMLHelper.safeText(mdoc.getSubjects());
         this.startdate=mdoc.getStartdate();
         this.enddate=mdoc.getEnddate();
+        this.openingdate=mdoc.getOpeningdate();
         this.closureCode=mdoc.getClosureCode();
         this.closureStatus=mdoc.getClosureStatus();
         this.closureType=mdoc.getClosureType();
@@ -107,6 +108,7 @@ public class SolrDoc {
         solrImportMap.addField("PERIOD",this.periods);
         solrImportMap.addField("STARTDATE",this.startdate);
         solrImportMap.addField("ENDDATE",this.enddate);
+        solrImportMap.addField("OPENINGDATE", this.openingdate);
         solrImportMap.addField("DEPARTMENT",this.department);
         solrImportMap.addField("SERIES",this.series);
         if(this.schema!=null){
@@ -170,6 +172,7 @@ public class SolrDoc {
         solrdoc.appendChild(SolrDoc.buildElement(doc, "DESCRIPTION", this.description));
         solrdoc.appendChild(SolrDoc.buildElement(doc, "STARTDATE", this.startdate));
         solrdoc.appendChild(SolrDoc.buildElement(doc, "ENDDATE", this.enddate));
+        solrdoc.appendChild(SolrDoc.buildElement(doc, "OPENINGDATE", this.openingdate));
         solrdoc.appendChild(SolrDoc.buildElement(doc, "DEPARTMENT", this.department));
         solrdoc.appendChild(SolrDoc.buildElement(doc, "SERIES", this.series));
         solrdoc.appendChild(SolrDoc.buildElement(doc, "SOURCELEVEL", this.sourceLevelId));
@@ -289,6 +292,9 @@ public class SolrDoc {
             }
             if(sdoc.enddate!=null){
                 saveDoc.append("<field name=").append("\"ENDDATE\">").append(sdoc.enddate).append("</field>");
+            }
+            if(sdoc.openingdate!=null){
+                saveDoc.append("<field name=").append("\"OPENINGDATE\">").append(sdoc.openingdate).append("</field>");
             }
             if(sdoc.department!=null){
                 saveDoc.append("<field name=").append("\"DEPARTMENT\">").append(sdoc.department).append("</field>");
@@ -471,6 +477,7 @@ public class SolrDoc {
         son.put("DESCRIPTION", this.description);
         son.put("STARTDATE", this.startdate);
         son.put("ENDDATE", this.enddate);
+        son.put("OPENINGDATE", this.openingdate);
         son.put("DEPARTMENT", this.department);
         son.put("SERIES", this.series);
         son.put("SOURCELEVEL", this.sourceLevelId);
