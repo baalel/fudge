@@ -36,6 +36,7 @@ public class CachedMongoDoc implements IMongoDoc{
     String closureType;
     String startdate;
     String enddate;
+    private String openingdate;
     String title;
     String description;
     String schema;
@@ -79,6 +80,7 @@ CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
         try{
             startdate=this.makeDate((String)doc.get("CoveringFromDate"), true);
             enddate=this.makeDate((String)doc.get("CoveringToDate"), false);
+            openingdate=this.getOpeningDate((String)doc.get("RecordOpeningDate"));
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -535,6 +537,14 @@ CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
     public String getEnddate() {
         return enddate;
     }
+    
+    /**
+     * @return the openingdate
+     */
+    @Override
+    public String getOpeningdate() {
+        return this.openingdate;
+    }
 
     /**
      * @return the title
@@ -638,6 +648,22 @@ CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
     @Override
     public List<String> getSubjects() {
         return subjects;
+    }
+    
+    private String getOpeningDate(String roDate) {
+        if(roDate==null || roDate.length()!=19){
+            return null;
+        }
+        else{
+            StringBuilder newDate=new StringBuilder();
+            String day,month,year;
+            day=roDate.substring(0, 2);
+            month=roDate.substring(3, 5);
+            year=roDate.substring(6,10);
+            newDate.append(year).append("-").append(month).append("-").append(day).append(MongoDoc.getDatetimepart());
+            return newDate.toString();    
+            
+        }
     }
     
     private class Entity{
