@@ -23,6 +23,7 @@ public interface IMongoDoc {
     public String getClosureType();
     public String getStartdate();
     public String getEnddate();
+    public String getOpeningdate();
     public String getTitle();
     public String getDescription();
     public String getSchema();

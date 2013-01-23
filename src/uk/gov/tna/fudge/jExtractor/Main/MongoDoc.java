@@ -50,6 +50,7 @@ public class MongoDoc implements IMongoDoc{
     private String closureType;
     private String startdate;
     private String enddate;
+    private String openingdate;
     private String title;
     private String description;
     private String schema;
@@ -72,16 +73,18 @@ public class MongoDoc implements IMongoDoc{
     private List<String> subjects;
     Fetcher fetcher;
     RefCache refCache;
+    TitleCache titleCache;
     CoveringDateCache dateCache;
     UrlParamCache urlCache;
     
     
-    MongoDoc(DBObject doc, RefCache parentCache,CoveringDateCache cdateCache,UrlParamCache uCache, Fetcher fetch)
+    MongoDoc(DBObject doc, RefCache parentCache,CoveringDateCache cdateCache,UrlParamCache uCache,TitleCache tCache, Fetcher fetch)
     {
         fetcher=fetch;
         refCache=parentCache;
         dateCache=cdateCache;
         urlCache=uCache;
+        titleCache=tCache;
         parentIaid=(String)doc.get("ParentIAID");
         iaid=(String)doc.get("IAID");
         sourceLevelId=(Integer)doc.get("SourceLevelId");
@@ -89,12 +92,11 @@ public class MongoDoc implements IMongoDoc{
         closureCode=(String)doc.get("ClosureCode");
         closureType=(String)doc.get("ClosureType");
         id=(ObjectId)doc.get("_id");
-        title=MongoDoc.cleanTitle((String)doc.get("Title"));
-        //startdate=MongoDoc.convertDate((String)doc.get("CoveringFromDate"),true);
-        //enddate=MongoDoc.convertDate((String)doc.get("CoveringToDate"),false);
+        title=createTitle(MongoDoc.cleanTitle((String)doc.get("Title")));
         try{
             startdate=this.makeDate((String)doc.get("CoveringFromDate"), true);
             enddate=this.makeDate((String)doc.get("CoveringToDate"), false);
+            openingdate=this.getOpeningDate((String)doc.get("RecordOpeningDate"));
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -181,6 +183,7 @@ public class MongoDoc implements IMongoDoc{
         son.put("Heldby", held.values);
         son.put("StartDate", getStartdate());
         son.put("EndDate", getEnddate());
+        son.put("OpeningDate", getOpeningdate());
         son.put("Schema", getSchema());
         son.put("Catdocref", getCatDocRef());
         son.put("Reference", ref.values);
@@ -282,6 +285,48 @@ public class MongoDoc implements IMongoDoc{
         
         
         return workingDate;
+    }
+    
+    private String createTitle(String dbTitle){
+        if(dbTitle!=null && !"".equals(dbTitle)){
+            titleCache.insert(this.iaid, dbTitle);
+            return dbTitle;
+        }
+        else{
+            String workingId=this.getParentIaid();
+            String workingTitle="";
+            if(titleCache.exists(workingId)){
+                    workingTitle=titleCache.lookup(workingId);
+                    
+            }
+            else{
+                boolean flag=false;
+                while(!flag){
+
+                    DBObject doc=fetcher.findParent(workingId);
+
+                    workingTitle=MongoDoc.cleanTitle((String)doc.get("Title"));
+                    if(!"".equals(workingTitle)){
+                        flag=true;
+                    }
+                    else{
+                        workingId=(String)doc.get("ParentIAID");
+                        if(titleCache.exists(workingId)){
+                            workingTitle=titleCache.lookup(workingId);
+                            flag=true;
+                        }
+                    }
+
+
+                }
+            }
+            titleCache.insert(this.iaid, workingTitle);
+            return workingTitle;
+        }
+        
+        
+        
+        
     }
     
     private String makeCatDocRef() {
@@ -571,6 +616,14 @@ public class MongoDoc implements IMongoDoc{
     public String getEnddate() {
         return enddate;
     }
+    
+    /**
+     * @return the enddate
+     */
+    @Override
+    public String getOpeningdate() {
+        return this.openingdate;
+    }
 
     /**
      * @return the title
@@ -674,6 +727,22 @@ public class MongoDoc implements IMongoDoc{
     @Override
     public List<String> getSubjects() {
         return subjects;
+    }
+
+    private String getOpeningDate(String roDate) {
+        if(roDate==null || roDate.length()!=19){
+            return null;
+        }
+        else{
+            StringBuilder newDate=new StringBuilder();
+            String day,month,year;
+            day=roDate.substring(0, 2);
+            month=roDate.substring(3, 5);
+            year=roDate.substring(6,10);
+            newDate.append(year).append("-").append(month).append("-").append(day).append(MongoDoc.getDatetimepart());
+            return newDate.toString();    
+            
+        }
     }
     
     

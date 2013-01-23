@@ -4,15 +4,14 @@
  */
 package uk.gov.tna.fudge.jExtractor.Main;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -22,6 +21,7 @@ public class SolrDocTest {
     static RefCache refCache;
     static CoveringDateCache dateCache;
     static UrlParamCache urlCache;
+    static TitleCache titleCache;
     static Fetcher fetcher;
     SolrDoc testSolrDoc;
     MongoDoc testMongoDoc;
@@ -34,6 +34,7 @@ public class SolrDocTest {
         refCache=new RefCache();
         dateCache=new CoveringDateCache();
         urlCache=new UrlParamCache();
+        titleCache=new TitleCache();
         fetcher=new Fetcher("192.168.0.6","27017","iadata","solrtest","informationasset","solrtestcoll");
     }
     
@@ -59,7 +60,7 @@ public class SolrDocTest {
     @Test
     public void testCheckIfDeptTrue() {
         System.out.println("checkIfDept_true");
-        SolrDoc trueinstance = new SolrDoc(new MongoDoc(fetcher.findOne("IAID", "C1"),refCache,dateCache,urlCache,fetcher));
+        SolrDoc trueinstance = new SolrDoc(new MongoDoc(fetcher.findOne("IAID", "C1"),refCache,dateCache,urlCache,titleCache,fetcher));
         boolean expResult = true;
         boolean result = trueinstance.checkIfDept();
         assertEquals(expResult, result);
@@ -69,7 +70,7 @@ public class SolrDocTest {
     @Test
     public void testCheckIfDeptFalse() {
         System.out.println("checkIfDept_false");
-        SolrDoc trueinstance = new SolrDoc(new MongoDoc(fetcher.findOne("IAID", "D7738606"),refCache,dateCache,urlCache,fetcher));
+        SolrDoc trueinstance = new SolrDoc(new MongoDoc(fetcher.findOne("IAID", "D7738606"),refCache,dateCache,urlCache,titleCache,fetcher));
         boolean expResult = false;
         boolean result = trueinstance.checkIfDept();
         assertEquals(expResult, result);
@@ -98,8 +99,8 @@ public class SolrDocTest {
         System.out.println("writeXMLasString");
         Integer batchid = 0;
         String savePath = "/";
-        List<SolrDoc> docs = new ArrayList<SolrDoc>();
-        docs.add(new SolrDoc(new MongoDoc(fetcher.findOne("IAID", "D7738606"),refCache,dateCache,urlCache,fetcher)));
+        List<SolrDoc> docs = new ArrayList<>();
+        docs.add(new SolrDoc(new MongoDoc(fetcher.findOne("IAID", "D7738606"),refCache,dateCache,urlCache,titleCache,fetcher)));
         String currDeptName = "BOB";
         boolean result=SolrDoc.writeXMLasString(batchid, savePath, docs, currDeptName);
         boolean expResult = true;
@@ -113,7 +114,7 @@ public class SolrDocTest {
     @Test
     public void testGetIaid() {
         System.out.println("getIaid");
-        SolrDoc instance = new SolrDoc(new MongoDoc(fetcher.findOne("IAID", "D7738606"),refCache,dateCache,urlCache,fetcher));
+        SolrDoc instance = new SolrDoc(new MongoDoc(fetcher.findOne("IAID", "D7738606"),refCache,dateCache,urlCache,titleCache,fetcher));
         String expResult = "D7738606";
         String result = instance.getIaid();
         assertEquals(expResult, result);
@@ -126,7 +127,7 @@ public class SolrDocTest {
     @Test
     public void testGetDepartment_0args() {
         System.out.println("getDepartment");
-        SolrDoc instance = new SolrDoc(new MongoDoc(fetcher.findOne("IAID", "D7738606"),refCache,dateCache,urlCache,fetcher));
+        SolrDoc instance = new SolrDoc(new MongoDoc(fetcher.findOne("IAID", "D7738606"),refCache,dateCache,urlCache,titleCache,fetcher));
         String expResult = "CAB";
         String result = instance.getDepartment();
         assertEquals(expResult, result);
@@ -138,7 +139,7 @@ public class SolrDocTest {
     @Test
     public void testGetParent() {
         System.out.println("getParent");
-        SolrDoc instance = new SolrDoc(new MongoDoc(fetcher.findOne("IAID", "D7738606"),refCache,dateCache,urlCache,fetcher));
+        SolrDoc instance = new SolrDoc(new MongoDoc(fetcher.findOne("IAID", "D7738606"),refCache,dateCache,urlCache,titleCache,fetcher));
         String expResult = "C11277869";
         String result = instance.getParent();
         assertEquals(expResult, result);
@@ -150,7 +151,8 @@ public class SolrDocTest {
     @Test
     public void testToSon() {
         System.out.println("toSon");
-        SolrDoc instance = new SolrDoc(new MongoDoc(fetcher.findOne("IAID", "D7738606"),refCache,dateCache,urlCache,fetcher));
+        SolrDoc instance;
+        instance = new SolrDoc(new MongoDoc(fetcher.findOne("IAID", "D7738606"),refCache,dateCache,urlCache,titleCache,fetcher));
         String expResultSeries = "CAB 195";
         String result = (String)instance.toSon().get("SERIES");
         assertEquals(expResultSeries, result);

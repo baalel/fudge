@@ -19,20 +19,20 @@ public class DolExtractor {
     private static Pattern desc_surname_re=Pattern.compile("surname\\\">(.+?)</emph>");
     private static Pattern desc_surname2_re=Pattern.compile("<surname>(.+?)</surname>");
     private static Pattern desc_formerRef_re=Pattern.compile("formerreference\\\">(.+?)</emph>");
-    private static Pattern desc_corpname_re=Pattern.compile("<corpname>(.+?)</corpname>");
+    //private static Pattern desc_corpname_re=Pattern.compile("<corpname>(.+?)</corpname>");
     private static Pattern desc_regnumber_re=Pattern.compile("regno\\\">(.+?)<");
     private static Pattern desc_rank_re=Pattern.compile("rank\\\">(.+?)</emph>");
     private static Pattern desc_rating_re=Pattern.compile("rating\\\">(.+?)</emph>");
-    private static Pattern desc_title_re=Pattern.compile("perstitle\\\">(.+?)</emph");
+    //private static Pattern desc_title_re=Pattern.compile("perstitle\\\">(.+?)</emph");
     private static Pattern desc_occupation_re=Pattern.compile("<occupation>(.+)</occupation>");
     private static Pattern desc_geo_re=Pattern.compile("<geogname>(.+?)</geogname>");
     private static Pattern desc_corp_re=Pattern.compile("corpname\"(.+?)1</emph>");
-    private static Pattern desc_nation_re=Pattern.compile("nation\">(.+?)</emph>");
+    //private static Pattern desc_nation_re=Pattern.compile("nation\">(.+?)</emph>");
     private static Pattern desc_scope_re=Pattern.compile("scope(?:2?)\">(.+?)</emph>");
     private static Pattern desc_discharge_re=Pattern.compile("dischargeno\">(.+?)</emph>");
-    private static Pattern desc_name1_re=Pattern.compile("name1\">Gudvang</emph>");
-    private static Pattern desc_name2_re=Pattern.compile("name2\">(.+?)</emph>");
-    private static Pattern desc_tonnage_re=Pattern.compile("size\">(.+?)</emph>");
+    //private static Pattern desc_name1_re=Pattern.compile("name1\">Gudvang</emph>");
+    //private static Pattern desc_name2_re=Pattern.compile("name2\">(.+?)</emph>");
+    //private static Pattern desc_tonnage_re=Pattern.compile("size\">(.+?)</emph>");
     private static Pattern desc_num_re=Pattern.compile("(?:certno|num)\">(.+?)</emph>");
     private static Pattern desc_award_re=Pattern.compile("award\">(.+?)</emph>");
     private static Pattern desc_division_re=Pattern.compile("division\">(.+?)</emph>");
@@ -43,7 +43,7 @@ public class DolExtractor {
     private static Pattern desc_petition_re=Pattern.compile("petitioners\\\">(.+?)</emph>");
     private static Pattern desc_addressee_re=Pattern.compile("addressees\\\">(.+?)</emph>");
     private static Pattern coll_re=Pattern.compile("<colltype id=\\\"(.+?)\\\">,</colltype>");
-    private static Pattern desc_aps=Pattern.compile("/emph>(.+?)$");
+    //private static Pattern endtext_re=Pattern.compile("/emph>(.+?)$");
     private static Pattern desc_request=Pattern.compile("request\\\">(.+?)</emph>");
     private static Pattern desc_endorsement=Pattern.compile("endorsement\\\">(.+?)</emph>");
     private static Pattern desc_agenda=Pattern.compile("agenda\\\">(.+?)</emph>");
@@ -61,7 +61,7 @@ public class DolExtractor {
     String description;
     String collType;
     
-    public DolExtractor(String desc, List pers, List place, List ref, List subj, List corp, String colltype){
+    public DolExtractor(String desc, List<String> pers, List<String> place, List<String> ref, List<String> subj, List<String> corp, String colltype){
         this.description=desc;
         this.ref=ref;
         this.pers=pers;
@@ -111,13 +111,13 @@ public class DolExtractor {
                 descriptiveText=extractCAB();
                 break;
             case "CombatRepWW2":
-                descriptiveText=extractCombatRep();
+                descriptiveText=extractNameWithRankAndCorp();
                 break;
             case "Datasets":
                 descriptiveText=extractGenericDesc();
                 break;
             case "DeathDuty":
-                descriptiveText=extractNameOccupationLocation();
+                descriptiveText=extractNameWithLocationAndOccupation();
                 break;
             case "DixonScott":
                 descriptiveText=extractGenericDesc();
@@ -144,10 +144,10 @@ public class DolExtractor {
                 descriptiveText=extractGenericDesc();
                 break;
             case "MapPicture":
-                descriptiveText=extractMapPicture();
+                descriptiveText=extractLocationWithCleanDescription();
                 break;
             case "MedSeal":
-                descriptiveText=extractMedSeal();
+                descriptiveText=extractLocationWithCleanDescription();
                 break;
             case "Medal":
                 descriptiveText=extractMedal();
@@ -168,7 +168,7 @@ public class DolExtractor {
                 descriptiveText=extractNavyLandService();
                 break;
             case "NavyList":
-                descriptiveText=extractEndText();
+                descriptiveText=extractGenericDesc();
                 break;
             case "NursingService":
                 descriptiveText=extractNameOnly();
@@ -180,10 +180,10 @@ public class DolExtractor {
                 descriptiveText=extractScopeOnly();
                 break;
             case "PrimeMin":
-                descriptiveText=extractEndText();
+                descriptiveText=extractGenericDesc();
                 break;
             case "PrisonerInterview":
-                descriptiveText=extractNameAndCorp();
+                descriptiveText=extractNameWithCorp();
                 break;
             case "RAFOfficers":
                 descriptiveText=extractNameOnly();
@@ -195,7 +195,7 @@ public class DolExtractor {
                 descriptiveText=extractRecHonours();
                 break;
             case "RoyalChelsea":
-                descriptiveText=extractEndText();
+                descriptiveText=extractGenericDesc();
                 break;
             case "RoyalMarines":
                 descriptiveText=extractNameWithNumberAndDivision();
@@ -210,22 +210,22 @@ public class DolExtractor {
                 descriptiveText=extractNameWithNumberAndCorp();
                 break;
             case "SecurityService":
-                descriptiveText=extractEndText();
+                descriptiveText=extractGenericDesc();
                 break;
             case "SecurityServiceKV":
-                descriptiveText=extractEndText();
+                descriptiveText=extractGenericDesc();
                 break;
             case "ShippingSeamen":
-                descriptiveText=extractEndText();
+                descriptiveText=extractGenericDesc();
                 break;
             case "ShipsExploration":
-                descriptiveText=extractEndText();
+                descriptiveText=extractGenericDesc();
                 break;
             case "Squadron":
                 descriptiveText=extractSquadron();
                 break;
             case "Titanic":
-                descriptiveText=extractTitanic();
+                descriptiveText=extractNameWithScope();
                 break;
             case "VictoriaCross":
                 descriptiveText=extractVC();
@@ -254,7 +254,7 @@ public class DolExtractor {
 
     private String extractGenericDesc() {
         String descriptiveText;
-        Matcher descMatcher=DolExtractor.desc_aps.matcher(description);
+        Matcher descMatcher=DolExtractor.desc_end_re.matcher(description);
         if(descMatcher.find()){
             descriptiveText=descMatcher.group(1);
         }
@@ -263,8 +263,7 @@ public class DolExtractor {
         }
         return descriptiveText;  
     }
-
-
+    
     private String extractNameOnly() {
         String fullname;
         String person;
@@ -329,37 +328,7 @@ public class DolExtractor {
         return "";
     }
     
-    private String extractNameWithRating() {
-        String fullname;
-        String person;
-        String rank;
-        Matcher persMatcher=DolExtractor.desc_persname_re.matcher(description);
-        if(persMatcher.find()){
-            String forename;
-            String surname;
-            person=persMatcher.group(1);
-            Matcher forenameMatcher=DolExtractor.desc_forename_re.matcher(person);
-            if(forenameMatcher.find()){
-                forename=forenameMatcher.group(1);
-            }
-            else{
-                forename="";
-            }
-            Matcher surnameMatcher=DolExtractor.desc_surname_re.matcher(person);
-            if(surnameMatcher.find()){
-                surname=surnameMatcher.group(1);
-            }
-            else{
-                surname="";
-            }
-            rank=this.extractRank();
-            fullname=rank.trim()+" "+forename.trim()+" "+surname.trim();
-            if(fullname.length()>0){
-                this.pers.add(fullname);
-            }          
-        }
-        return "";
-    }
+    
 
     private String extractCabSurnameOnly() {
         Matcher mSurname=DolExtractor.desc_surname2_re.matcher(description);
@@ -434,9 +403,13 @@ public class DolExtractor {
     
     private String extractRank(){
         Matcher mRank=DolExtractor.desc_rank_re.matcher(description);
+        Matcher mRating=DolExtractor.desc_rating_re.matcher(description);
         String rankText;
         if(mRank.find()){
             rankText=mRank.group(1);
+        }
+        else if(mRating.find()){
+            rankText=mRating.group(1);
         }
         else{
             rankText="";
@@ -452,14 +425,14 @@ public class DolExtractor {
         return "";
     }
 
-    private String extractCombatRep() {
+    private String extractNameWithRankAndCorp() {
         extractCorp();
         extractNameWithRank();
         return "";
     }
 
 
-    private String extractNameOccupationLocation() {
+    private String extractNameWithLocationAndOccupation() {
         extractNameWithLocation();
         extractOccupation();
         return "";
@@ -501,19 +474,12 @@ public class DolExtractor {
     private String extractFameWill() {
         String descText="Will ";
         extractPersOnly();
-        descText+=extractEndText();
+        descText+=extractGenericDesc();
         return descText;
         
     }
     
-    private String extractEndText(){
-        String descText="";
-        Matcher mEndText=DolExtractor.desc_end_re.matcher(description);
-        if(mEndText.find()){
-            descText=mEndText.group(1);
-        }
-        return descText;
-    }
+    
 
 
     private String extractScopeOnly() {
@@ -526,16 +492,10 @@ public class DolExtractor {
     }
 
 
-    private String extractMapPicture() {
+    private String extractLocationWithCleanDescription() {
         String descText=DolExtractor.cleanDescriptionText(description);
         extractLocation();
         
-        return descText;
-    }
-
-    private String extractMedSeal() {
-        String descText=DolExtractor.cleanDescriptionText(description);
-        extractLocation();
         return descText;
     }
 
@@ -562,7 +522,7 @@ public class DolExtractor {
     }
 
     private String extractMusterRolls() {
-        extractNameWithRating();
+        extractNameWithRank();
         extractCorp();
         return "";
     }
@@ -584,14 +544,14 @@ public class DolExtractor {
 
 
     private String extractNavyLandService() {
-        extractNameWithRating();
+        extractNameWithRank();
         extractServiceNumber();
         return "";
     }
 
 
 
-    private String extractNameAndCorp() {
+    private String extractNameWithCorp() {
         extractNameOnly();
         extractCorp();
         return "";
@@ -663,7 +623,7 @@ public class DolExtractor {
         return "";
     }
 
-    private String extractTitanic() {
+    private String extractNameWithScope() {
         extractNameOnly();
         return extractScopeOnly();
     }

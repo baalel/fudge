@@ -141,7 +141,7 @@ public class JExtractor {
         RefCache parentCache=new RefCache();
         CoveringDateCache dateCache=new CoveringDateCache();
         UrlParamCache urlCache=new UrlParamCache();
-
+        TitleCache titleCache=new TitleCache();
         GeneralCache cache=new GeneralCache();
         Stack<String> workQueue=new Stack<>();
         
@@ -170,7 +170,7 @@ public class JExtractor {
                     while(cursor.hasNext()) {
                         DBObject doc=cursor.next();
 
-                        IMongoDoc mdoc=new MongoDoc(doc,parentCache,dateCache,urlCache,fetcher);                      
+                        IMongoDoc mdoc=new MongoDoc(doc,parentCache,dateCache,urlCache,titleCache,fetcher);                      
 
                         //IMongoDoc cmdoc=new CachedMongoDoc(doc,cache,fetcher);
                         workQueue.push(mdoc.getIaid());
@@ -190,6 +190,7 @@ public class JExtractor {
                                 parentCache.clear();
                                 dateCache.clear();
                                 urlCache.clear();
+                                titleCache.clear();
                                 
                                 cache.clear();
                                 oldDept=workingDept;
