@@ -36,7 +36,7 @@ public class CachedMongoDoc implements IMongoDoc{
     String closureType;
     String startdate;
     String enddate;
-    private String openingdate;
+    String openingdate;
     String title;
     String description;
     String schema;
@@ -63,9 +63,6 @@ public class CachedMongoDoc implements IMongoDoc{
 CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
     {
         fetcher=fetch;
-        //refCache=parentCache;
-        //dateCache=cdateCache;
-        //urlCache=uCache;
         cache=gCache;
         parentIaid=(String)doc.get("ParentIAID");
         iaid=(String)doc.get("IAID");
@@ -74,9 +71,7 @@ CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
         closureCode=(String)doc.get("ClosureCode");
         closureType=(String)doc.get("ClosureType");
         id=(ObjectId)doc.get("_id");
-        title=CachedMongoDoc.cleanTitle((String)doc.get("Title"));
-        //startdate=MongoDoc.convertDate((String)doc.get("CoveringFromDate"),true);
-        //enddate=MongoDoc.convertDate((String)doc.get("CoveringToDate"),false);
+        title=createTitle(CachedMongoDoc.cleanTitle((String)doc.get("Title")));
         try{
             startdate=this.makeDate((String)doc.get("CoveringFromDate"), true);
             enddate=this.makeDate((String)doc.get("CoveringToDate"), false);
@@ -110,7 +105,6 @@ CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
         if(placeName!=null){
             place.add(placeName);}
         schema=CachedMongoDoc.extractSchema((String)scopeContent.get("Schema"));
-        //if(schema==null){schema="";}
         
         catDocRef=makeCatDocRef();
         ref=new Reference(catDocRef);
@@ -147,6 +141,7 @@ CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
         son.put("Heldby", held.values);
         son.put("StartDate", startdate);
         son.put("EndDate", enddate);
+        son.put("OpeningDate", getOpeningdate());
         son.put("Schema", schema);
         son.put("Catdocref",catDocRef);
         son.put("Reference", ref.values);
@@ -418,6 +413,48 @@ CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
         }
         
         return schema;
+    }
+    
+    private String createTitle(String dbTitle){
+        if(dbTitle!=null && !"".equals(dbTitle)){
+            cache.insertTitle(this.iaid, dbTitle);
+            return dbTitle;
+        }
+        else{
+            String workingId=this.getParentIaid();
+            String workingTitle="";
+            if(cache.existsTitle(workingId)){
+                    workingTitle=cache.lookupTitle(workingId);
+                    
+            }
+            else{
+                boolean flag=false;
+                while(!flag){
+
+                    DBObject doc=fetcher.findParent(workingId);
+
+                    workingTitle=CachedMongoDoc.cleanTitle((String)doc.get("Title"));
+                    if(!"".equals(workingTitle)){
+                        flag=true;
+                    }
+                    else{
+                        workingId=(String)doc.get("ParentIAID");
+                        if(cache.existsTitle(workingId)){
+                            workingTitle=cache.lookupTitle(workingId);
+                            flag=true;
+                        }
+                    }
+
+
+                }
+            }
+            cache.insertTitle(this.iaid, workingTitle);
+            return workingTitle;
+        }
+        
+        
+        
+        
     }
     
     /**
