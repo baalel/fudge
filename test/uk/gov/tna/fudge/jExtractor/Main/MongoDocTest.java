@@ -19,6 +19,7 @@ public class MongoDocTest {
     static Fetcher fetcher;
     static RefCache refCache;
     static UrlParamCache urlCache;
+    static TitleCache titleCache;
     static CoveringDateCache dateCache;
     
     public MongoDocTest() {
@@ -30,7 +31,8 @@ public class MongoDocTest {
         refCache=new RefCache();
         dateCache=new CoveringDateCache();
         urlCache=new UrlParamCache();
-        mdoc=new MongoDoc(fetcher.findOne("IAID", "C1"),refCache,dateCache,urlCache,fetcher);
+        titleCache=new TitleCache();
+        mdoc=new MongoDoc(fetcher.findOne("IAID", "C1"),refCache,dateCache,urlCache,titleCache,fetcher);
     }
     
     @AfterClass
