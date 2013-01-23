@@ -618,7 +618,7 @@ public class MongoDoc implements IMongoDoc{
     }
     
     /**
-     * @return the enddate
+     * @return the openingdate
      */
     @Override
     public String getOpeningdate() {
