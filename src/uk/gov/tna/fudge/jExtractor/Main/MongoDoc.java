@@ -479,7 +479,7 @@ public class MongoDoc implements IMongoDoc{
         Matcher working=MongoDoc.desc_re.matcher(dirty);
         while(working.find()){
             //cf C1095691 description
-            clean+=MongoDoc.removeTags(working.group(1));
+            clean+=" "+MongoDoc.removeTags(working.group(1)).trim();
             //clean=MongoDoc.removeTags(clean);
         }
         return clean;
