@@ -390,14 +390,12 @@ CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
      */
     private static String cleanDescription(String dirty)
     {
-        String clean;
+        String clean="";
         Matcher working=CachedMongoDoc.desc_re.matcher(dirty);
-        if(working.find()){
-            clean=working.group(1);
-            clean=CachedMongoDoc.removeTags(clean);
-        }
-        else{
-            clean="";
+        while(working.find()){
+            //cf C1095691 description
+            clean+=" "+CachedMongoDoc.removeTags(working.group(1)).trim();
+            //clean=MongoDoc.removeTags(clean);
         }
         return clean;
     }
