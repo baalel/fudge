@@ -161,7 +161,7 @@ public class MongoDoc implements IMongoDoc{
         if(tag.data!=null){
             subjects.addAll(tag.getValues());
         }
-        this.urlParams=makeUrlParams();
+        this.urlParams=makeUrlParamsNew();
         
     }
     
@@ -320,7 +320,9 @@ public class MongoDoc implements IMongoDoc{
 
                 }
             }
-            titleCache.insert(this.iaid, workingTitle);
+            if(this.sourceLevelId<7){
+                titleCache.insert(this.iaid, workingTitle);
+            }
             return workingTitle;
         }
         
@@ -385,6 +387,7 @@ public class MongoDoc implements IMongoDoc{
                 parent=(String)doc.get("ParentIAID");
                 currentRef=(String)doc.get("Reference");
                 level=(Integer)doc.get("SourceLevelId");
+                this.urlCache.insertLevel(workingid, level);
                 if(workingid.equals(this.getParentIaid())){
                     this.parentLevel=level;
                 }
@@ -393,7 +396,9 @@ public class MongoDoc implements IMongoDoc{
             }
             
         }
-        this.refCache.insert( getIaid(), getReference().toString());
+        if(this.getSourceLevelId()<7){
+            this.refCache.insert( getIaid(), getReference().toString());
+        }
         return getReference().toString();
         //throw new UnsupportedOperationException("Not yet implemented");
     }
@@ -413,9 +418,7 @@ public class MongoDoc implements IMongoDoc{
             }
             temp.insert(0, urlCache.lookup(this.getParentIaid())+'/');
         }
-        else if("C0".equals(this.getParentIaid())){
-            temp.insert(0, "066/1/");
-        }
+        
         else{
             Integer currentLevel=this.getSourceLevelId();
             String currentParent=this.getParentIaid();
@@ -429,18 +432,65 @@ public class MongoDoc implements IMongoDoc{
                     
                 }
                 temp.insert(0, (String)doc.get("IAID")+"/");
+                urlCache.insertLevel(currentParent, (Integer)doc.get("SourceLevelId"));
                 currentParent=(String)doc.get("ParentIAID");
                 
             }
             temp.insert(0, "066/1/");   
         }
-        
-        urlCache.insert(this.getIaid(), temp.toString());
+        if(this.sourceLevelId<7){
+            urlCache.insert(this.getIaid(), temp.toString());
+        }
         
         
         return temp.toString();
     }
     
+    private String makeUrlParamsNew(){
+        StringBuilder temp=new StringBuilder(this.getIaid());
+        Integer workingLevel;
+        if(urlCache.exists(this.getParentIaid())){
+            workingLevel=this.getSourceLevelId()-1;
+            this.parentLevel=urlCache.lookupLevel(this.getParentIaid());
+            if(this.parentLevel==null){
+                DBObject doc=fetcher.findParent(this.getParentIaid());
+                this.parentLevel=(Integer)doc.get("SourceLevelId");
+                urlCache.insertLevel(this.parentIaid, this.parentLevel);
+            }
+            while((workingLevel!=this.parentLevel)){
+                temp.insert(0, "0/");
+                workingLevel--; 
+            }
+            temp.insert(0, urlCache.lookup(this.getParentIaid())+"/");
+        }
+        else if("C0".equals(this.getParentIaid())){
+            temp.insert(0, UrlParamCache.urlParamPrefix);
+        }
+        else{
+            String currentParent=this.getParentIaid();
+            workingLevel=this.getSourceLevelId();
+            while (workingLevel!=1){
+                workingLevel--;
+                DBObject doc=fetcher.findParent(currentParent);
+                while((workingLevel-(Integer)doc.get("SourceLevelId"))>0){
+                    temp.insert(0, "0/");
+                    workingLevel--;                 
+                }
+                temp.insert(0, (String)doc.get("IAID")+"/");
+                currentParent=(String)doc.get("ParentIAID");
+            }
+            temp.insert(0, UrlParamCache.urlParamPrefix);
+        }
+        
+        
+        //temp.insert(0, UrlParamCache.urlParamPrefix);
+        if(this.sourceLevelId<7){
+            urlCache.insert(this.getIaid(), temp.toString());
+        }
+        
+        return temp.toString();
+        
+    }
     private static String cleanTitle(String dirty)
     {
         String clean;
