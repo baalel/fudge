@@ -56,10 +56,12 @@ public class SolrPostman implements Runnable{
            return;
        }
        try{
+           if(docs.size()>0){
             server.add(docs);
-            //if(this.commit){
+            if(this.commit){
                 server.commit();
-            //}
+            }
+           }
         }
         catch(SolrException | SolrServerException | IOException se){
             System.out.println("***Error posting document***");
