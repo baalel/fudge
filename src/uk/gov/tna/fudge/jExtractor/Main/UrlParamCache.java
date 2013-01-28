@@ -13,10 +13,12 @@ import java.util.Map;
  */
 public class UrlParamCache {
     Map<String, String> urlLookup;
+    Map<String, Integer> levelLookup;
     static String urlParamPrefix="066/1/";
     
     UrlParamCache(){
         urlLookup=new HashMap<>();
+        levelLookup=new HashMap<>();
         //urlLookup.put("C0", "");
         
     }
@@ -29,9 +31,22 @@ public class UrlParamCache {
 
     }
     
+    public void insertLevel(String id, Integer reference)
+    {
+        if(id!=null && reference!=null){
+            levelLookup.put(id, reference);
+        }
+
+    }
+    
     public String lookup(String id)
     {
         return urlLookup.get(id);
+    }
+    
+    public Integer lookupLevel(String id)
+    {
+        return levelLookup.get(id);
     }
     
     public boolean exists(String key)
@@ -39,8 +54,14 @@ public class UrlParamCache {
         return urlLookup.containsKey(key);
     }
     
+    public boolean existsLevel(String key)
+    {
+        return levelLookup.containsKey(key);
+    }
+    
     public void clear(){
         this.urlLookup.clear();
+        this.levelLookup.clear();
         //urlLookup.put("C0", "");
         System.gc();
     }

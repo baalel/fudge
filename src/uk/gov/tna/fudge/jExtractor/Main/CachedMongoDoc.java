@@ -36,6 +36,7 @@ public class CachedMongoDoc implements IMongoDoc{
     String closureType;
     String startdate;
     String enddate;
+    String openingdate;
     String title;
     String description;
     String schema;
@@ -62,9 +63,6 @@ public class CachedMongoDoc implements IMongoDoc{
 CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
     {
         fetcher=fetch;
-        //refCache=parentCache;
-        //dateCache=cdateCache;
-        //urlCache=uCache;
         cache=gCache;
         parentIaid=(String)doc.get("ParentIAID");
         iaid=(String)doc.get("IAID");
@@ -73,12 +71,11 @@ CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
         closureCode=(String)doc.get("ClosureCode");
         closureType=(String)doc.get("ClosureType");
         id=(ObjectId)doc.get("_id");
-        title=CachedMongoDoc.cleanTitle((String)doc.get("Title"));
-        //startdate=MongoDoc.convertDate((String)doc.get("CoveringFromDate"),true);
-        //enddate=MongoDoc.convertDate((String)doc.get("CoveringToDate"),false);
+        title=createTitle(CachedMongoDoc.cleanTitle((String)doc.get("Title")));
         try{
             startdate=this.makeDate((String)doc.get("CoveringFromDate"), true);
             enddate=this.makeDate((String)doc.get("CoveringToDate"), false);
+            openingdate=this.getOpeningDate((String)doc.get("RecordOpeningDate"));
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -108,7 +105,6 @@ CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
         if(placeName!=null){
             place.add(placeName);}
         schema=CachedMongoDoc.extractSchema((String)scopeContent.get("Schema"));
-        //if(schema==null){schema="";}
         
         catDocRef=makeCatDocRef();
         ref=new Reference(catDocRef);
@@ -145,6 +141,7 @@ CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
         son.put("Heldby", held.values);
         son.put("StartDate", startdate);
         son.put("EndDate", enddate);
+        son.put("OpeningDate", getOpeningdate());
         son.put("Schema", schema);
         son.put("Catdocref",catDocRef);
         son.put("Reference", ref.values);
@@ -393,14 +390,12 @@ CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
      */
     private static String cleanDescription(String dirty)
     {
-        String clean;
+        String clean="";
         Matcher working=CachedMongoDoc.desc_re.matcher(dirty);
-        if(working.find()){
-            clean=working.group(1);
-            clean=CachedMongoDoc.removeTags(clean);
-        }
-        else{
-            clean="";
+        while(working.find()){
+            //cf C1095691 description
+            clean+=" "+CachedMongoDoc.removeTags(working.group(1)).trim();
+            //clean=MongoDoc.removeTags(clean);
         }
         return clean;
     }
@@ -416,6 +411,48 @@ CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
         }
         
         return schema;
+    }
+    
+    private String createTitle(String dbTitle){
+        if(dbTitle!=null && !"".equals(dbTitle)){
+            cache.insertTitle(this.iaid, dbTitle);
+            return dbTitle;
+        }
+        else{
+            String workingId=this.getParentIaid();
+            String workingTitle="";
+            if(cache.existsTitle(workingId)){
+                    workingTitle=cache.lookupTitle(workingId);
+                    
+            }
+            else{
+                boolean flag=false;
+                while(!flag){
+
+                    DBObject doc=fetcher.findParent(workingId);
+
+                    workingTitle=CachedMongoDoc.cleanTitle((String)doc.get("Title"));
+                    if(!"".equals(workingTitle)){
+                        flag=true;
+                    }
+                    else{
+                        workingId=(String)doc.get("ParentIAID");
+                        if(cache.existsTitle(workingId)){
+                            workingTitle=cache.lookupTitle(workingId);
+                            flag=true;
+                        }
+                    }
+
+
+                }
+            }
+            cache.insertTitle(this.iaid, workingTitle);
+            return workingTitle;
+        }
+        
+        
+        
+        
     }
     
     /**
@@ -535,6 +572,14 @@ CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
     public String getEnddate() {
         return enddate;
     }
+    
+    /**
+     * @return the openingdate
+     */
+    @Override
+    public String getOpeningdate() {
+        return this.openingdate;
+    }
 
     /**
      * @return the title
@@ -638,6 +683,22 @@ CachedMongoDoc(DBObject doc, GeneralCache gCache, Fetcher fetch)
     @Override
     public List<String> getSubjects() {
         return subjects;
+    }
+    
+    private String getOpeningDate(String roDate) {
+        if(roDate==null || roDate.length()!=19){
+            return null;
+        }
+        else{
+            StringBuilder newDate=new StringBuilder();
+            String day,month,year;
+            day=roDate.substring(0, 2);
+            month=roDate.substring(3, 5);
+            year=roDate.substring(6,10);
+            newDate.append(year).append("-").append(month).append("-").append(day).append(MongoDoc.getDatetimepart());
+            return newDate.toString();    
+            
+        }
     }
     
     private class Entity{

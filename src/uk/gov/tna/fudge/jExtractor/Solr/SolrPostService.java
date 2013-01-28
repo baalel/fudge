@@ -159,7 +159,7 @@ public class SolrPostService {
         try{
             server.add(doc);
             if(commit){
-                server.commit();
+                server.commit(false,false);
             }
         }
         catch(SolrException | SolrServerException | IOException se){

@@ -28,6 +28,7 @@ public class Fetcher {
     DB storeDb;
     DBCollection sourceColl;
     DBCollection destColl;
+    private static BasicDBObject fieldList=new BasicDBObject("IAID",1).append("ParentIAID", 1).append("Reference", 1).append("SourceLevelId",1).append("CoveringDateFrom", 1).append("CoveringDateTo", 1).append("Title", 1);
     
     /**
      * Constructor to initialize the MongoDB Handler
@@ -87,9 +88,10 @@ public class Fetcher {
     DBCursor findMany(String field, String pattern)
     {
         BasicDBObject query = new BasicDBObject(field, pattern);
+
         DBCursor cursor = sourceColl.find(query);
         cursor.addOption(Bytes.QUERYOPTION_NOTIMEOUT);
-        //cursor.addOption(Bytes.QUERYOPTION_EXHAUST);
+        cursor.batchSize(1000);
         return cursor;
     }
     
@@ -114,12 +116,14 @@ public class Fetcher {
      */
     DBObject findParent(String parent)
     {
-        BasicDBObject query=new BasicDBObject("IAID", parent);
+        /*BasicDBObject query=new BasicDBObject("IAID", parent);
         BasicDBObject fieldlist=new BasicDBObject("IAID",1).append("ParentIAID", 1).append("Reference", 1).append("SourceLevelId",1).append("CoveringDateFrom", 1).append("CoveringDateTo", 1).append("Title", 1);
-        DBObject doc=sourceColl.findOne(query, fieldlist);
+        DBObject doc=sourceColl.findOne(query, fieldlist);*/
+        //doc=runPQuery(makeQuery(parent),makefields());
         
-        return doc;
+        return sourceColl.findOne(new BasicDBObject("IAID", parent),Fetcher.fieldList);
     }
+    
     
     /**
      * Saves document to output collection

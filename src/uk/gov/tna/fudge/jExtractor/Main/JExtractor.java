@@ -173,7 +173,9 @@ public class JExtractor {
                         IMongoDoc mdoc=new MongoDoc(doc,parentCache,dateCache,urlCache,titleCache,fetcher);                      
 
                         //IMongoDoc cmdoc=new CachedMongoDoc(doc,cache,fetcher);
-                        workQueue.push(mdoc.getIaid());
+                        if(mdoc.getSourceLevelId()!=7){
+                            workQueue.push(mdoc.getIaid());
+                        }
                         SolrDoc sdoc=new SolrDoc(mdoc);
                         solrDocs.add(sdoc);
                         mongoDocs.add(sdoc.toSon());
@@ -395,9 +397,7 @@ public class JExtractor {
                 cfgFile="TNAConfig";
             }
             verboseFlag=line.hasOption("verbose");
-            
-            
-            
+          
             JExtractor indexer=new JExtractor(cfgFile);
             indexer.run(commandAction,verboseFlag);
         }
@@ -405,12 +405,6 @@ public class JExtractor {
             System.out.println("Unable to parse command line options");
             System.out.println("Reason: "+pe.getMessage());
             System.exit(1);
-        }
-        
-        
-        
-        
-        
-        
+        }  
     }
 }
