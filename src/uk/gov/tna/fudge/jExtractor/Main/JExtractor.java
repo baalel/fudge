@@ -26,6 +26,7 @@ import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
 import org.apache.solr.common.SolrInputDocument;
 import uk.gov.tna.fudge.jExtractor.Solr.SolrPostService;
+import uk.gov.tna.fudge.jExtractor.Solr.SolrPostman;
 
 public class JExtractor {
     
@@ -397,9 +398,25 @@ public class JExtractor {
                 cfgFile="TNAConfig";
             }
             verboseFlag=line.hasOption("verbose");
-          
-            JExtractor indexer=new JExtractor(cfgFile);
-            indexer.run(commandAction,verboseFlag);
+            SolrPostman threadedpostie;
+            if("THREADED".equals(commandAction)){
+                /*String[] distservers={"http://localhost:8080/solr/discovery1","http://localhost:8080/solr/discovery2"};
+                List<String> solrservers=new ArrayList<>(2);
+                solrservers.addAll(Arrays.asList(distservers));
+                * threadedpostie=new SolrPostman(solrservers);
+                */
+                threadedpostie=new SolrPostman("http://localhost:8080/solr/discovery1");
+                
+                Thread consumer=new Thread(threadedpostie);
+                ThreadedExtractor indexer=new ThreadedExtractor(cfgFile,threadedpostie);
+                Thread producer=new Thread(indexer);
+                producer.start();
+                consumer.start();
+            }
+            else{
+                JExtractor indexer=new JExtractor(cfgFile);
+                indexer.run(commandAction,verboseFlag);
+            }
         }
         catch(ParseException pe){
             System.out.println("Unable to parse command line options");
