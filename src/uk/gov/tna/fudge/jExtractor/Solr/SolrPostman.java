@@ -31,6 +31,7 @@ public class SolrPostman implements Runnable{
     
     public SolrPostman(String solrServerUrl){
         server = new HttpSolrServer(solrServerUrl);
+        
         distributed=false;
         createQueue();
     }
@@ -49,19 +50,19 @@ public class SolrPostman implements Runnable{
         this.workQueue=new Stack<>();
     }
     
-    private void postDocument(List<SolrInputDocument> docs, boolean commit){
+    private void postDocument(List<SolrInputDocument> docs){
        if(this.distributed){
            distribute(docs, commit);
            return;
        }
        try{
             server.add(docs);
-            if(commit){
+            //if(this.commit){
                 server.commit();
-            }
+            //}
         }
         catch(SolrException | SolrServerException | IOException se){
-            System.out.println("Error posting test document");
+            System.out.println("***Error posting document***");
             System.out.println(se.getMessage());
             System.exit(1);
             
@@ -132,19 +133,19 @@ public class SolrPostman implements Runnable{
    
     @Override
     public void run(){
+        int counter=1;
         try {
             while(!stopRequested || !workQueue.empty()){
                 if(!workQueue.empty()){
                     System.out.println("Postman Posting, Queue is "+workQueue.size());
                     workingBatch=workQueue.pop();
-                    this.postDocument(workingBatch, this.commit);
-                    if(this.commit){
-                        this.commit=false;
-                    }
+                    this.commit=(counter%20==0);
+                    this.postDocument(workingBatch);
+                    counter++;
                 }
                 else{
                     System.out.println("Postman Sleeping");
-                    Thread.sleep(10000L);
+                    Thread.sleep(5000L);
 
                 }
             }
