@@ -268,7 +268,7 @@ public class JExtractor {
             webDocs.clear();
             cache.clear();
             System.gc();
-            System.out.println("Job completed. "+ docCounter.toString()+" documents processed");
+             System.out.println("Job completed. "+ docCounter.toString()+" documents processed");
             elapsedTime = (nowTime-beginTime)/1000000000;
             System.out.println("Duration was: "+elapsedTime.toString()+" seconds");
             
