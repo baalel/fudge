@@ -253,8 +253,8 @@ public class JExtractor {
             nowTime=System.nanoTime();
             //converts reported nanoseconds to documents per second based on batch size of 5000
             Double elapsed=1/((nowTime-startTime)/(docCounter%5000)/1000000000.0); 
-            Integer percentDone;
-            percentDone = docCounter*100/totalDocs;
+            Long percentDone;
+            percentDone = Math.round((float)docCounter*100.0/(float)totalDocs);
             System.out.println("Processed "
                     + docCounter.toString() 
                     + " BatchID "
@@ -399,13 +399,8 @@ public class JExtractor {
             }
             verboseFlag=line.hasOption("verbose");
             SolrPostman threadedpostie;
-            if("THREADED".equals(commandAction)){
-                /*String[] distservers={"http://localhost:8080/solr/discovery1","http://localhost:8080/solr/discovery2"};
-                List<String> solrservers=new ArrayList<>(2);
-                solrservers.addAll(Arrays.asList(distservers));
-                * threadedpostie=new SolrPostman(solrservers);
-                */
-                threadedpostie=new SolrPostman("http://localhost:8080/solr/discovery1");
+            if("THREADED".equals(commandAction)){             
+                threadedpostie=new SolrPostman("http://localhost:8080/solr/discoverytest");
                 
                 Thread consumer=new Thread(threadedpostie);
                 ThreadedExtractor indexer=new ThreadedExtractor(cfgFile,threadedpostie);
