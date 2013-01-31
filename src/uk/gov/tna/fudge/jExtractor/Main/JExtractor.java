@@ -398,8 +398,9 @@ public class JExtractor {
                 cfgFile="TNAConfig";
             }
             verboseFlag=line.hasOption("verbose");
-            SolrPostman threadedpostie;
-            if("THREADED".equals(commandAction)){             
+            
+            if("THREADED".equals(commandAction)){
+                SolrPostman threadedpostie;
                 threadedpostie=new SolrPostman("http://localhost:8080/solr/discoverytest");
                 
                 Thread consumer=new Thread(threadedpostie);
