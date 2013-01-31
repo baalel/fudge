@@ -5,6 +5,9 @@
 package uk.gov.tna.fudge.jcategorizer;
 
 
+import com.mongodb.BasicDBList;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.cli.CommandLine;
@@ -22,7 +25,8 @@ import uk.gov.tna.fudge.jExtractor.Solr.SolrPostService;
  * @author steve
  */
 public class JCategorizer {
-    Fetcher fetch;
+    Fetcher catFetcher;
+    Fetcher docFetcher;
     List<String> catList;
     List<Category> categories;
     Boolean verboseFlag;
@@ -31,7 +35,8 @@ public class JCategorizer {
     
     
     public JCategorizer(String config, boolean verbose){
-        fetch=new Fetcher("localhost","27017","catdb","catcol");
+        catFetcher=new Fetcher("localhost","27017","catdb","catcol");
+        docFetcher=new Fetcher("localhost","27017","solrdb","solrcollection");
         solrServer="http://localhost:8080/solr/discoverytest";
         catList=new ArrayList<>();
         verboseFlag=verbose;
@@ -39,9 +44,25 @@ public class JCategorizer {
     }
     
     public void run(){
-        for(Category cat : categories){
-            solrService.tagCategoryQuery(cat.getQueryText(),cat.getCatName());
-            
+        DBCursor curs=docFetcher.findAll();
+        while(curs.hasNext()){
+            DBObject doc=curs.next();
+            for(Category cat: categories){
+                Boolean hit=cat.processDoc(doc);
+                if(hit){
+                    BasicDBList taxTags;
+                    if(doc.containsField("TAXONOMY")){
+                        taxTags=(BasicDBList)doc.get("TAXONOMY");
+                    }
+                    else{
+                        taxTags=new BasicDBList();
+                    }
+                    taxTags.add(cat.getCatName());
+                    doc.put("TAXONOMY", taxTags);
+                }
+            }
+            docFetcher.store(doc);
+                    
         }
         
         
@@ -50,13 +71,13 @@ public class JCategorizer {
     public void load(String dataSource){
         switch (dataSource) {
             case "MONGO":
-                catList=getCatsFromMongo();
+                getCatsFromMongo();
                 break;
             case "FILE":
-                catList=getCatsFromFile();
+                getCatsFromFile();
                 break;
             case "SOLR":
-                catList=getCatsFromSolr();
+                getCatsFromSolr();
                 break;
             default:
                 System.out.println("Category source should be MONGO, FILE or SOLR");
@@ -65,7 +86,7 @@ public class JCategorizer {
             
         }
         for(String cat : this.catList){
-            Category c=new Category(fetch,cat);
+            Category c=new Category(catFetcher,cat);
             c.loadCategory();
             categories.add(c);
             System.out.println("Created Category "+c.getCatName());
@@ -74,22 +95,21 @@ public class JCategorizer {
         
     }
     
-    private List<String> getCatsFromMongo(){
-        List<String> cats=new ArrayList<>();
-        cats.add("TESTCAT");
-        return cats;
+    private void getCatsFromMongo(){
+
+        catList.add("TESTCAT");
+        categories.add(new Category(docFetcher,"TESTCAT"));
+
     }
     
-    private List<String> getCatsFromFile(){
-        List<String> cats=new ArrayList<>();
-        cats.add("TESTCAT");
-        return cats;
+    private void getCatsFromFile(){
+        catList.add("TESTCAT");
+        categories.add(new Category(docFetcher,"TESTCAT"));
     }
     
-    private List<String> getCatsFromSolr(){
-        List<String> cats=new ArrayList<>();
-        cats.add("TESTCAT");
-        return cats;
+    private void getCatsFromSolr(){
+        catList.add("TESTCAT");
+        categories.add(new Category(docFetcher,"TESTCAT"));
     }
 
     /**
