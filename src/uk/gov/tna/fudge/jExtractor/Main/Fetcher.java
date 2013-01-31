@@ -95,6 +95,13 @@ public class Fetcher {
         return cursor;
     }
     
+    public DBCursor findAll(){
+        String pattern="*";
+        String field="IAID";
+        return findMany(field,pattern);
+        
+    }
+    
     /**
      * A simple one field searcher, may be used for future expansion
      * @param field The field to search for pattern in
@@ -130,7 +137,7 @@ public class Fetcher {
      * will update if already exists in collection or insert if not
      * @param doc 
      */
-    void store(DBObject doc)
+    public void store(DBObject doc)
     {
         destColl.save(doc);
     }
