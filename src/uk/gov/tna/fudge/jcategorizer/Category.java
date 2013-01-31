@@ -5,6 +5,7 @@
 package uk.gov.tna.fudge.jcategorizer;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.common.SolrDocumentList;
 import uk.gov.tna.fudge.jExtractor.Main.Fetcher;
@@ -48,6 +49,10 @@ public class Category {
      */
     public String getQueryText() {
         return queryText;
+    }
+
+    Boolean processDoc(DBObject doc) {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
     
 }
