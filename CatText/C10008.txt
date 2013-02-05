@@ -1,0 +1,24 @@
+"canal" 
+"canals" 
+"British Waterways Board" 
+"Narrow Boat" 
+"National rivers authority" 
+"british board of waterways" 
+(River +dredging) 
+("River boat"~5
+"River cargo"~5
+"navigable river" 
+"river transport" 
+"canal boat" 
+"BWB" 
+(Thames +barge) 
+"River barge"~5
+"waterways navigation"~5
+"towpath" 
+"Southampton Docks" 
+"lake boat"~5
+"lake barge"~5
+"lake vessel"~5
+"Inland water transport"
+-"Railway" 
+-"railways"

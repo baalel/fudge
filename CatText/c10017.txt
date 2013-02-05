@@ -1,0 +1,16 @@
+"communis*" 
+"comintern" 
+"marxis*" 
+"russia revolution"~3 
+"russian revolution" 
+"bolshev*" 
+"menshevi*" 
+"leninis*" 
+"Stalinis*" 
+"trotsky*" 
+"Castro communism"~5 
+"Cuba revolution"~5 
+"titoism" 
+"eurocommunism" 
+"korean labour party" 
+"social revolutionary"

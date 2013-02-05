@@ -1,0 +1,20 @@
+"debt" 
+"debts" 
+debtor 
+bankrupt 
+bankruptcy 
+insolvent 
+insolvency 
+debenture 
+creditors 
+"registers of petitions for protection"
+"debtor prison"~5
+"bankruptcy court"~5 
+"bankruptcy petition"~5
+"bankrupt creditor"~5 
+"bankrupt official receiver"~5
+-"national debt" 
+-"public debt" 
+-"debt management" 
+-"war debt" 
+-"enemy debt"

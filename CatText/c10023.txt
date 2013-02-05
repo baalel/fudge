@@ -1,0 +1,66 @@
+"murder" 
+"prostitution" 
+"slave trafficking" 
+"brothels" 
+"fraud" 
+"burglary" 
+"rape" 
+"sexual assault" 
+"theft" 
+"grievous bodily harm" 
+"actual bodily harm" 
+"manslaughter" 
+"incest" 
+"forgery" 
+"extortion" 
+"homicide" 
+"perjury" 
+"treason" 
+"arson" 
+"affray"
+"poaching" 
+"breach of the peace" 
+"wounding with intent" 
+"reginald kray" 
+"ronald kray" 
+"myra hindley" 
+"ian brady" 
+"drunk and disorderly" 
+"jack the ripper" 
+"whitechapel murders" 
+"dr crippen"~5 
+"indecent assault" 
+"felony" 
+"embezzlement" 
+"bigamy" 
+"larceny" 
+"libel" 
+"buggery" 
+"conspiracy defendant"~5
+"misdemeanour" 
+"slave trading defendant"~5
+"sacrilege" 
+"highway robbery" 
+"sheep stealing" 
+"cattle stealing" 
+"horse stealing" 
+"receiving stolen goods" 
+"stealing convicted"~5
+"malicious wounding" 
+"housebreaking" 
+"sedition" 
+"infanticide" 
+"possession drugs"~5
+"intent to supply drugs"~5
+"assault battery"~5
+"accused of" 
+"gross indecency" 
+"criminal depositions" 
+"criminal court depositions"~5 
+"criminal court indictments"~5
+"criminal department old"~5
+"calendar of prisoners" 
+"old captions" 
+"old bailey sessions papers"
+-"affray submarine"~100
+-"affray hms"~100

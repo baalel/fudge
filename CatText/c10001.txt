@@ -1,0 +1,184 @@
+"international aid" 
+"foreign aid" 
+"development aid"
+"overseas aid" 
+"multilateral aid" 
+"bilateral aid" 
+"mutual aid" 
+"food aid" 
+"relief aid"
+"educational aid" 
+"emergency aid" 
+"disaster aid" 
+"overseas development"
+"international development"
+"foreign development"
+"overseas assistance"
+"international assistance"
+"foreign assistance"
+"overseas relief"
+"international relief"
+"foreign relief"
+"humanitarian assistance" 
+"humanitarian aid"
+"humanitarian relief"
+"humanitarian work"
+"relief supplies"
+"relief services"
+"relief camps"
+"relief camp"
+"relief effort"
+"relief efforts"
+"aid from UK" 
+"aid from United Kingdom" 
+"assistance from UK" 
+"assistance from United Kingdom" 
+"UK aid programme" 
+"United Kingdom aid programme" 
+"UK aid framework"
+"United Kingdom aid framework" 
+"aid volcano"~3
+"aid earthquake*"~3
+"aid drought*"~3
+"aid hurricane*"~3
+"aid cyclone*"~3
+"assistance earthquake*"~3
+"assistance drought*"~3
+"assistance hurricane*"~3
+"assistance cyclone*"~3
+"assistance volcano"~3
+"aid and development" 
+"development assistance" 
+"disaster relief" 
+"aid to developing" 
+"aid for developing" 
+"assistance to developing" 
+"assistance for developing" 
+"assistance to under-developed countries" 
+"assistance for under-developed countries" 
+"aid to under-developed countries"
+"aid for under-developed countries"
+"relief to developing"
+"relief for developing" 
+"development of developing countries"
+"aid policy"
+"aid policies"
+"Freedom from Hunger"
+"famine relief" 
+"International Bank for Reconstruction and Development"
+"IBRD"
+"I.B.R.D"
+"International Monetary Fund"
+"IMF"
+"I.M.F"
+"Oxfam"
+"International Red Cross"
+"International Committee of the Red Cross"
+"Marshall Aid" 
+"Marshall Programme"
+"Value of Aid Committee" 
+"Value for Aid Committee" 
+"Foreign and Commonwealth Aid Committee"
+"Overseas Food Corporation" 
+"Relief and Rehabilitation Administration" 
+"UNRAA" 
+"U.N.R.A.A" 
+"UNESCO" 
+"U.N.E.S.C.O" 
+"overseas economic aid" 
+"overseas financial aid" 
+"Colombo Plan" 
+"Organisation for Economic Co-operation and Development" 
+"OECD" 
+"O.E.C.D" 
+"Organisation for European Economic Co-operation"
+"Organisation for European Economic Recovery" 
+"European reconstruction" 
+"Commission for Mutual Economic Aid" 
+"Council for Mutual Economic Assistance" 
+"aid Europe*"~3 
+"OEEC" 
+"O.E.E.C" 
+"Colonial Development Advisory Committee"
+"Colonial Development Fund"
+"Colonial Development and Welfare Advisory Committee"
+"West Indies Development and Welfare Organisation" 
+"Colonial Development and Welfare Act" 
+"British Middle East Office" 
+"British Middle East Development Division"
+"colonial loan*" 
+"Special UN Fund for Economic Development" 
+"Department of Technical Co-operation"
+"Technical Assistance Department"
+"aid from HMG" 
+"African Assistance Plan"
+"European Recovery Programme"~3
+"European Community Aid"~3
+"European Development Fund"~3
+"European Regional Development Fund"~3
+"united nations assistance"
+"united nations aid"
+"united nations development"
+"UN assistance"
+"UN aid"
+"UN development"
+"U.N assistance"
+"U.N aid"
+"U.N development"
+"Commonwealth aid"~3
+"foreign aid"~3
+"India aid"~3
+"Pakistan aid"~3
+"Ceylon aid"~3
+"Sri Lanka aid"~3
+"Bangladesh aid"~3
+"Asia aid"~3
+"Cambodia aid"~3
+"Burma aid"~3
+"Africa aid"~3
+"Middle East aid"~3
+"third world aid"~3
+"Sudan aid"~3
+"Mozambique aid"~3
+"Nigeria aid"~3
+"Angola aid"~3
+"Ghana aid"~3
+"Tanzania aid"~3
+"Kenya aid"~3
+"Uganda aid"~3
+"Congo aid"~3
+"Somalia aid"~3
+"Ethiopia aid"~3
+"Malawi aid"~3
+"Commonwealth assistance"~3
+"foreign assistance"~3
+"India assistance"~3
+"Pakistan assistance"~3
+"Ceylon assistance"~3
+"Sri Lanka assistance"~3
+"Bangladesh assistance"~3
+"Asia assistance"~3
+"Cambodia assistance"~3
+"Burma assistance"~3
+"Africa assistance"~3
+"Middle East assistance"~3
+"third world assistance"~3
+"Sudan assistance"~3
+"Mozambique assistance"~3
+"Nigeria assistance"~3
+"Angola assistance"~3
+"Ghana assistance"~3
+"Tanzania assistance"~3
+"Kenya assistance"~3
+"Uganda assistance"~3
+"Congo assistance"~3
+"Somalia assistance"~3
+"Ethiopia assistance"~3
+"Malawi assistance"~3
+-"military aid" 
+-"military assistance" 
+-"military operation*" 
+-"defence" 
+-"peacekeeping" 
+-"legal aid" 
+-"legal assistance"

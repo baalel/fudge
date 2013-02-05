@@ -1,0 +1,65 @@
+"construction industr*" 
+"building industr*" 
+"aggregate industr*" 
+"building and construction" 
+"building construction" 
+"building and maintenance" 
+"construction engineering" 
+"construction equipment" 
+"construction material*"~4
+"construction method*" 
+"construction vehicle*" 
+"construction work*" 
+"design and construction" 
+"engineering construction" 
+"construction job*" 
+"building design" 
+"building costs" 
+"building standard*" 
+"building material*" 
+"building services" 
+"building standard*" 
+"building operation*" 
+"building research" 
+"building work*" 
+"building job*" 
+"building control" 
+"building regulation*" 
+"regulation of build*" 
+"house building" 
+"housing construction" 
+"highway* construction"~2
+"highway* engineering"~2
+"road* construction"~2
+"road* engineering"~2
+"railway* construction"~2
+"canal* construction"~2
+"airport* construction"~2
+"concrete construction"~3
+"civil engineering" 
+"Special Areas Reconstruction (Agreement) Act" 
+"Building Control Act" 
+"Taylor Woodrow" 
+"George Wimpey" 
+"Richard Costain" 
+"Costain Ltd" 
+"Tarmac" 
+"Sir Robert McAlpine" 
+"Alfred McAlpine" 
+"Mowlem" 
+"Balfour Beatty" 
+"Sir William Arrol" 
+"National Building Agency" 
+"ECITB" 
+"NHBC" 
+"Freeman Fox" 
+"Sir William Halcrow" 
+"Ove Arup" 
+"public works" 
+"navvy" 
+"navvies" 
+"labourer* construction"~3
+"Labourers Union" 
+"builder* construction"~3
+"architect* construction"~3 
+"surveyor* construction"~3

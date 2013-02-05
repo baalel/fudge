@@ -1,0 +1,44 @@
+"blind" 
+"mentally defective" 
+"crippled" 
+"disabled person" 
+"paraplegic" 
+"disabled ex-servicemen" 
+"spastic" 
+"handicapped" 
+"dumb" 
+"partially sighted" 
+"cerebral pasly" 
+"disibility pensions" 
+"wheelchair" 
+"remploy" 
+"special needs" 
+"learning difficulties" 
+"mental handicap" 
+"disabled society"~5
+"disabled benefits"~5
+"epilepsy disability"~5
+"autism" 
+"spina bifida" 
+"downs syndrome" 
+"congenital abnormalities" 
+"amputee" 
+"artifical limb" 
+"disabled rehabilitation"~5
+"disabled travel"~5
+"disabled minority"~5
+"disabled employment"~5
+"disease disability"~5
+"disabled sports"~5 
+"hearing aids" 
+"visually impaired" 
+"hearing impaired" 
+"sign deaf"~5
+"mental retardation" 
+"disabled research"~5
+"thalidomide" 
+"limb deformities"
+deaf
+braille
+-"deaf hill"~100
+-"braille parson"~100

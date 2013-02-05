@@ -1,0 +1,24 @@
+"charity commission" 
+"charity trust" 
+"voluntary hospital" 
+almshouse 
+"relief fund" 
+philanthropic 
+"benevolent institution" 
+"charity act") 
+"charity endowment"~5
+"charity land"~5
+"charity bequest"~5
+"charity grant"~5
+"charity legislation"~5 
+"charity hospital"~5
+"charity war"~100
+"charity school"~100 
+"charity aged"~100
+"charity parochial"~100
+"charity parish"~100
+"charity army"~100
+"charity navy"~100
+"charity air force"~100 
+"charity trust"~100
+"charity housing"~100
