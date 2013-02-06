@@ -1,0 +1,18 @@
+"communis*" 
+"comintern" 
+"marxis*" 
+"russia revolution"~3 
+"russian revolution" 
+"bolshev*" 
+"menshevi*" 
+"leninis*" 
+"Stalinis*" 
+"trotsky*" 
+"Castro communism"~5 
+"Cuba revolution"~5 
+"titoism" 
+"eurocommunism" 
+"korean labour party" 
+"social revolutionary"
+
++((text:communis | DESCRIPTION:communi | TITLE:communi^20.0) (text:comintern | DESCRIPTION:comintern | TITLE:comintern^20.0) (text:marxis | DESCRIPTION:marxi | TITLE:marxi^20.0) (text:"russia revolution"~3 | DESCRIPTION:"russia revolut"~3 | TITLE:"russia revolut"~3^20.0) (text:"russian revolution"~3 | DESCRIPTION:"russian revolut"~3 | TITLE:"russian revolut"~3^20.0) (text:bolshev | DESCRIPTION:bolshev | TITLE:bolshev^20.0) (text:menshevi | DESCRIPTION:menshevi | TITLE:menshevi^20.0) (text:leninis | DESCRIPTION:lenini | TITLE:lenini^20.0) (text:stalinis | DESCRIPTION:stalini | TITLE:stalini^20.0) (text:trotsky | DESCRIPTION:trotski | TITLE:trotski^20.0) (text:"castro communism"~5 | DESCRIPTION:"castro commun"~5 | TITLE:"castro commun"~5^20.0) (text:"cuba revolution"~5 | DESCRIPTION:"cuba revolut"~5 | TITLE:"cuba revolut"~5^20.0) (text:titoism | DESCRIPTION:titoism | TITLE:titoism^20.0) (text:eurocommunism | DESCRIPTION:eurocommun | TITLE:eurocommun^20.0) (text:"korean labour party"~3 | DESCRIPTION:"korean labour parti"~3 | TITLE:"korean labour parti"~3^20.0) (text:"social revolutionary"~3 | DESCRIPTION:"social revolutionari"~3 | TITLE:"social revolutionari"~3^20.0))

@@ -1,0 +1,26 @@
+"charity commission" 
+"charity trust" 
+"voluntary hospital" 
+almshouse 
+"relief fund" 
+philanthropic 
+"benevolent institution" 
+"charity act") 
+"charity endowment"~5
+"charity land"~5
+"charity bequest"~5
+"charity grant"~5
+"charity legislation"~5 
+"charity hospital"~5
+"charity war"~100
+"charity school"~100 
+"charity aged"~100
+"charity parochial"~100
+"charity parish"~100
+"charity army"~100
+"charity navy"~100
+"charity air force"~100 
+"charity trust"~100
+"charity housing"~100
+
++((text:"charity commission"~3 | DESCRIPTION:"chariti commiss"~3 | TITLE:"chariti commiss"~3^20.0) (text:"charity trust"~3 | DESCRIPTION:"chariti trust"~3 | TITLE:"chariti trust"~3^20.0) (text:"voluntary hospital"~3 | DESCRIPTION:"voluntari hospit"~3 | TITLE:"voluntari hospit"~3^20.0) (text:almshouse | DESCRIPTION:almshous | TITLE:almshous^20.0) (text:"relief fund"~3 | DESCRIPTION:"relief fund"~3 | TITLE:"relief fund"~3^20.0) (text:philanthropic | DESCRIPTION:philanthrop | TITLE:philanthrop^20.0) (text:"benevolent institution"~3 | DESCRIPTION:"benevol institut"~3 | TITLE:"benevol institut"~3^20.0) (text:"charity act"~3 | DESCRIPTION:"chariti act"~3 | TITLE:"chariti act"~3^20.0) (text:"charity endowment"~3 | DESCRIPTION:"chariti endow"~3 | TITLE:"chariti endow"~3^20.0) (text:5 | DESCRIPTION:5 | TITLE:5^20.0) (text:"charity land"~3 | DESCRIPTION:"chariti land"~3 | TITLE:"chariti land"~3^20.0) (text:5 | DESCRIPTION:5 | TITLE:5^20.0) (text:"charity bequest"~3 | DESCRIPTION:"chariti bequest"~3 | TITLE:"chariti bequest"~3^20.0) (text:5 | DESCRIPTION:5 | TITLE:5^20.0) (text:"charity grant"~3 | DESCRIPTION:"chariti grant"~3 | TITLE:"chariti grant"~3^20.0) (text:5 | DESCRIPTION:5 | TITLE:5^20.0) (text:"charity legislation"~3 | DESCRIPTION:"chariti legisl"~3 | TITLE:"chariti legisl"~3^20.0) (text:5 | DESCRIPTION:5 | TITLE:5^20.0) (text:"charity hospital"~3 | DESCRIPTION:"chariti hospit"~3 | TITLE:"chariti hospit"~3^20.0) (text:5 | DESCRIPTION:5 | TITLE:5^20.0) (text:"charity war"~3 | DESCRIPTION:"chariti war"~3 | TITLE:"chariti war"~3^20.0) (text:100 | DESCRIPTION:100 | TITLE:100^20.0) (text:"charity school"~3 | DESCRIPTION:"chariti school"~3 | TITLE:"chariti school"~3^20.0) (text:100 | DESCRIPTION:100 | TITLE:100^20.0) (text:"charity aged"~3 | DESCRIPTION:"chariti ag"~3 | TITLE:"chariti ag"~3^20.0) (text:100 | DESCRIPTION:100 | TITLE:100^20.0) (text:"charity parochial"~3 | DESCRIPTION:"chariti parochi"~3 | TITLE:"chariti parochi"~3^20.0) (text:100 | DESCRIPTION:100 | TITLE:100^20.0) (text:"charity parish"~3 | DESCRIPTION:"chariti parish"~3 | TITLE:"chariti parish"~3^20.0) (text:100 | DESCRIPTION:100 | TITLE:100^20.0) (text:"charity army"~3 | DESCRIPTION:"chariti armi"~3 | TITLE:"chariti armi"~3^20.0) (text:100 | DESCRIPTION:100 | TITLE:100^20.0) (text:"charity navy"~3 | DESCRIPTION:"chariti navi"~3 | TITLE:"chariti navi"~3^20.0) (text:100 | DESCRIPTION:100 | TITLE:100^20.0) (text:"charity air force"~3 | DESCRIPTION:"chariti air forc"~3 | TITLE:"chariti air forc"~3^20.0) (text:100 | DESCRIPTION:100 | TITLE:100^20.0) (text:"charity trust"~3 | DESCRIPTION:"chariti trust"~3 | TITLE:"chariti trust"~3^20.0) (text:100 | DESCRIPTION:100 | TITLE:100^20.0) (text:"charity housing"~3 | DESCRIPTION:"chariti hous"~3 | TITLE:"chariti hous"~3^20.0) (text:100 | DESCRIPTION:100 | TITLE:100^20.0))

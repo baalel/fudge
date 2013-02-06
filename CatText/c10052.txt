@@ -1,0 +1,145 @@
+"Ministry of Labour" 
+"labour and predecessors" 
+"Labour and successors" 
+"manpower" 
+"employment" 
+"employer*" 
+"worker*" 
+"workpeople" 
+"workforce" 
+"labourers" 
+"jobs" 
+"job creation" 
+"labour employment"~5
+"labour policy"~1
+"labour market*"~1
+"labour force"~1
+"labour demand*"~1
+"labour supply"~1
+"labour requirement*"~1
+"labour economic*"~1
+"labour productivity"~1
+"labour condition*"~1
+"labour contract*"~1
+"labour organi?ation*"~1
+"labour law"~1
+"labour laws"~1
+"labour legislation"~1
+"labour statistic*"~1
+"labour exchange*"~1
+"labour migration"~1
+"labour mobility"~1
+"labour movement*"~1
+"labour relation*"~1
+"labour conflict*"~1
+"labour court*"~1
+"labour dispute*"~1
+"international labour"~1
+"agricultural labour"~1
+"industrial labour"~1
+"dock labour"~1
+"voluntary labour"~1
+"shift labour"~1
+"youth labour"~1
+"alien labour"~1
+"migrant labour"~1
+"indentured labour"~1
+"compulsory labour"~1
+"forced labour"~1
+"collective labour"~1
+"female labour"~1
+"male labour"~1
+"child labour"~1
+"industrial unionism"~1
+"industrial relation*"~1
+"industrial tribunal*"~1
+"industrial action"~1
+"industrial training"~! 
+"working condition*" 
+"work* environment"~1
+"ILO" 
+"I.L.O" 
+"part-time labour" 
+"self-employed labour" 
+"Jobcentre*" 
+"Remploy" 
+"job seek*" 
+"work permit*" 
+"collective agreement*" 
+"collective bargaining" 
+"industrial democracy" 
+"productivity bargain*" 
+"conciliation labour"~5
+"arbitration labour"~5
+"Advisory, Conciliation and Arbitration Service" 
+"ACAS" 
+"A.C.A.S" 
+"industrial stoppage*" 
+"trade dispute*" 
+"pay dispute" 
+"pay strike*"~1
+"unofficial strike*"~1
+"official strike*"~1
+"threatened strike*"~1
+"~General strike" 
+"national strike" 
+"coal* strike*"~2
+"mineworker* strike*"~2
+"miner*  strike*"~2
+"rail* strike*"~2
+"transport* strike*"~2
+"police strike*"~2
+"dock* strike*"~2
+"industrial strike*"~2
+"*workers strike*"~2
+"*makers strike*"~2
+"*builders  strike*"~2
+"officers strike*"~2
+"officials strike*"~2
+"labourers strike*"~2
+"staff strike*"~2
+"engineers  strike*"
+"spinners  strike*"~2
+"*fitter* strike*"~2
+"manufacturers strike*"~2
+"machinists strike*"~2
+"sailors strike*"~2
+"weavers strike*"~2
+"employees strike*"~2
+"handlers strike*"~2
+"seam?n* strike*"~2
+"postm?n* strike*"~2 
+"strike ballot*" 
+"strike action" 
+"work to rule" 
+"pickets" 
+"picketing" 
+"trade union*" 
+"trades union*" 
+"TUC" 
+"T.U.C" 
+"shop steward*" 
+"conciliation officer*" 
+"Whitley Council*" 
+"arbitration tribunal*" 
+"staff association*" 
+"worker participation" 
+"workers participation" 
+"women* labour"~2
+"boy labour*" 
+"labor" 
+"underemployment" 
+"unemployment" 
+"apprentice*" 
+"training of labour" 
+"Vocational" 
+"forem?n"
+-"~Labour Party" 
+-"~Labour Government" 
+-"~Labour opposition" 
+-"labour birth"~5
+-"HMS Striker" 
+-"lucky strike" 
+-"hunger strike*" 
+-"Air Staff" 
+-"strike aircraft"

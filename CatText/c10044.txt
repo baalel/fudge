@@ -1,0 +1,33 @@
+"naval hospital" 
+"prisoner of war hospital" 
+"voluntary hospital" 
+"poor law hospital*" 
+"inspectors general of hospitals" 
+"british hospitals association" 
+"private hospital" 
+"hospital ward" 
+"intensive care unit" 
+"regional hospital board" 
+"london hospital" 
+"hospital records" 
+"children's hospital*" 
+"mental hospital" 
+"hospital act" 
+"hospital board" 
+"out-patients" 
+"hospital management" 
+"district hospital" 
+"cottage hospital" 
+"rural hospital" 
+"teaching hospital*" 
+"emergency hospital*" 
+"long stay hospital" 
+"hospital patients" 
+"hospital inspector*" 
+"infectious hospital"~5
+"maternity hospital"~5
+"hospital staff"~5
+"accident emergency department"~5
+"welsh hospital board"
+"general hospital"
+-"general hospital folio"~100

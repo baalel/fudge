@@ -1,0 +1,28 @@
+"Inflation" 
+"inflationary" 
+"deflation" 
+"anti-inflation" 
+"price index" 
+"retail price index" 
+"RPI" 
+"consumer prices index" 
+"consumer price index" 
+"monetary policy" 
+"Price Commission" 
+"Phillips curve" 
+"counter-inflation" 
+"wages and prices" 
+"wage control" 
+"price code" 
+"indexation" 
+"Index Advisory Committee" 
+"Prices and Incomes" 
+"prices and income" 
+"incomes policy" 
+"cash limits" 
+"price rise"~5
+"price increase"~5
+"price living"~5
+"cost rise"~5
+"cost increase"~5
+"cost living"~5

@@ -1,0 +1,86 @@
+"fish" 
+"fishery" 
+"fishing" 
+"fisheries" 
+("fish* product*")
+("fish* produce") 
+("fish* industry") 
+("fish* trade*") 
+"commercial fish*" 
+"industrial fish*" 
+"fish farm*" 
+"sea fish*" 
+"seafish*" 
+"sea angling"
+"marine fish*"
+"marine resource*"
+"marine biology"
+"shellfish"
+"white fish"
+"aquaculture" 
+"aquafarming"
+"coastal fish*"
+"fish* port*"~2
+"fish* harbour*"~2
+"fish* vessel*"~2
+"fish* boat*"~2
+"fish* fleet*"~2
+"fishing smack*" 
+"trawler fish*"~100
+"coracle fish*"~100
+"fish* research"~2 
+"fish* resource*~2) 
+"fish* process*"~2
+"fish* preserv*"~5
+"fish* transport*"~2 
+"fish* market*"~2
+"fisherm?n"
+"trawlerm?n"
+"whaling"
+"oyster laying"
+"oyster fish*"
+"freshwater fisheries" 
+"freshwater fishing"
+"shrimping"
+"shrimp industry"
+"cod fish*"
+"mackerel fish*"
+"herring fish*" 
+"salmon fish*"
+"lobster fish*"
+"haddock fish*"
+"eel fish*"
+"trout fish*"
+"mussel fish*"
+"tuna fish*"
+"seal fish*"
+"Law of the Sea" 
+"fish* rights"~2
+"fish* limit*"~2
+"catch limit*"
+"territorial water* fish*"~100
+"fish* quota*"~2
+"fish* protection"~2 
+"fish* dispute"~2
+"Cod War" 
+"Fisheries Department" 
+"Fishing Department" 
+"White Fish Commission*"
+"White Fish Authority" 
+"Sea Fish Commission*"
+"Fisheries Office" 
+"Fisheries Inspectorate" 
+"Fisheries Commission*" 
+"Fisheries Division"
+"Fisheries Board"
+"Fishing Committee"
+"Fisheries Committee"
+"Fisheries Laboratory" 
+"Fisheries Experiment* Station"~1
+"Fish* Research Station*"~1
+"fish* hatcher*"~2
+"Fish* Radiobiological Laborator*"~1
+"Whaling Commission*"
+"Colonial Fisheries Advisory Committee") 
+-"Flying Fish" 
+-"HMS Seafish"

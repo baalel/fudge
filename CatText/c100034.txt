@@ -1,0 +1,8 @@
+"electoral reform" 
+"universal suffrage" 
+"commission voting system"~5 
+"votes for women" 
+"parliamentary reform" 
+"representation of the people act" 
+"ballot act" 
+"speech reform bill"~5

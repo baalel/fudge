@@ -1,0 +1,67 @@
+"international conflict*" 
+"armed conflict*" 
+"military operation*" 
+"state of war" 
+"theatres of war" 
+"civil war" 
+"civil wars" 
+"hostilities" 
+"religious war*" 
+"holy war*" 
+"atomic war*" 
+"nuclear war*" 
+"war of attrition" 
+"cold war" 
+"world war" 
+"world wars" 
+"insurrection*" 
+"insurgence" 
+"rebellion*" 
+"filibuster*" 
+"uprising" 
+"revolt" 
+"battle" 
+"military rebellion*" 
+"military campaign*" 
+"coup*" 
+"great war" 
+"war of independence" 
+"independence war" 
+"peoples war" 
+"occupied territor*" 
+"occupied zone*" 
+"revolutionary war*" 
+"revolutionaries" 
+"American Revolution" 
+"French Revolution" 
+"Russian Revolution" 
+"Hungarian Revolution" 
+"guerilla war*" 
+"guerillas" 
+"freedom fighter*" 
+"the troubles" 
+"American war*"~2
+"African war*"~2
+"Anglo war*"~2
+"Europe* war*"~2
+"Far East war*"~2
+"Middle East war*"~2
+"Pacific war*"~2
+"war* States"~2
+"War Cabinet and Cabinet: Joint Planning Committee, later Joint Planning Staff"
+-"student" 
+-"radical" 
+-"Chartist" 
+-"convict" 
+-"prison*" 
+-"industrial" 
+-"economic" 
+-"trade union" 
+-"Revolt ship"~100
+-"petrol revolt" 
+-"pay" 
+-"coup soleil"~5
+-"coup oeil"~5
+-"religious war services"
+
++((text:"international conflict"~3 | DESCRIPTION:"intern conflict"~3 | TITLE:"intern conflict"~3^20.0) (text:"armed conflict"~3 | DESCRIPTION:"arm conflict"~3 | TITLE:"arm conflict"~3^20.0) (text:"military operation"~3 | DESCRIPTION:"militari oper"~3 | TITLE:"militari oper"~3^20.0) (text:"state ? war"~3 | DESCRIPTION:"state ? war"~3 | TITLE:"state ? war"~3^20.0) (text:"theatres ? war"~3 | DESCRIPTION:"theatr ? war"~3 | TITLE:"theatr ? war"~3^20.0) (text:"civil war"~3 | DESCRIPTION:"civil war"~3 | TITLE:"civil war"~3^20.0) (text:"civil wars"~3 | DESCRIPTION:"civil war"~3 | TITLE:"civil war"~3^20.0) (text:hostilities | DESCRIPTION:hostil | TITLE:hostil^20.0) (text:"religious war"~3 | DESCRIPTION:"religi war"~3 | TITLE:"religi war"~3^20.0) (text:"holy war"~3 | DESCRIPTION:"holi war"~3 | TITLE:"holi war"~3^20.0) (text:"atomic war"~3 | DESCRIPTION:"atom war"~3 | TITLE:"atom war"~3^20.0) (text:"nuclear war"~3 | DESCRIPTION:"nuclear war"~3 | TITLE:"nuclear war"~3^20.0) (text:"war ? attrition"~3 | DESCRIPTION:"war ? attrit"~3 | TITLE:"war ? attrit"~3^20.0) (text:"cold war"~3 | DESCRIPTION:"cold war"~3 | TITLE:"cold war"~3^20.0) (text:"world war"~3 | DESCRIPTION:"world war"~3 | TITLE:"world war"~3^20.0) (text:"world wars"~3 | DESCRIPTION:"world war"~3 | TITLE:"world war"~3^20.0) (text:insurrection | DESCRIPTION:insurrect | TITLE:insurrect^20.0) (text:insurgence | DESCRIPTION:insurg | TITLE:insurg^20.0) (text:rebellion | DESCRIPTION:rebellion | TITLE:rebellion^20.0) (text:filibuster | DESCRIPTION:filibust | TITLE:filibust^20.0) (text:uprising | DESCRIPTION:upris | TITLE:upris^20.0) (text:revolt | DESCRIPTION:revolt | TITLE:revolt^20.0) (text:battle | DESCRIPTION:battl | TITLE:battl^20.0) (text:"military rebellion"~3 | DESCRIPTION:"militari rebellion"~3 | TITLE:"militari rebellion"~3^20.0) (text:"military campaign"~3 | DESCRIPTION:"militari campaign"~3 | TITLE:"militari campaign"~3^20.0) (text:coup | DESCRIPTION:coup | TITLE:coup^20.0) (text:"great war"~3 | DESCRIPTION:"great war"~3 | TITLE:"great war"~3^20.0) (text:"war ? independence"~3 | DESCRIPTION:"war ? independ"~3 | TITLE:"war ? independ"~3^20.0) (text:"independence war"~3 | DESCRIPTION:"independ war"~3 | TITLE:"independ war"~3^20.0) (text:"peoples war"~3 | DESCRIPTION:"peopl war"~3 | TITLE:"peopl war"~3^20.0) (text:"occupied territor"~3 | DESCRIPTION:"occupi territor"~3 | TITLE:"occupi territor"~3^20.0) (text:"occupied zone"~3 | DESCRIPTION:"occupi zone"~3 | TITLE:"occupi zone"~3^20.0) (text:"revolutionary war"~3 | DESCRIPTION:"revolutionari war"~3 | TITLE:"revolutionari war"~3^20.0) (text:revolutionaries | DESCRIPTION:revolutionari | TITLE:revolutionari^20.0) (text:"american revolution"~3 | DESCRIPTION:"american revolut"~3 | TITLE:"american revolut"~3^20.0) (text:"french revolution"~3 | DESCRIPTION:"french revolut"~3 | TITLE:"french revolut"~3^20.0) (text:"russian revolution"~3 | DESCRIPTION:"russian revolut"~3 | TITLE:"russian revolut"~3^20.0) (text:"hungarian revolution"~3 | DESCRIPTION:"hungarian revolut"~3 | TITLE:"hungarian revolut"~3^20.0) (text:"guerilla war"~3 | DESCRIPTION:"guerilla war"~3 | TITLE:"guerilla war"~3^20.0) (text:guerillas | DESCRIPTION:guerilla | TITLE:guerilla^20.0) (text:"freedom fighter"~3 | DESCRIPTION:"freedom fighter"~3 | TITLE:"freedom fighter"~3^20.0) (text:troubles | DESCRIPTION:troubl | TITLE:troubl^20.0) (text:"american war"~2 | DESCRIPTION:"american war"~2 | TITLE:"american war"~2^20.0) (text:"african war"~2 | DESCRIPTION:"african war"~2 | TITLE:"african war"~2^20.0) (text:"anglo war"~2 | DESCRIPTION:"anglo war"~2 | TITLE:"anglo war"~2^20.0) (text:"europe war"~2 | DESCRIPTION:"europ war"~2 | TITLE:"europ war"~2^20.0) (text:"far east war"~2 | DESCRIPTION:"far east war"~2 | TITLE:"far east war"~2^20.0) (text:"middle east war"~2 | DESCRIPTION:"middl east war"~2 | TITLE:"middl east war"~2^20.0) (text:"pacific war"~2 | DESCRIPTION:"pacif war"~2 | TITLE:"pacif war"~2^20.0) (text:"war states"~2 | DESCRIPTION:"war state"~2 | TITLE:"war state"~2^20.0) (text:"war cabinet ? cabinet joint planning committee later joint planning staff"~3 | DESCRIPTION:"war cabinet ? cabinet joint plan committe later joint plan staff"~3 | TITLE:"war cabinet ? cabinet joint plan committe later joint plan staff"~3^20.0) -(text:student | DESCRIPTION:student | TITLE:student^20.0) -(text:radical | DESCRIPTION:radic | TITLE:radic^20.0) -(text:chartist | DESCRIPTION:chartist | TITLE:chartist^20.0) -(text:convict | DESCRIPTION:convict | TITLE:convict^20.0) -(text:prison | DESCRIPTION:prison | TITLE:prison^20.0) -(text:industrial | DESCRIPTION:industri | TITLE:industri^20.0) -(text:economic | DESCRIPTION:econom | TITLE:econom^20.0) -(text:"trade union"~3 | DESCRIPTION:"trade union"~3 | TITLE:"trade union"~3^20.0) -(text:"revolt ship"~100 | DESCRIPTION:"revolt ship"~100 | TITLE:"revolt ship"~100^20.0) -(text:"petrol revolt"~3 | DESCRIPTION:"petrol revolt"~3 | TITLE:"petrol revolt"~3^20.0) -(text:pay | DESCRIPTION:pai | TITLE:pai^20.0) -(text:"coup soleil"~5 | DESCRIPTION:"coup soleil"~5 | TITLE:"coup soleil"~5^20.0) -(text:"coup oeil"~5 | DESCRIPTION:"coup oeil"~5 | TITLE:"coup oeil"~5^20.0) -(text:"religious war services"~3 | DESCRIPTION:"religi war servic"~3 | TITLE:"religi war servic"~3^20.0))

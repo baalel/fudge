@@ -1,0 +1,35 @@
+"maps" 
+"map" 
+"chart" 
+"charts" 
+"with plan" 
+"with plans" 
+"Ordnance Survey" 
+"Boundaries Branch" 
+"Perambulation Card*" 
+"sheet number" 
+"sheet reference" 
+"County Series sheet*" 
+"cartograph*" 
+"architectural drawing*"~1
+"plans drawing*"~1
+"technical drawing*"~1
+"track diagram*"~1
+"technical diagram*"~1
+"Administrative Area diagram*"~1
+"atlas* world"~5
+"atlas* britain"~5
+"atlas* miscellaneous"~5
+"atlas* geographical"~5
+"atlas* historical"~5
+"atlas*") 
+"plan attached"~1
+"plans attached"~1
+"sheet OS"~1
+"plan OS"~1)
+"sealed plan"
+"sealed plans" 
+"includes plan" 
+"includes plans"
+-"M.A.P"
+-"Microprocessor Applications Project"

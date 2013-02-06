@@ -1,0 +1,46 @@
+"animal hunting"~3
+"blood sport*" 
+"hunting sport*" 
+"hunting trip*" 
+"game hunting"~3
+"game shooting"~3 
+"game kill*"~3
+"deer hunt*"~3
+"deer kill*"~3
+"stag hunt*"~3
+"stag kill*"~3
+"falconry" 
+"fox hunting" 
+"wild bird* shooting"~3
+"foxhounds" 
+"otter hunt*" 
+"grouse game"~3
+"pheasant shooting"~3
+"poaching" 
+"poacher" 
+"rabbit trap*"~3
+"pigeon shooting" 
+"baiting animal"~3
+"coursing" 
+"illegal hunting" 
+"hunting with dogs" 
+"hunting dogs" 
+"game licenc*" 
+"huntsm?n" 
+"falconer*" 
+"hunter" 
+"gamekeeper*" 
+"beagling" 
+"hunting legislation" 
+"League Against Cruel Sports" 
+"Countryside Alliance" 
+"Hunting Act" 
+"Hunting Bill" 
+"Hunting Order" 
+"Hunting Regulation*" 
+"Game Regulation*" 
+"Game law*" 
+"Game Act" 
+"Deer Act" 
+"ground game" 
+"hunting ground"

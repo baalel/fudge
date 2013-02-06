@@ -1,0 +1,22 @@
+"playwright" 
+"science fiction author" 
+"fiction publishing"~3
+"book author"~5
+"book written"~3
+"poetry" 
+"poem*" 
+"poetical" 
+"satirical verse*"~5 
+"satirical pamphlet*"~5 
+"satirical song*"~5
+"satirical lyric*"~5
+"literary work*"~5
+"literary art*"~5
+"vernacular literature" 
+"contemporary literature"~2
+"international union for the protection of literary and artistic work" 
+"adventure stories" 
+"royal literary" 
+"books literary" 
+"literary association"~5
+-"commercial"

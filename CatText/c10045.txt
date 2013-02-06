@@ -1,0 +1,30 @@
+"housing associations" 
+"housing policy" 
+"sheltered accommodation" 
+"slum clearance" 
+"housing conditions" 
+"high rise flats" 
+"housing subsidy" 
+"housing benefits" 
+"rented housing" 
+"council housing" 
+"council houses" 
+"housing provision" 
+"affordable housing" 
+"emergency housing" 
+"home ownership" 
+"right to buy housing"~5
+"new towns housing"~5
+"stamp duty housing"~5
+"shared ownership housing"~5 
+"planning housing"~5
+"housing NEAR5 mortgages"~5
+"tenancies housing"~5
+"housing population"~5
+"housing accommodation"~5
+"housing workers"~5
+"Housing Proposals and Schemes" 
+"HAMU Series" 
+-"house of commons" 
+-"public house" 
+-"post office"
