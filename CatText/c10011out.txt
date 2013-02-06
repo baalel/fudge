@@ -1,4 +1,0 @@
-"chartism"
-"chartist movement"
-
-+((text:chartism | DESCRIPTION:chartism | TITLE:chartism^20.0) (text:"chartist movement"~3 | DESCRIPTION:"chartist movement"~3 | TITLE:"chartist movement"~3^20.0))
