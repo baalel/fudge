@@ -1,0 +1,45 @@
+"miners' welfare" 
+"miners welfare fund" 
+"miners welfare commission" 
+"miners welfare committee" 
+"social welfare" 
+"colonial" "welfare"~5
+"children welfare" 
+"income support" 
+"jobseekers allowance" 
+"unemployment assistance board" 
+"supplementary benefits" 
+"sickness benefit" 
+"incapacity benefits" 
+"disability benefits" 
+"unemployment benefits" 
+"family income supplements" 
+"child tax credit" 
+"housing benefits" 
+"welfare" "children"~5
+"welfare officers" 
+"care in the community" 
+"occupational health" 
+"maternity" "child welfare"~5
+"health visitors" 
+"social workers" 
+"care" "elderly"~5
+"care" "children"~5
+"care" "mentally handicapped"~5 
+"tax credits" 
+"welfare committee" 
+"welfare" "prisoners"~5
+"residential care home" 
+"nursing home" 
+"dr barnardo's" 
+"orphanage" 
+"children's home" 
+"sheltered housing" 
+"community care" 
+"Remand" "Voluntary Homes"~5
+"irish distress committee" 
+"youth welfare" 
+"health and safety executive" 
+"pharmaceutical and therapeutic services" 
+"public health services, registered files" 
+"welsh board of health registered files"

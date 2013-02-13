@@ -1,0 +1,170 @@
+"mining and quarrying" 
+"mines and quarrying" 
+"mining and quarry" 
+"mines and quarry" 
+"quarrying" 
+"quarry" 
+"quarries" 
+"quarrym?n" 
+"open pit*" 
+"open cast min*" 
+"strip min*" 
+"surface min*" 
+"mining industr*" 
+"extract* industry"~1
+"mining compan*" 
+"mining inspector*" 
+"mine* inspector*"~1
+"inspector* mine*"~2
+"abandoned mine*" 
+"mine closure*" 
+"working mine*" 
+"mining engineer*" 
+"mineral* engineer*"~1
+"mineral extract*" 
+"mining undertaking*" 
+"mineral* undertaking*"~1
+"mining accident*" 
+"metalliferous deposit*" 
+"metalliferous min*" 
+"carboniferous deposit*" 
+"mine* entry book*"~1
+"lighting in mine*" 
+"royal mine*" 
+"mineral right*" 
+"mining right*" 
+"mining royalt*" 
+"coal mine*" 
+"coal mining" 
+"colliery" 
+"collieries" 
+"collier" 
+"mine shaft*" 
+"British Coal"
+"National Coal Board" 
+"N.C.B" 
+"NCB" 
+"National Union of Mineworkers" 
+"N.U.M" 
+"NUM" 
+"clay pit*" 
+"china clay" 
+"ball clay" 
+"fireclay" 
+"gravel pit*" 
+"slag heap*" 
+"Secretary for Mines" 
+"Secretary of Mines" 
+"Mines Department" 
+"Mines Inspectorate" 
+"Departmental Committee on the Non-Ferrous Mining Industry" 
+"Mining Association of Great Britain" 
+"Mining Dangers Research Board" 
+"Safety in Mines Research" 
+"Mining Research Establishment" 
+"Mining and Research Development Establishment" 
+"Mineral Resources Development Department" 
+"Mining Sub-Committee" 
+"Board for Mining Qualification*" 
+"Mining Qualifications Board" 
+"Metalliferous Mining Industry Advisory Committee" 
+"Mineral Development Committee" 
+"Mining Record Office" 
+"Mines and Quarries Inspectorate" 
+"Mining Federation" 
+"MFGB" 
+"M.F.G.B" 
+"firedamp" 
+"adit" 
+"mine shaft" 
+"spoil heap"
+"bauxite mine*"~1 
+"chalk mine*"~1 
+"chromium mine*"~1 
+"copper mine*"~1 
+"diamond mine*"~1 
+"gold mine*"~1 
+"gypsum mine*"~1 
+"iron mine*"~1 
+"iron ore mine*"~1 
+"ironstone mine*"~1 
+"lead mine*"~1 
+"limestone mine*"~1 
+"manganese mine*"~1 
+"manganese ore mine*"~1 
+"metal mine*"~1 
+"phosphate mine*"~1 
+"potash mine*"~1 
+"platinum mine*"~1 
+"salt mine*"~1 
+"sandstone mine*"~1 
+"silver mine*"~1 
+"slate mine*"~1~1 
+"tin mine*"~1" 
+"uranium mine*"~1" 
+"zinc mine*"~1"
+"bauxite mining"~1 
+"chalk mining"~1 
+"chromium mining"~1 
+"copper mining"~1 
+"diamond mining"~1 
+"gold mining"~1 
+"gypsum mining"~1 
+"iron mining"~1 
+"iron ore mining"~1 
+"ironstone mining"~1 
+"lead mining"~1 
+"limestone mining"~1 
+"manganese mining"~1 
+"manganese ore mining"~1 
+"metal mining"~1 
+"phosphate mining"~1 
+"potash" 
+"platinum mining"~1 
+"salt mining"~1 
+"sandstone mining"~1 
+"silver mining"~1 
+"slate mining"~1 
+"tin mining"~1 
+"uranium mining"~1 
+"zinc mining"~1
+"Mines Act"~1 
+"Miners Welfare Act"~1 
+"Mines Working Facilities and Support Act"~1 
+"Mines and Collieries Act"~1 
+"Mining Industry Welfare Fund Act"~1 
+"Mining Industry Act"~1 
+"Metalliferous Mines Regulation Act"~1 
+"Stratified Ironstone Mines Gunpowder Act"~1 
+"Slate Mines Gunpowder Act"~1
+"Mineral Workings Act"~1
+"Mines Working Facilities and Support Act"~1
+"Coal Mines Inspection Act"~1
+"mining of metal*"~1 
+"mining of mineral*"~1 
+"mining of precious stone*"~1 
+"mining of bauxite"~1
+"mining of chromium"~1
+"mining of copper"~1
+"mining of diamond*"~1
+"mining of gold"~1
+"mining of gypsum"~1
+"mining of lead"~1
+"mining of iron"~1
+"mining of limestone"~1
+"mining of manganese"~1
+"mining of ore*"~1
+"mining of phosphate*"~1
+"mining of potash"~1
+"mining of platinum"~1
+"mining of salt"~1
+"mining of sandstone"~1
+"mining of silver"~1
+"mining of slate*"~1
+"mining of tin"~1
+"mining of uranium"~1
+"mining of zinc"~1
+-"minelaying" 
+-"minesweep*" 
+-"quarrying flight*" 
+-"Home Guard"

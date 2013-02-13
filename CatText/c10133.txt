@@ -1,0 +1,54 @@
+"Ireland"
+"Eire"
+"Republic of Ireland"
+"Irish Free State"
+"Dublin Government"
+"Taoiseach"
+"Irish minister"~2
+"Irish Distress Committee" 
+"Irish Grants Committee"
+"Anglo-Irish"
+"Irish Council"
+"Home Office: Six Figure Files" 
+"Irish"
+-"place of birth"
+-"ship Ireland"
+-"~Ireland ~Island"
+-"Six Clerks Office"
+-"Irish v"
+-"v Irish"
+-"Inquisitions Post Mortem"
+-"Debtor"
+-"Will registers"
+-"Irish Sea"
+-"Ann Irish"~1
+-"James Irish"~1
+-"John Irish"~1
+-"Matthew Irish"~1
+-"Mathew Irish"~1
+-"Robert Irish"~1
+-"William Irish"~1
+-"Joseph Irish"~1
+-"George Irish"~1 
+-"Ireland Ltd"~1
+-"Ireland Limited"~1
+-"Ireland Company"
+-"Ireland plaintiff*"~1
+-"Irish Ltd"~1
+-"Irish Limited"~1
+-"Irish Company"~1
+-"Irish plaintiff*"~1
+-"Irish Brigade"~1
+-"Irish Corps"~1
+-"Irish Dragoon*"~1
+-"Irish Foot"~1
+-"Irish Fusiliers"~1
+-"Irish Guards"~1
+-"Irish Horse"~1
+-"Irish Hussars"~1
+-"Irish Lancers"~1
+-"Irish Light"~1
+-"Irish Rangers"~1
+-"Irish Regiment"~1
+-"Irish Regt"~1
+-"Irish Rifles"~1

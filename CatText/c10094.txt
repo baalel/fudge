@@ -1,0 +1,56 @@
+"Recusant" 
+"Recusants" 
+"recusancy" 
+"heretic" 
+"heretics" 
+"heresy" 
+"lollardy" 
+"lollards" 
+"lollard" 
+"Spanish Inquisition" 
+"popish" 
+"persecution papist*"~5
+"attack papist*"~5
+"against papist*" 
+"persecution Catholic*"~5 
+"discrimination Catholic*"~5 
+"anti-Catholic*" 
+"anti-Roman Catholic*" 
+"attack* catholic*"~5
+"against catholic*" 
+"against Roman catholic*" 
+"Catholic emancipation" 
+"persecution protestant*"~5 
+"discrimination protestant*"~5
+"anti-protestant*" 
+"attack* protestant*"~5
+"against protestant*" 
+"persecution Jew*"~5
+"discrimination Jew*"~5
+"anti-Jew*" 
+"attack* Jew*"~5
+"against Jew*" 
+"holocaust"
+-"nuclear holocaust"~5
+"Jew* camp*"~5 
+"religious abuse" 
+"religious intolerance" 
+"religious equality" 
+"Test Act" 
+"Test Acts" 
+"Test Oath" 
+"Test Oaths" 
+"Sacrament Certificate*" 
+"Protestation Oath Roll*" 
+"Anti-semitism" 
+"Anti-semitic" 
+"turban sikh"~5
+"discrimination sikh*"~5 
+"anti-Islam*" 
+"anti-Christian*" 
+"persecution christian*"~5
+"anti-religion" 
+"against religion" 
+"religious discrimination" 
+"religious persecution" 
+"Anglo-American Committee of Enquiry on Palestine, 1946: Papers"

@@ -1,0 +1,25 @@
+"metropolitan police act" 
+"police officers" 
+"bow street" 
+"metropolitan magistrates" 
+"special constabulary" 
+"police control" 
+"police force" 
+"thames police" 
+"police complaints authority" 
+"police complaints board" 
+"police act" 
+"new scotland yard" 
+"police protection" 
+"police investigation" 
+"crime police"~5
+"police brutality"~5 
+"police regulation"~5 
+"police discipline"~5 
+"police procedure"~5
+"women police"~5
+"police patrol"~5
+"traffic police"~5
+"police protection" 
+"police investigation*" 
+"metropolitan police office of the commissioner"

@@ -1,0 +1,111 @@
+"treaty" 
+"treaties" 
+"international instrument*" 
+"international agreement*" 
+"international pact*" 
+"international convention*" 
+"international charter*" 
+"international law*" 
+"international accord*" 
+"joint communiqu?" 
+"Convention" 
+"Protocol" 
+"convention and protocol" 
+"entente" 
+"Accord" 
+"non-aggression pact" 
+"Intervention Pact" 
+"Comintern Pact" 
+"Power Pact" 
+"Neutrality Pact" 
+"Atlantic Pact" 
+"Pacific Pact" 
+"Defen?e Pact" 
+"Baghdad Pact" 
+"Bagdad Pact" 
+"Pact of Mutual Co-operation" 
+"Communist Pact" 
+"Western Pact" 
+"European Pact" 
+"Asian Pact" 
+"Arab Pact" 
+"Eastern Pact" 
+"Black Sea Pact" 
+"Mediterranean Pact" 
+"Locarno Pact" 
+"Italian- Pact"~2
+"Russo- Pact"~2
+"Soviet- Pact"~2
+"Russian- Pact"~2
+"American- Pact"~2
+"Anglo- Pact"~2
+"German- Pact"~2
+"Franco- Pact"~2
+"French- Pact"~2
+"Spanish- Pact"~2
+"Japanese- Pact"~2 
+"Arbitral Convention" 
+"Bankruptcy Convention" 
+"European Convention" 
+"New Hebrides Convention" 
+"Berne Convention" 
+"Paris Convention" 
+"Geneva Convention" 
+"Brussels Convention" 
+"Hague Convention" 
+"Washington Convention" 
+"political alliance*" 
+"foreign alliance*" 
+"defensive alliance*" 
+"European coalition*" 
+"Grand Alliance" 
+"Holy Alliance" 
+"Triple Alliance" 
+"Quadruple Alliance" 
+"Anglo- alliance"~2
+"Franco- alliance"~2
+"French Alliance"~2
+"Prussian alliance"~2 
+"Spanish alliance"~2 
+"Japanese alliance"~2 
+"Austro- alliance"~2 
+"Russian alliance"~2 
+"Russo- alliance"~2 
+"Soviet- alliance"~2 
+"Dutch alliance"~2 
+"Polish alliance"~2 
+"Pacific Alliance"~2 
+"Atlantic Alliance"~2 
+"Simonstown Agreement" 
+"Anglo- Agreement"~2
+"Holy League" 
+"Confederation of the Rhine" 
+"Germanic Confederation" 
+"North Atlantic Treaty North Atlantic Treaty Organi?ation"~100
+"North Atlantic Treaty NATO"~100
+"North Atlantic Treaty N.A.T.O"~100
+"Southeast Asia Treaty Southeast Asia Treaty Organi?ation"~100
+"Southeast Asia Treaty SEATO"~100
+"Southeast Asia Treaty S.E.A.T.O"~100
+"Central Treaty Central Treaty Organi?ation"~100
+"Central Treaty CENTO"~100
+"Central Treaty C.E.N.T.O"~100
+-"Crown and Treaty" 
+-"Commercial and Treaty" 
+-"Treaty Port*" 
+-"Treaty Court" 
+-"charter flight*" 
+-"air charter*" 
+-"suicide pact*" 
+-"lib/lab pact" 
+-"Grand Alliance Film Corporation" 
+-"Exercise Grand Alliance" 
+-"145809 Triple Alliance" 
+-"industrial triple alliance" 
+-"triple alliance miner"~100 
+-"Ltd" 
+-"Limited" 
+-"Company" 
+-"North Atlantic Treaty Organi?ation" 
+-"Southeast Asia Treaty Organi?ation" 
+-"Central Treaty Organi?ation"

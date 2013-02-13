@@ -1,0 +1,67 @@
+"electricity supply"~2
+"electricity supplies"~2
+"electricity generation"~2
+"electricity distribution"~2
+"electricity production"~2
+"electricity regulation"~2
+"electricity transmission"~2
+"electricity usage"~2
+"electricity demand"~2
+"electricity Act"~1
+"electricity Acts"~1
+"electricity Bill"~1
+"electricity station"~1
+"electricity sub-station"~1
+"electricity generator*"~1
+"electricity network*"~1
+"electricity market*"~1
+"electricity grid*"~1
+"electricity works"~1
+"electricity industry"~1
+"electricity industries"~1
+"electricity company"~1
+"electricity companies"~1
+"electricity board*"~1
+"electricity branch*"~1
+"electricity commission"~1
+"electricity commissioner*"~1
+"electricity producer*"~1
+"electricity pylon*"~1
+"electricity grid"~1
+"electricity meter*"~1
+"electricity Association"~1
+"electricity Authority"~1
+"electricity Division*"~1
+"electricity Consumer Council"~1
+"electricity Consumers Council"~1
+"electricity Council"~1
+"electricity policy"~1
+"electrical power"~1
+"electrical current"~1
+"electrical energy"~1
+"electrical industry"~1
+"electrical industries"~1
+"electric power"~1
+"electric current"~1
+"electric energy"~1
+"electric industry"~1
+"electric industries"~1
+"Central Electricity Generating Board" 
+"CEGB" 
+"C.E.G.B" 
+"Electrical Division" 
+"OFGEM" 
+"Northern Electric" 
+"Southern Electric" 
+"overhead electricity" 
+"nationalised electricity" 
+"use of electricity" 
+"static electricity" 
+"Midlands Electricity"~1
+"Eastern Electricity"~1
+"London Electricity"~1
+"South Wales Electricity"~1
+"Western Electricity"~1
+"Yorkshire Electricity"~1
+"Electricity Correspondence and Papers" 
+"Electricity Registers of Consents and Special Orders"

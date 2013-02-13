@@ -1,0 +1,70 @@
+"Armed Forces" 
+"the Forces" 
+"British forces" 
+"military forces" 
+"British troops" 
+"Armed Services" 
+"Ministry of Defence" 
+"MOD" 
+"MoD" 
+"M.O.D" 
+"Minister of Defence" 
+"Defence Secretariat" 
+"War Office" 
+"Ordnance Office and War Office" 
+"Secretary-at-War" 
+"War Department" 
+"Secretary of State for War" 
+"Office of the Commander-in-Chief" 
+"Chief of the Imperial General Staff" 
+"CIGS" 
+"C.I.G.S" 
+"Military headquarters" 
+"Chief of the General Staff" 
+"Chiefs of Staff Committee" 
+"British Joint Staff Mission" 
+"Adjutant General's Department" 
+"Judge Advocate General" 
+"Directorate of Civil Affairs" 
+"Admiralty" 
+"Navy Board" 
+"Air Ministry" 
+"Air Board" 
+"Muster roll"~1
+"Muster rolls"~1
+"Muster book"~1
+"Muster books"~1 
+"Attestation Form*"~1
+"Attestation Paper*"~1 
+"Royal Hospital Chelsea"~1
+"Royal Hospital Kilmainham"~1
+"War Pensions Registered Files"~2
+"War Pensions Award Files"~2 
+"court martial*" 
+"courts martial*" 
+"Military Entry Books"~2
+"Military Entry Book"~2
+"Deserter Record* Books"~2
+"Deserter Record* Book"~2
+"war grave roll"~2
+"war grave rolls"~2 
+"nominal roll"~2
+"nominal rolls"~2
+"Record of Officers Services"~1
+"Records of Officers Services"~1
+"Registers of Officers Services"~1
+"Officers Service Record*" 
+"military personnel" 
+"ARMY AND NAVY" 
+"Prisoners of War Lists" 
+"Index Cards of Allied Prisoners of War" 
+"Liberated Prisoner of War Interrogation Questionnaires" 
+"Special Questionnaire for British American Ex-Prisoners of War" 
+"Liberation Reports" 
+"Prisoners of War Interviews" 
+"Tower of London: Constable's Office" 
+"Committee on Detention Barracks" 
+"Military commissions and warrants"~4
+"war diaries" 
+"trench maps"
+-"military personnel research committee"~100

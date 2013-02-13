@@ -1,0 +1,27 @@
+"ballet" 
+"music hall" 
+"performing arts" 
+"musical performance" 
+"performance art" 
+"dancing" 
+"theatres act" 
+"actor" 
+"actress" 
+"theatrical" 
+"operatic" 
+"opera" 
+"music festival" 
+"musicians union" 
+"bands music"~5
+"music room" 
+"music halls"
+-"war" 
+-"naval" 
+-"military" 
+-"operating theatre" 
+-"Mediterranean Theatre" 
+-"theatre pacific"~5
+-"theatre russia*"~5
+-"theatre atlantic"~5 
+-"theatre africa*"~5
+-"ss actor"

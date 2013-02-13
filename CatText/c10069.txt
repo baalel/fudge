@@ -1,0 +1,15 @@
+"national debt" 
+"public debt" 
+"debt management" 
+"war debt" 
+"enemy debt" 
+"public loan" 
+"public loans" 
+"South Sea Co" 
+"South Sea Company" 
+"South Sea stock" 
+"South Sea House"
+"gilt* stock"~5
+"gilt* stocks"~5 
+"gilt* market"~5 
+"gilt* markets"~5

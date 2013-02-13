@@ -1,0 +1,45 @@
+"nurses" 
+"nursing" 
+"auxiliary nursing" 
+"nursing register"~5
+"midwives" 
+"midwife" 
+"midwifery" 
+"nursing council" 
+"health visit*" 
+"district nurs*" 
+"community nurs*" 
+"education nursing"~5
+"education nurses"~5
+"training nurses"~5
+"imperial military nursing service" 
+"register of nurses" 
+"voluntary aid detachment" 
+"nightingale fund" 
+"nursing florence nightingale"~5
+"british nurs* association" 
+"college of nursing" 
+"male nurses" 
+"nurses act" 
+"civil nursing reserve" 
+"royal college of nursing" 
+"nursing training committees" 
+"employment nurses"~5 
+"employment midwives"~5
+"roll of nurses" 
+"mental nurses" 
+"nursing yeomanry" 
+"renkioi hospital" 
+"queen alexandra nursing"~5
+"QARANC" 
+"QAIMNS" 
+"nurses in the crimea" 
+"territorial force nursing service" 
+"student nurses" 
+"nursing service" 
+"officers nurses"~5
+"nurses pensions" 
+"nurses appointments"~5
+"recipients of the royal red cross" 
+"medical staff corps" 
+"staff nurs*"

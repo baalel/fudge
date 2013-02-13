@@ -1,0 +1,21 @@
+"probate" 
+"probates" 
+"testator" 
+"testators" 
+"signed will" 
+"codicil*" 
+"bequest" 
+"testamentary" 
+"Prerogative Court of Canterbury" 
+"Privy Council Muniment Book*" 
+"Instruments from Other Courts" 
+"Special Jurisdiction Miscellanea" 
+"Seamens Wills"~1
+"Royal Wills"~1
+"administration wills"~5
+"inventor* wills"~5
+"test?ment* wills"~5
+"supplementary wills"~5
+"administration will"~5
+"beneficiary will"~5
+"test?ment* will"~5

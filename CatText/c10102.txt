@@ -1,0 +1,77 @@
+"women" 
+"gender" 
+"sexual" 
+"sexually" 
+"sex discrimination" 
+"sex disqualification" 
+"sex education" 
+"sex instruction" 
+"equal pay" 
+"mysogyny" 
+"mysogynist" 
+"feminism" 
+"feminist" 
+"feminists" 
+"obscene" 
+"obscenity" 
+"indecent" 
+"indecency" 
+"indecence" 
+"adultery" 
+"adulterer" 
+"adulterers" 
+"adulterous" 
+"unnatural act" 
+"unnatural acts" 
+"unnatural practice" 
+"unnatural practices" 
+"carnal knowledge" 
+"criminal congress" 
+"masturbation" 
+"bestiality" 
+"brothel" 
+"prostitution" 
+"prostitute" 
+"prostitutes" 
+"conjugal visit" 
+"conjugal visits" 
+"conjugal rights" 
+"deviancy" 
+pornography 
+"queer archive" 
+"buggery" 
+"sodomite" 
+"sodomites" 
+"sodomy" 
+"lesbians" 
+"bisexual*" 
+"transsexual*" 
+transgender 
+intersex 
+homosexual 
+homosexuality 
+transvestite 
+hermaphrodite 
+"gay rights" 
+"gay news" 
+"gay activist" 
+"gay activists" 
+"gay action" 
+"gay man" 
+"gay men" 
+"gay centre" 
+"gay community" 
+"Gay liberation" 
+"gay teenagers"
+"masculine woman"~5 
+"gay group"~5
+"gay movement"~5 
+"gay lesbian"~5 
+"gay campaign"~5 
+"gay theatre"~5 
+"gay centre"~5 
+"lesbian group"~5 
+"lesbian theatre"~5 
+"lesbian movement"~5 
+"lesbian campaign"~5 
+"lesbian centre"~5

@@ -1,0 +1,7 @@
+"slave*" 
+"anti-slavery society" 
+"enslaved africans" 
+"slavery" 
+"emancipation slaves"~5
+"abolition slaves"~5
+"slave trade"

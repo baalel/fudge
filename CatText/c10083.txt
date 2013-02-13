@@ -1,0 +1,38 @@
+"demographic" 
+"demography" 
+"demographer" 
+"overpopulation" 
+"overpopulated" 
+"over populated" 
+"population control" 
+"population density"~2
+"population census"~2
+"population statistics"~2
+"population growth"~2
+"population estimate*"~2
+"population commission" 
+"population reduction"~2
+"population projection*"~3
+"general register office" NEAR5 "birth*"~5
+"general register office" NEAR5 "death*"~5
+"birth certificate*"~2
+"census statistics" 
+"Births Deaths and Marriages" 
+"births marriages and deaths" 
+"births marriages deaths" 
+"births and marriages" 
+"deaths at sea" 
+"births at sea" 
+"birth registrations" 
+"marriage registrations" 
+"death registrations" 
+"miscellaneous foreign returns" 
+"foreign registers and returns" 
+"foreign death returns" 
+"graves and tombstones" 
+"birth rate" 
+"mortality" 
+"death rate" 
+"life expectancy" 
+"churching" 
+"churchings"

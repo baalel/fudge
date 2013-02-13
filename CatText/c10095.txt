@@ -1,0 +1,36 @@
+"renewable energ*" 
+OR "renewable electricity" 
+OR "alternative energ*" 
+OR "renewable fuel*" 
+OR "biogas" 
+OR "biomass" 
+OR "biofuel" 
+OR "hydroelectric*" 
+OR "hydro electric*" 
+OR "hydropower" 
+OR "hydro power" 
+OR "wind energy"~5
+OR "wind farm*" 
+OR "wind power" 
+OR "wind turbine*" 
+OR "solar power"~5
+OR "solar energy"~5 
+OR "solar panel*" 
+OR "landfill gas*" 
+OR "geothermal" 
+OR "photovoltaic" 
+OR "tidal energ*" 
+OR "tidal power" 
+OR "wave farm*" 
+OR "ocean energy"~5
+OR "kinetic energ*"~5 
+OR "*thermal energ*" 
+OR "Renewables Advisory Board" 
+OR "Renewable Energy Agency" 
+OR "Geothermal Association" 
+OR "Energy Saving Trust" 
+OR "Non-Fossil Fuel Obligation" 
+OR "Renewables Obligation" 
+OR "Renewables Directive" 
+OR "green energ*" 
+OR "energy conservation"~2

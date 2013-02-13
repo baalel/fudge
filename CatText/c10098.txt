@@ -1,0 +1,107 @@
+"road transport" 
+"motorway" 
+"highways" 
+"driving licens*" 
+"motor licens*" 
+"dvla" 
+"Driver and Vehicle Licensing Agency" 
+"Driving and Motor Licences" 
+"motor car" 
+"speed limit" 
+"road safety" 
+"vehicle safety" 
+"Acquired Road Service Companies" 
+"British Omnibus Companies Public Relations Committee Papers" 
+"Road Research Laboratory" 
+"Holyhead and Shrewsbury Roads" 
+"General Traffic Division Registered Files" 
+"Divisional Road Engineers Offices and Successors"
+"road traffic accident" 
+"taxicab"
+"national bus company" 
+"road car"~5 
+"roads car"~5 
+"highway car"~5 
+"highways car"~5 
+"road motorcycle"~5 
+"roads motorcycle"~5 
+"highway motorcycle"~5 
+"highways motorcycle"~5 
+"road freight"~5 
+"roads freight"~5 
+"highway freight"~5 
+"highways freight"~5 
+"road traffic"~5 
+"roads traffic"~5 
+"highway traffic"~5 
+"highways traffic"~5 
+"road motor vehicle"~5 
+"roads motor vehicle"~5 
+"highway motor vehicle"~5 
+"highways motor vehicle"~5 
+"road lorry"~5 
+"roads lorry"~5 
+"highway lorry"~5 
+"highways lorry"~5 
+"road lorries"~5 
+"roads lorries"~5 
+"highway lorries"~5 
+"highways lorries"~5 
+"road juggernaut"~5 
+"roads juggernaut"~5 
+"highway juggernaut"~5 
+"highways juggernaut"~5 
+"road cart"~5 
+"roads cart"~5 
+"highway cart"~5 
+"highways cart"~5 
+"road automobile"~5 
+"roads automobile"~5 
+"highway automobile"~5 
+"highways automobile"~5 
+"road motorbike"~5 
+"roads motorbike"~5 
+"highway motorbike"~5 
+"highways motorbike"~5 
+"road stage coach"~5 
+"roads stage coach"~5 
+"highway stage coach"~5 
+"highways stage coach"~5 
+"road horse and carriage"~5 
+"roads horse and carriage"~5 
+"highway horse and carriage"~5 
+"highways horse and carriage"~5 
+"road Moped*"~5 
+"roads Moped*"~5 
+"highway Moped*"~5 
+"highways Moped*"~5 
+"road articulated"~5 
+"roads articulated"~5 
+"highway articulated"~5 
+"highways articulated"~5 
+"road driver*"~5 
+"roads driver*"~5 
+"highway driver*"~5 
+"highways driver*"~5 
+"road signs"~5 
+"roads signs"~5 
+"highway signs"~5 
+"highways signs"~5 
+"road repair"~5 
+"roads repair"~5 
+"highway repair"~5 
+"highways repair"~5 
+"road bus"~5 
+"roads bus"~5 
+"highway bus"~5 
+"highways bus"~5 
+"road tram"~5 
+"roads tram"~5 
+"highway tram"~5 
+"highways tram"~5 
+"road wagon horse"~100
+"taxi accident"~5 
+"taxi road"~5 
+"taxi cab"~5 
+-"railway" 
+-"railways"

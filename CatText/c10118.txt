@@ -1,0 +1,227 @@
+"private paper*"~1
+"private record*"~1
+"private correspondence"~1
+"private collection*"~1
+"private letters"~1
+"private letters and papers"~!
+"personal letters and papers"~1
+"personal letters"~1
+"personal papers"~1
+"personal records"~1
+"personal correspondence"~1
+"personal correspondence and papers"~1
+"personal collection*"~1
+"personal collection of papers"~1 
+"family papers"~1
+"family archives"~1
+"family records"~1
+"family correspondence"
+"family letters"~1
+"private office papers"~1
+"private office files"~1 
+"John Davies Collection"~2
+"Peter Yorke Collection"~2
+"Charles Purton Cooper Collection"~2
+"W E Hayward Collection"~2
+"Earl Granville Papers"~5
+"Ramsay MacDonald Papers"~5
+"Sir William Eyre Papers"~3
+"Northern Groups Hinton Papers"~3 
+"Travel Papers"~1
+"Hassall Ministry of Economic Warfare Library Papers"~1
+"Railway Executive Members Papers"~1 
+"Permanent Secretary to the Civil Service Department Papers"~1
+"Chartwell Trust Papers"~1
+"Private Offices: Various Ministers and Officials Papers"~1
+"Joseph Wolseley, Adjutant General of Army Papers"~1
+"English Nature and predecessors: Senior Officers Papers"~1
+"Sir Martin Davies Papers"~1
+"Private Collections of Ministers and Officials Papers"~1
+"Collection of Herbert Papers"~1
+"Shaftesbury and successors"
+"Private Office: Northern Ireland Papers"~1
+"John da Cunha Papers"~1
+"Akroyd Papers"~1
+"Alex S Allan Papers"~1
+"Bosanquet Papers"~1
+"Thomas Carew Papers"~1
+"Earl of Carnarvon Papers"~1
+"Snape Douglas Papers"~1
+"Earl of Chatham Papers"~1
+"Baron Colchester Papers"~1
+"Purton Cooper Papers"~1
+"Charles Cornwallis Papers"~1
+"Ellenborough Papers"~1
+"Charles Napier Papers"~1
+"Henry Petrie Papers"~1
+"Revell Reade Papers"~1
+"Stoke-Rodney Papers"~1
+"Lord John Russell Papers"~1
+"Robert Waterhouse Papers"~1
+"Alfred Milner Papers"~1
+"John Codrington Papers"~1
+"Duke of Leeds Papers"~1
+"Satow Papers"~1
+"John Popham Papers"~1
+"Carmichael Smyth Papers"~1
+"Sir William Stuart Papers"~1
+"Charles Ardagh Papers"~1
+"Sir John Nicholl Papers"~1
+"Lowry Cole Papers"~1
+"Earl of Egremont Papers"~1
+"Edward Cardwell Papers"~1
+"Stephen Buckland Papers"~1
+"Baron Dorchester Papers"~1
+"Baron Northcote Papers"~1
+"Kitchener of Khartoum Papers"~1
+"Dacres Adams Papers"~1
+"Grant-Sturgis Papers"~1
+"Earl of Balfour Papers"~1
+"Eardley Childers Papers"~1
+"Charles J Napier Papers"~1
+"Mance Papers"~1
+"Earl Midleton Papers"~1
+"Alan Garrett Anderson Papers"~1
+"Warneford Nightingale Papers"~1
+"Lyham Loraine Papers"~1
+"Hilary Jenkinson Papers"~1
+"Baron Carnock Papers"~1
+"Fordyce Aickman Papers"~1
+"Rice Price Papers"~1
+"C E Napier Papers"~1
+"Evelyn Wylie Papers"~1
+"Francis Meekings Papers"~1
+"Thomas Flower Papers"~1
+"Shipley Wilson Papers"~1
+"Foster-Turner Papers"~1
+"Otto Clarke Papers"~1
+"Basil Mundy Papers"~1
+"Hubert Hall Papers"~1
+"D'Este Family Papers"~1
+"Cairns, 1st Earl Papers"~1
+"Neville Aldworth Papers"~1
+"Keeper of Public Records Papers"~1
+"Lord Hankey Papers"~1
+"Ampthill Papers"~1
+"Aston Papers"~1
+"Bloomfield Papers"~1
+"Clarendon Papers"~1
+"Cowley Papers"~1
+"Cromer Papers"~1
+"Granville Papers"~1
+"Hammond Papers"~1
+"Henderson Papers"~1
+"Hertslet Papers"~1
+"Hervey Papers"~1
+"Howard de Walden Papers"~1
+"Jackson Papers"~1
+"Jordan Papers"~1
+"Loraine Papers"~1
+"Malet Papers"~1
+"Pierrepont Papers"~1
+"Pottinger Papers"~1
+"Simmons Papers"~1
+"Stratford Canning Papers"~1
+"Stuart de Rothesay Papers"~1
+"Tenterden Papers"~1
+"Foreign Office: Thornton Papers"~1
+"White Papers"~1
+"Woodbine Parish Papers"~1
+"Cockroft Papers"~1
+"Sir Frank Whittle Papers"~1
+"Sir John Slessor Papers"~1
+"Bancroft Papers"~1
+"Fitzroy Papers"~1
+"Aylmer Papers"~1
+"Lord Hailey Papers"~1
+"Sir Isaac Newton Papers"~1
+"Sir Charles Fremantle Papers"~1
+"William John Hocking Papers"~1
+"Geddes Papers"~1
+"Boston Papers"~1
+"Boggis-Rolfe Papers"~1
+"PETYT Papers"~1
+"KERGUELEN Papers"~1
+"WILLIAMSON Papers"~1
+"DANIELL Papers"~1
+"CARNSEW Papers"~1
+"BAYNING Papers"~1
+"WARNER Papers"~1
+"DE RENZI Papers"~1
+"JOHNSON Papers"~1
+"Bouillon Papers"~1
+"Nicholson Wornum Papers"~1
+"Sir Philip Hendy Papers"~1
+"Isherwood Kay Papers"~1
+"war office amherst"~5
+"war office scovell"~5
+"war office george murray"~5
+"war office frederick roberts"~5
+"war office william h smith"~5
+"war office redvers"~5
+"war office Brownrigg"~5
+"war office peacocke"~5
+"war office earl alexander"~5
+"war office erskine"~5
+"war office Beale Colvin"
+"war office denis daly"~5
+"war office Henry George Hart"~5
+"War Office Lieutenant General Sir Harry G W Smith"~100
+"War Office Field Marshal Viscount Garnet Joseph Wolseley"~100
+"War Office Field Marshal Sir John Greer Dill"~100
+"War Office General Miles Christopher Dempsey"~100
+"War Office Field Marshal Sir Douglas Haig"~100
+"War Office Treasury Thomas Archer"~100
+"War Office Major J S Rothwell"~100
+"Special Collections Briggs"~2
+"Special Collections George Dow"~2
+"Special Collections Fairbank"~"
+"Special Collections Leeman"~2
+"Special Collections Tomlinson"~2
+"Special Collections Earl of Bradford's Collection"~4
+"Special Collections I K Brunel"~4
+"Special Collections F P Cockshott"~4
+"Special Collections Sir Arthur Elton"~4
+"Special Collections Retired Railway Officers' Society"~4
+"Cabinet Secretary Notebooks"~2
+"Blundell Notebooks"~2
+"Papers of Sir"~2
+"Papers of Lord Keynes"~2
+"Papers of Salwey Winnington"~2
+"Papers of Marianne North"~2
+"Papers of George Bentham"~2
+"Papers of Joseph Hooker"~2
+"Papers of Augustine Henry"~2
+"Papers of Francis Kingdon-Ward"~3
+"Papers of Henry Nicholas Ridley"~3
+"Papers of Norman Douglas Simpson"~3
+"Papers relating to Richard Spruce"~3
+"Papers relating to William Burchell"~3
+"Papers relating to John Eliot Howard"~3
+"Papers relating to Colin Graham Trapnell"~3
+"Papers relating to Kew Collectors"~3
+"Papers relating to Chancery exhibits"~3
+"Foreign Office: Private Office" 
+"Henry Dallas: Correspondence" 
+"Papers relating to 1st Earl of Chatham" 
+"Russell Grant-Sturgis: Diary" 
+"Sir James Clark Ross: Correspondence and papers" 
+"Prime Minister's Office: Sir Desmond Morton" 
+"HENRY FANSHAWE, QUEEN'S REMEMBRANCER" 
+"ABRAHAM FARLEY, DEPUTY CHAMBERLAIN OF THE EXCHEQUER" 
+"EDWARD WARD, CHIEF BARON OF THE EXCHEQUER" 
+"MASTER OF THE CEREMONIES" 
+"Mussolini's personal files" 
+"Venetian Manuscripts" 
+"Gifts and Deposits: Star Chamber Papers" 
+"Miscellaneous Documents of Unknown Ownership" 
+"Joseph Hatton: Collection of Home Office Criminal Papers" 
+"Papers of botanist, Dr William Arnold Bromfield" 
+"Papers of horticulturist, George W Robinson"
+-"Paper Number" 
+-"Family Records Centre" 
+-"Family Records website" 
+-"Royal Family. Correspondence" 
+-"Imperial Ottoman Family. Correspondence" 
+-"Crown v Corker" 
+-"Official Correspondence"

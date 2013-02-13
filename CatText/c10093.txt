@@ -1,0 +1,151 @@
+"religion" 
+"religions" 
+"religious" 
+"church of england" 
+"C of E" 
+"english church"~1
+"scottish church"~1
+"welsh church"~1
+"orthodox church"~1
+"independent church"~1
+"parish church"~1
+"free church"~1
+"reform church"~1
+"relief church"~1
+"religious movement*"~1
+"religious institution*"~1
+"religious sect"~1
+"religious sects"~1
+"religious activities"~1
+"religious group*"~1
+"religious institution*"~1
+"religious symbol*"~1
+"religious practice*"~1
+"religious belief"~1
+"religious faith*"~1
+"religious building*"~1
+"religious leaders"~1
+"religious land*"~1
+"russian orthodox"~1
+"greek orthodox"~1
+"eastern orthodox"~1
+"church of scotland" 
+"Church of Rome" 
+"taoist" 
+"buddhism" 
+"buddhist" 
+"buddhists" 
+"sharia" 
+"mohammedan" 
+"islam" 
+"islamic" 
+"christianity" 
+"christians" 
+"paganism" 
+"judaism" 
+"jew" 
+"jews" 
+"jewish" 
+"shinto" 
+"shintoism" 
+"mormonism" 
+"mormons" 
+"mormon" 
+"sephardim" 
+"protestantism" 
+"protestant" 
+"protestants" 
+"catholicism" 
+"catholic" 
+"catholics" 
+"popish" 
+"papist*" 
+"jehovah's witness*" 
+"baptist*" 
+"presbyterian*" 
+"methodism" 
+"methodist" 
+"methodists" 
+"congregationalist*" 
+"lutheran*" 
+"calvinist*" 
+"orthodox" 
+"coptic" 
+"patriarchate" 
+"parsee" 
+"muslim" 
+"muslims" 
+"moslem" 
+"moslems" 
+"sikhism" 
+"hinduism" 
+"rite" 
+"sacrement" 
+"quaker" 
+"quakers" 
+"anabaptist" 
+"fifth monarchy" 
+"church of scientology" 
+"christian science" 
+"anglican" 
+"evangelist*" 
+"evangelical" 
+"episcopal" 
+"wesleyan*" 
+"huguenot*" 
+"order of friars" 
+"Franciscan*" 
+"Carmelite*" 
+"Capuchin*" 
+"ecumenical" 
+"House of the Converts" 
+"Society of Friends" 
+"independent chapel" 
+"church and state" 
+"church lands" 
+"church goods" 
+"mosque" 
+"mosques" 
+"temple" 
+"temples" 
+"church" 
+"churches" 
+"holy trinity" 
+"monastery" 
+"monasteries" 
+"monastic" 
+"temporality" 
+"temporalities" 
+"ecclesiastic*" 
+"priory" 
+"priories" 
+"nunner*" 
+"cathedral" 
+"cathedrals" 
+"bishopric*"
+-"persecution" 
+-"discrimination" 
+-"ship" 
+-"hms" 
+-"company" 
+-"princess" 
+-"ketch" 
+-"operation" 
+-"Quakers Place"~1
+-"Quakers Road"~1
+-"Quakers Yard"~1
+-"Quakers Street"~1
+-"Quakers Lane"~1
+-"Quakers Drove"~1
+-"Quakers Farm"~1
+-"Priory Place"~1
+-"Priory Road"~1
+-"Priory Yard"~1
+-"Priory Street"~1
+-"Priory Lane"~1
+-"Priory Drove"~1
+-"Priory Farm"~1
+-"monastic hand"~1
+-"monastic inkstand"~1
+-"monastic height finders"~1
+-"monastic lead"~1

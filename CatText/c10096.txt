@@ -1,0 +1,108 @@
+"physicist" 
+"Scientific and Industrial Research" 
+"CERN" 
+"NIRNS" 
+"COSPAR" 
+"NERC" 
+"physical laboratory" 
+"physical laboratories" 
+"invention*" 
+"Physics and Physical Chemistry" 
+"physics committee" 
+"nuclear physics" 
+"astronom*" 
+"aeronaut*" 
+"astrophysics" 
+"experimentation" 
+"vivisection*" 
+"technological advance*" 
+"Science and Technology Act" 
+"Warren Spring Laboratory" 
+"Royal Radar Establishment" 
+"Royal Signals and Radar Establishment" 
+"Experimental Establishment" 
+"Guided Weapons Division" 
+"Imperial Institute: Records" 
+"Research and Experiments Department" 
+"technology research"~5 
+"botanical research"~5
+"zoological research"~5 
+"technology development"~5
+"research and development" 
+"research and production" 
+"Centre for Environmental Studies: Papers" 
+"MANAGEMENT OF RESEARCH" 
+"building research"~1 
+"engineering research"~1
+"fuel research"~1
+"power research"~1
+"science research"~1
+"chemistry research"~1
+"chemical research"~1
+"biology research"~1
+"biological research"~1
+"medical research"~1
+"genetic research"~1
+"clinical research"~1
+"biomedial research"~1
+"pyschiatric research"~1
+"genetic research"~1
+"nuclear research"~1
+"physics research"~1
+"weapon research"~1
+"weapons research"~1
+"meteorological research"~1
+"geological research"~1
+"oceanographic research"~1
+"hydrological research"~1
+"applied research"~1
+"space research"~1
+"agriculture research"~1
+"agricultural research"~1
+"Veterinary research"~1
+"economic research"~1
+"building research"~1
+"social research"~1
+"land use research"~1
+"industrial research"~1
+"overseas research"~1
+"computer research"~1
+"experimental research"~1
+"transport research"~1
+"road research"~1
+"research equipment"~1
+"research initiative*"~1
+"research policy"~1
+"research policies"~1
+"research organisation*"~1
+"research authority"~1
+"research authorities"~1
+"research establishment*"~1
+"research institution*"~1
+"research institute*"~1
+"research laboratory"~1
+"research laboratories"~1
+"research department"~1
+"research council*"~1
+"research group*"~1
+"research foundation*"~1
+"research grant*"~1
+"research programme*"~1
+"research project*"~1
+"research centre*"~1
+"research association*"~1
+"research station*"~1
+"research facilities"~1
+"research board*"~1
+"scientific research"~1
+"scientific report*"~1
+"scientific method"~1
+"scientific methods"~1
+"scientific study"~1
+"scientific studies"~1
+"scientific department"~1
+"scientific mission*"~1
+"scientific advisory"~1
+"scientific expedition*"~1
+"scientific co-operation"~1
+"scientific policy"~1

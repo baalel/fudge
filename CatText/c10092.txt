@@ -1,0 +1,138 @@
+"War Office" 
+"Army" 
+"the army" 
+"british army" 
+"regular army" 
+"field army" 
+"foreign armies" 
+"army Lists"~1 
+"army formations"~1 
+"army brigade*"~1 
+"army unit*"~1 
+"army service"~1 
+"army Establishment"~1 
+"army personnel"~1 
+"army organisation"~1 
+"army Group"~1
+"regiment" 
+"regiments" 
+"regt" 
+"regts" 
+"regimental" 
+"garrison*" 
+"fusiliers" 
+"dragoons" 
+"hussars" 
+"lancers" 
+"Light Infantry" 
+"Yeomanry" 
+"Territorial Army" 
+"Cavalry" 
+"Militia" 
+"gurkhas" 
+"carabiniers" 
+"household cavalry" 
+"coldstream guards"~1
+"scots guards"~1
+"horse guards"~1
+"welsh guards"~1
+"irish guards"~1
+"grenadier guards"~1
+"dragoon guards"~1
+"gordon highlanders"~1
+"seaforth highlanders"~1
+"argyle and sutherland highlanders"~1
+"argyllshire highlanders"~1
+"sutherland highlanders"~1
+"cameron highlanders"~1
+"own highlanders"~1
+"royal highlanders"~1
+"Veterinary corps"~1
+"Dental corps"~1
+"Physical Training corps"~1
+"Nursing corps"~1
+"General Service corps"~1
+"royal army medical corps"~1
+"intelligence corps"~1
+"medical corps"~1
+"infantry corps"~1
+"training corps"~1
+"army corps"~5
+"Armoured Division"
+"CORPS"
+-"air CORPS"
+-"observer CORPS"
+-"flying CORPS
+-"aircraft CORPS"
+"COMMAND"
+-"educational COMMAND"
+-"bomber COMMAND"
+-"coastal COMMAND"
+-"air COMMAND"
+-"guidance COMMAND"
+-"VIAC COMMAND"
+-"supply COMMAND"
+-"Balloon COMMAND"
+-"Fighter COMMAND"
+-"Flying Training COMMAND"
+-"Technical Training COMMAND"
+-"Signals COMMAND"
+-"Maintenance COMMAND"
+-"Ferry COMMAND"
+-"Reserve COMMAND"
+"royal scots greys" 
+"cameronians" 
+"the buffs" 
+"Borderers" 
+"sherwood foresters" 
+"rifle brigade" 
+"royal engineers" 
+"royal artillery" 
+"royal horse artillery" 
+"royal armoured corps" 
+"royal ulster rifles" 
+"connaught rangers" 
+"royal corps of signals" 
+"blues and royals" 
+"royal scots" 
+"Black watch" 
+"Green Jackets" 
+"Royal Signals" 
+"British Army of the Rhine" 
+"BAOR" 
+"B.A.O.R" 
+"Royal Electrical and Mechanical Engineers" 
+"R.E.M.E" 
+"REME" 
+"royal rangers"~2 
+"Royal Military" 
+"field marshal" 
+"garrison battalion*" 
+"Soldiers Service Documents" 
+"Soldiers Documents" 
+"Documents of Soldiers" 
+"Officers Services First World War" 
+"Service Records First World War" 
+"Records of Service and Papers" 
+"Muster Books and Pay Lists" 
+"Muster Master General" 
+"certificates of muster" 
+"Commissary General of Musters Office" 
+"Quarterly Historical Reports" 
+"Unit Historical Reports" 
+"Description and Enrolment Register*" 
+"battle honours" 
+"Paymaster General of the Guards" 
+"Name and Regiment" 
+"Register of Artillery" 
+"Army Unit Historical Records and Reports" 
+"Monthly Returns to the Adjutant General" 
+"Discharge Documents" 
+"Discharge Paper*" 
+"Orders of Battle and Organisation Tables" 
+"Vouchers for Agents Disbursements" 
+"Officers commissions Original documents"~100
+"Depot Description Books" 
+"Armed Forces Enrolment Forms" 
+"Home Guard" 
+-"salvation army"

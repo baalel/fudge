@@ -1,0 +1,19 @@
+"suffragette" 
+"suffragettes" 
+"suffragist" 
+"suffragists" 
+"votes for women" 
+"sylvia pankhurst"~5
+"emmeline pankhurst"~5
+"women suffrage"~5
+"woman suffrage"~5
+"womans suffrage"~5
+"womens suffrage"~5
+"women franchise"~5
+"woman franchise"~5
+"womans franchise"~5
+"womens franchise"~5
+"women enfranchise"~5
+"woman enfranchise"~5
+"womans enfranchise"~5
+"womens enfranchise"~5

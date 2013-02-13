@@ -1,0 +1,53 @@
+"freight ship"~5
+"container ship" 
+"container ships" 
+"container shipping" 
+"roll on roll off"~3 
+"cunard line" 
+"steamship" 
+"white star line" 
+"clipper ship"~100
+"merchant shipping" 
+"merchant navy" 
+"atlantic convoy" 
+"cargo shipping" 
+"chamber of shipping" 
+"liberty ship" 
+"coal hulk" 
+"passenger ferry" 
+"convict ship*" 
+"Brigantine" 
+"Icebreaker" 
+"tug boat" 
+"whaling ship" 
+"liner ship"~100
+"barge sea"~100
+"liner vessel"~100
+"passenger vessel" 
+"cargo vessel" 
+"shipping vessel"~100 
+"packet steamer"~100
+"ministry of shipping" 
+"hulk cargo"~100
+"Atlantic shipping"~5
+"North Sea shipping"~5
+"English Channel shipping"~5
+"Pacific shipping"~5
+"Ocean shipping"~5
+"sea shipping"~5
+"Steam yacht"
+"Sailing ship" 
+"atlantic transport line" 
+"inwards passenger lists" 
+"outwards passenger lists" 
+"list of passengers disembarking" 
+"titanic" 
+"rms" 
+"steamer" 
+"crew list" 
+"crew lists" 
+"cockets" 
+"cocket seal" 
+"port book*"
+"shipping control operation"~5
+-"Royal Navy"

@@ -1,0 +1,187 @@
+"military operation*"~1
+"aerial operation*"~1
+"air operation*"~1
+"combined operation*"~1
+"land operation*"~1
+"landing operation*"~1
+"naval operation*"
+"land battle*"~1
+"air battle*"~1
+"aerial battle*"~1
+"naval battle*"~1
+"sea battle*"~1
+"military campaign*"~1
+"military expedition*"~1
+"military d?spatch*"~1
+"military offensive"~1
+"Operation Apostle"~1
+"Operation Doomsday"~1
+"Operation Freshman"~1
+"Operation Jupiter"~1
+"Operation Avalanche"~1
+"Operation Bonaparte"~1
+"Operation Barbarossa"~1
+"Operation Corkscrew"~1
+"Operation Husky"~1
+"Operation Crossbow"~1
+"Operation Crusader"~1
+"Operation Dynamo"~1
+"Operation Frankton"~1
+"Operation Iceberg"~1
+"Operation Infatuate"~1
+"Operation Ironclad"~1
+"Operation Jubilee"~1
+"Operation Lightfoot"~1
+"Operation Overlord"~1
+"Operation Dragoon"~1
+"Operation Plainfare"~1
+"Operation Neptune"~1
+"Operation Menace"~1
+"Operation Musketeer"~1
+"Operation Poker"~1
+"Operation Telescope"~1
+"Operation Plunder"~1
+"Operation Varsity"~1
+"Operation Sea Lion"~1
+"Operation Sealion"~1
+"Operation Smith"~1
+"Operation Shingle"~1
+"Operation Market Garden"~1
+"Operation Torch"~1
+"Operation Shackle"~1
+"Oman* operation*"~2
+"North Africa* operation*"~2
+"Western Desert* operation*"~2
+"Balkan operation*"~2
+"Rhine operation*"~2
+"Korean operation*"~2
+"Arnhem operation*"~5
+"Norway operation*"~5
+"Singapore operation*"~5
+"Khartoum operation*"~5
+"Battle Agincourt"~2
+"Battle Bannockburn"~2
+"Battle Bala?lava"~2
+"Battle Hastings"~2
+"Battle Waterloo"~2
+"Battle Trafalgar"~2
+"Battle Jutland"~2
+"Battle Atlantic"~2
+"Battle Falkland*"~2
+"Battle Amiens"~2
+"Battle Arras"~2
+"Battle Corunna"~2
+"Battle Culloden"~2
+"Battle Loos"~2
+"Battle Omdurman"~2
+"Battle Tobruk"~2
+"Battle Ypres"~2
+"Battle Flanders"~2
+"Battle Marne"~2
+"Battle Aisne"~2
+"Battle Vedun"~2
+"Battle Midway"~2
+"Battle Dettingen"~2
+"Battle Blenheim"~2
+"Battle Copenhagen"~2
+"Battle Malplaquet"~2
+"Battle Minden"~2
+"Battle Arnhem"~2
+"Battle Britain"~2
+"Battle France"~2
+"Battle Cassino"~2 
+"Battle Somme"~3
+"Battle Nile"~3 
+"Battle Khartoum"~5
+"Battle Singapore"~5 
+"Dardanelles campaign*"~5
+"Dardanelles operation*"~5
+"Dardanelles force*"~5
+"Dardanelles d?spatch*"~5
+"Dardanelles casualties"~5
+"Dardanelles troops"~5
+"Dardanelles attack*"~5
+"Dardanelles army"~5
+"Suez campaign*"~5
+"Suez crisis"~5
+"Suez operation*"~5
+"Suez force*"~5
+"Suez attack*"~5
+"Suez army"~5
+"Suez Nasser"~5
+"Abyssinian campaign"~1"
+"Ethiopian campaign"~1"
+"Ashanti campaign"~1"
+"Burma campaign"~1"
+"Crimean campaign"~1"
+"Italian campaign"~1"
+"Korean campaign"~1"
+"Malayan campaign"~1"
+"Palestine campaign"~1"
+"American campaign"~1"
+"Russian campaign"~1"
+"African campaign"~1"
+"Saloni?a campaign"~1"
+"Sinai campaign"~1"
+"North Africa* campaign"~2"
+"Mesopotamia* campaign"~2"
+"Oman campaign"~2"
+"Singapore campaign"~5
+"Khartoum campaign"~5
+"low countries campaign"~5
+"Ashanti war*"~1
+"Korean war*"~1
+"Crimean war*"~1
+"Gulf war*"~1
+"Iraq war*"~1
+"Hundred Years war*"~1
+"Manchurian war*"~1
+"Seven Years war*"~1
+"Six Day war*"~1
+"Yom Kippur war*"~1
+"Thirty Years war*"~1
+"Falklands war*"~1
+"Zulu war*"~1
+"Afghan war*"~1
+"Arab war*"~1
+"Balkan war*"~1
+"Boer war*"~1
+"Arab Israeli war*"~1
+"Napoleonic war*"~1
+"American war*"~2
+"African war*"~2
+"Anglo  war*"~2
+"Europe* war*"~2
+"Far East war*"~2
+"Middle East war*"~2
+"Pacific war*"~2
+"States war*"~2
+"operations War"~5
+"Succession War"~5
+"wartime operations"~5
+"operational situation report*" 
+"D-Day landings"~1
+"Normandy landings"~1
+"allied landings"~1
+"Sicily invasion"~5
+"Rome invasion"~5
+"Norway invasion"~5
+fall Singapore"~2 
+"fall Khartoum"~2 
+"Berlin Airlift"~1
+"Berlin Blockade"~1
+"capture Singapore"~2
+"Dieppe raid"~5
+"Dunkirk evacuation"~5
+"El Alamein" 
+"allied invasion" 
+"Eastern Front" 
+"Gallipoli" 
+"Malayan Emergency" 
+"War of the Grand Alliance" 
+"world war" 
+"world wars" 
+"War Cabinet and Cabinet: Joint Planning Committee, later Joint Planning Staff" 
+"Prime Minister's Office: Operational Correspondence and Papers" 
+"Western Front"
+-"Case No"
