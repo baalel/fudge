@@ -63,6 +63,27 @@ public class SolrPostService {
         }      
     }
     
+        public void querytest(String queryText){
+        SolrQuery query = new SolrQuery();
+        query.setQuery(queryText);
+        query.addSortField("DREREFERENCE", SolrQuery.ORDER.asc);
+        query.setRows(10);
+        query.setStart(0);
+        //query.setParam("shards", "http://localhost:8080/solr/discovery1,http://localhost:8080/solr/discovery2");
+        try {
+            QueryResponse rsp = this.server.query( query );
+            SolrDocumentList docs = rsp.getResults();
+            System.out.println(docs.getNumFound());
+            
+            //for(SolrDocument doc : docs){
+            //    System.out.println(doc.toString());
+            //}
+        } catch (SolrServerException ex) {
+            //Logger.getLogger(SolrPostman.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("SolrException "+ex.getMessage());
+        }      
+    }
+    
     public void tagCategoryQuery(String queryText, String tag){
         List<SolrInputDocument> results=new ArrayList<>();
         SolrQuery query = new SolrQuery();
