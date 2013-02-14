@@ -10,7 +10,7 @@
 "traverse of inquisition" 
 "Domesday" 
 "Treasury of Receipt Modern Deeds" 
-"Treasury of Receipt Ancient Deeds") 
+"Treasury of Receipt Ancient Deeds"
 -"Domesday Committee" 
 -"Plan Domesday" 
 -"Digest of museum statistics"

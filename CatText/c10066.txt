@@ -1,3 +1,42 @@
+"tin mining"~1 
+"uranium mining"~1 
+"zinc mining"~1
+"Mines Act"~1 
+"Miners Welfare Act"~1 
+"Mines Working Facilities and Support Act"~1 
+"Mines and Collieries Act"~1 
+"Mining Industry Welfare Fund Act"~1 
+"Mining Industry Act"~1 
+"Metalliferous Mines Regulation Act"~1 
+"Stratified Ironstone Mines Gunpowder Act"~1 
+"Slate Mines Gunpowder Act"~1
+"Mineral Workings Act"~1
+"Mines Working Facilities and Support Act"~1
+"Coal Mines Inspection Act"~1
+"mining of metal*"~1 
+"mining of mineral*"~1 
+"mining of precious stone*"~1 
+"mining of bauxite"~1
+"mining of chromium"~1
+"mining of copper"~1
+"mining of diamond*"~1
+"mining of gold"~1
+"mining of gypsum"~1
+"mining of lead"~1
+"mining of iron"~1
+"mining of limestone"~1
+"mining of manganese"~1
+"mining of ore*"~1
+"mining of phosphate*"~1
+"mining of potash"~1
+"mining of platinum"~1
+"mining of salt"~1
+"mining of sandstone"~1
+"mining of silver"~1
+"mining of slate*"~1
+"mining of tin"~1
+"mining of uranium"~1
+"mining of zinc"~1
 "mining and quarrying" 
 "mines and quarrying" 
 "mining and quarry" 
@@ -46,7 +85,7 @@
 "NCB" 
 "National Union of Mineworkers" 
 "N.U.M" 
-"NUM" 
+"NUM"
 "clay pit*" 
 "china clay" 
 "ball clay" 
@@ -91,22 +130,22 @@
 "lead mine*"~1 
 "limestone mine*"~1 
 "manganese mine*"~1 
-"manganese ore mine*"~1 
+"manganese ore mine*"~1
 "metal mine*"~1 
 "phosphate mine*"~1 
 "potash mine*"~1 
 "platinum mine*"~1 
-"salt mine*"~1 
+"salt mine*"~1
 "sandstone mine*"~1 
 "silver mine*"~1 
-"slate mine*"~1~1 
-"tin mine*"~1" 
-"uranium mine*"~1" 
-"zinc mine*"~1"
+"slate mine*"~1  
+"tin mine*"~1
+"uranium mine*"~1 
+"zinc mine*"~1
 "bauxite mining"~1 
 "chalk mining"~1 
 "chromium mining"~1 
-"copper mining"~1 
+"copper mining"~1
 "diamond mining"~1 
 "gold mining"~1 
 "gypsum mining"~1 
@@ -124,46 +163,7 @@
 "salt mining"~1 
 "sandstone mining"~1 
 "silver mining"~1 
-"slate mining"~1 
-"tin mining"~1 
-"uranium mining"~1 
-"zinc mining"~1
-"Mines Act"~1 
-"Miners Welfare Act"~1 
-"Mines Working Facilities and Support Act"~1 
-"Mines and Collieries Act"~1 
-"Mining Industry Welfare Fund Act"~1 
-"Mining Industry Act"~1 
-"Metalliferous Mines Regulation Act"~1 
-"Stratified Ironstone Mines Gunpowder Act"~1 
-"Slate Mines Gunpowder Act"~1
-"Mineral Workings Act"~1
-"Mines Working Facilities and Support Act"~1
-"Coal Mines Inspection Act"~1
-"mining of metal*"~1 
-"mining of mineral*"~1 
-"mining of precious stone*"~1 
-"mining of bauxite"~1
-"mining of chromium"~1
-"mining of copper"~1
-"mining of diamond*"~1
-"mining of gold"~1
-"mining of gypsum"~1
-"mining of lead"~1
-"mining of iron"~1
-"mining of limestone"~1
-"mining of manganese"~1
-"mining of ore*"~1
-"mining of phosphate*"~1
-"mining of potash"~1
-"mining of platinum"~1
-"mining of salt"~1
-"mining of sandstone"~1
-"mining of silver"~1
-"mining of slate*"~1
-"mining of tin"~1
-"mining of uranium"~1
-"mining of zinc"~1
+"slate mining"~1
 -"minelaying" 
 -"minesweep*" 
 -"quarrying flight*" 

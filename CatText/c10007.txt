@@ -36,7 +36,7 @@
 "royal bank of scotland" 
 "National Westminster Bank" 
 "Coutts Bank" 
-"Deutsche Bank") 
+"Deutsche Bank"
 "loan bank"~5
 "securities"
 -"government securities" 

@@ -81,7 +81,7 @@
 "butter bread"~5
 "sauce company"~5
 "sauces company"~5 
-"bacon ham"~5) 
+"bacon ham"~5
 "bacon lard"~5
 -"Milk Street" 
 -"Robert Milk" 

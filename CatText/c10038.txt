@@ -2,10 +2,10 @@
 "fishery" 
 "fishing" 
 "fisheries" 
-("fish* product*")
-("fish* produce") 
-("fish* industry") 
-("fish* trade*") 
+"fish* product*"
+"fish* produce" 
+"fish* industry" 
+"fish* trade*"
 "commercial fish*" 
 "industrial fish*" 
 "fish farm*" 
@@ -25,11 +25,11 @@
 "fish* vessel*"~2
 "fish* boat*"~2
 "fish* fleet*"~2
-"fishing smack*" 
+"fishing smack*"
 "trawler fish*"~100
 "coracle fish*"~100
 "fish* research"~2 
-"fish* resource*~2) 
+"fish* resource*"~2
 "fish* process*"~2
 "fish* preserv*"~5
 "fish* transport*"~2 
@@ -81,6 +81,6 @@
 "fish* hatcher*"~2
 "Fish* Radiobiological Laborator*"~1
 "Whaling Commission*"
-"Colonial Fisheries Advisory Committee") 
+"Colonial Fisheries Advisory Committee"
 -"Flying Fish" 
 -"HMS Seafish"

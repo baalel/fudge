@@ -3,7 +3,7 @@
 "private correspondence"~1
 "private collection*"~1
 "private letters"~1
-"private letters and papers"~!
+"private letters and papers"~1
 "personal letters and papers"~1
 "personal letters"~1
 "personal papers"~1
@@ -32,14 +32,14 @@
 "Railway Executive Members Papers"~1 
 "Permanent Secretary to the Civil Service Department Papers"~1
 "Chartwell Trust Papers"~1
-"Private Offices: Various Ministers and Officials Papers"~1
+"Private Offices Various Ministers and Officials Papers"~1
 "Joseph Wolseley, Adjutant General of Army Papers"~1
-"English Nature and predecessors: Senior Officers Papers"~1
+"English Nature and predecessors Senior Officers Papers"~1
 "Sir Martin Davies Papers"~1
 "Private Collections of Ministers and Officials Papers"~1
 "Collection of Herbert Papers"~1
 "Shaftesbury and successors"
-"Private Office: Northern Ireland Papers"~1
+"Private Office Northern Ireland Papers"~1
 "John da Cunha Papers"~1
 "Akroyd Papers"~1
 "Alex S Allan Papers"~1
@@ -124,7 +124,7 @@
 "Stratford Canning Papers"~1
 "Stuart de Rothesay Papers"~1
 "Tenterden Papers"~1
-"Foreign Office: Thornton Papers"~1
+"Foreign Office Thornton Papers"~1
 "White Papers"~1
 "Woodbine Parish Papers"~1
 "Cockroft Papers"~1
@@ -175,7 +175,7 @@
 "War Office Major J S Rothwell"~100
 "Special Collections Briggs"~2
 "Special Collections George Dow"~2
-"Special Collections Fairbank"~"
+"Special Collections Fairbank"~2
 "Special Collections Leeman"~2
 "Special Collections Tomlinson"~2
 "Special Collections Earl of Bradford's Collection"~4
@@ -201,21 +201,21 @@
 "Papers relating to Colin Graham Trapnell"~3
 "Papers relating to Kew Collectors"~3
 "Papers relating to Chancery exhibits"~3
-"Foreign Office: Private Office" 
-"Henry Dallas: Correspondence" 
+"Foreign Office Private Office" 
+"Henry Dallas Correspondence" 
 "Papers relating to 1st Earl of Chatham" 
-"Russell Grant-Sturgis: Diary" 
-"Sir James Clark Ross: Correspondence and papers" 
-"Prime Minister's Office: Sir Desmond Morton" 
+"Russell Grant-Sturgis Diary" 
+"Sir James Clark Ross Correspondence and papers" 
+"Prime Minister's Office Sir Desmond Morton" 
 "HENRY FANSHAWE, QUEEN'S REMEMBRANCER" 
 "ABRAHAM FARLEY, DEPUTY CHAMBERLAIN OF THE EXCHEQUER" 
 "EDWARD WARD, CHIEF BARON OF THE EXCHEQUER" 
 "MASTER OF THE CEREMONIES" 
 "Mussolini's personal files" 
 "Venetian Manuscripts" 
-"Gifts and Deposits: Star Chamber Papers" 
+"Gifts and Deposits Star Chamber Papers" 
 "Miscellaneous Documents of Unknown Ownership" 
-"Joseph Hatton: Collection of Home Office Criminal Papers" 
+"Joseph Hatton Collection of Home Office Criminal Papers" 
 "Papers of botanist, Dr William Arnold Bromfield" 
 "Papers of horticulturist, George W Robinson"
 -"Paper Number" 

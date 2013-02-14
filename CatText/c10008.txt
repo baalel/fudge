@@ -4,14 +4,14 @@
 "Narrow Boat" 
 "National rivers authority" 
 "british board of waterways" 
-(River +dredging) 
-("River boat"~5
+"River dredging"
+"River boat"~5
 "River cargo"~5
 "navigable river" 
 "river transport" 
 "canal boat" 
 "BWB" 
-(Thames +barge) 
+"Thames barge" 
 "River barge"~5
 "waterways navigation"~5
 "towpath" 

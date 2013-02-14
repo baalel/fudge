@@ -1,11 +1,11 @@
 "charity commission" 
 "charity trust" 
 "voluntary hospital" 
-almshouse 
+"almshouse" 
 "relief fund" 
-philanthropic 
+"philanthropic"
 "benevolent institution" 
-"charity act") 
+"charity act" 
 "charity endowment"~5
 "charity land"~5
 "charity bequest"~5

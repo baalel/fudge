@@ -11,7 +11,7 @@
 "mutual and balanced force reduction*" 
 "force reduction*" 
 "MBFR" 
-M.B.F.R" 
+"M.B.F.R" 
 "Strategic Arms Limitation Talk*" 
 "SALT* conference*"~5
 "Partial Test Ban Treaty" 

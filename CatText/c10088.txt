@@ -6,7 +6,7 @@
 "television broadcast*"~5
 "tv broadcast*"~5
 "commercial broadcast*" 
-("satellite television"~5
+"satellite television"~5
 "broadcasting regulation*" 
 "public service broadcast*" 
 "digital broadcast*" 

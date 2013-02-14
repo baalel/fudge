@@ -62,7 +62,7 @@
 "CORPS"
 -"air CORPS"
 -"observer CORPS"
--"flying CORPS
+-"flying CORPS"
 -"aircraft CORPS"
 "COMMAND"
 -"educational COMMAND"

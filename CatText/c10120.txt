@@ -38,21 +38,6 @@
 "Committee journal"~1
 "Corporation journal"~1
 "union journal"~1
-"official journals"~1
-"government journals"~1
-"departmental journals"~1
-"parliamentary journals"~1
-"Council journals"~1
-"Ministry journals"~1
-"Office journals"~1
-"Agency journals"~1
-"Commission journals"~1
-"Board journals"~1
-"Company journals"~1
-"Executive journals"~1
-"Committee journals"~1
-"Corporation journals"~1
-"union journals"~1
 "official history"~1
 "government history"~1
 "departmental history"~1
@@ -68,21 +53,6 @@
 "Committee history"~1
 "Corporation history"~1
 "union history"~1
-"official histories"~1
-"government histories"~1
-"departmental histories"~1
-"parliamentary histories"~1
-"Council histories"~1
-"Ministry histories"~1
-"Office histories"~1
-"Agency histories"~1
-"Commission histories"~1
-"Board histories"~1
-"Company histories"~1
-"Executive histories"~1
-"Committee histories"~1
-"Corporation histories"~1
-"union histories"~1
 "official periodical*"~1
 "government periodical*"~1
 "departmental periodical*"~1
@@ -113,21 +83,6 @@
 "Committee yearbook*"~1
 "Corporation yearbook*"~1
 "union yearbook*"~1
-"official year book*"~1
-"government year book*"~1
-"departmental year book*"~1
-"parliamentary year book*"~1
-"Council year book*"~1
-"Ministry year book*"~1
-"Office year book*"~1
-"Agency year book*"~1
-"Commission year book*"~1
-"Board year book*"~1
-"Company year book*"~1
-"Executive year book*"~1
-"Committee year book*"~1
-"Corporation year book*"~1
-"union year book*"~1
 "official Bulletin*"~1
 "government Bulletin*"~1
 "departmental Bulletin*"~1
@@ -173,17 +128,6 @@
 "Committee pamphlet*"~1
 "Corporation pamphlet*"~1
 "union pamphlet*"~1
-"official hand book*"~1
-"government hand book*"~1
-"departmental hand book*"~1
-"Office hand book*"~1
-"Council hand book*"~1
-"Ministry hand book*"~1
-"Office hand book*"~1
-"Board hand book*"~1
-"Company hand book*"~1
-"Committee hand book*"~1
-"Corporation hand book*"~1
 "official handbook*"~1
 "government handbook*"~1
 "departmental handbook*"~1
@@ -199,15 +143,12 @@
 "Publications Branch"~1
 "Publications Section"~1
 "published work"~1
-"published works"~1
 "published book"~1
-"published books"~1
 "published booklet*"~1
 "published journal"
-"published journals"~1
 "HMSO"
 "H.M.S.O"
-"Stationery ~Office"
+"Stationery Office"
 "British Transport Historical Records Office library" 
 "London Gazette"~1
 "Edinburgh Gazette"~1
@@ -219,9 +160,8 @@
 "colonial gazettes"~1
 "military gazettes"~1
 "police gazettes"~1
-"~Gazetteeer*" 
+"Gazetteeer*" 
 "Confidential print" 
-"Confidential prints" 
 "parliamentary report*"~1
 "sessional report*"~1
 "parliamentary paper*"~1
@@ -230,8 +170,6 @@
 "published annual report*"~2
 "statutory instrument*" 
 "public journal" 
-"public journals" 
-"Information Bulletins and Digests"
 "Information Bulletin*"
 "Information Digest*"
 "Industrial Bulletin*"
@@ -253,39 +191,35 @@
 "Admiralty Publications"~2
 "Supplies Division Publications"~2
 "National Gallery Publications"~2
-"Local Administration in England Publications"~2
-"English Nature and predecessors Publications"~2
+"Local Administration Publications"~4
+"English Nature Publications"~4
 "Commission on Historical Manuscripts Publications"~2
-"Schools Council for Curriculum and Examinations Publications"~2
+"Curriculum and Examinations Publications"~2
 "Training of Health Visitors Publications"~2
-"Headquarters and Joint Service Command Publications"~2
+"Joint Service Command Publications"~2
 "London Museum Publications"~2
 "Employers' Associations Publications"~2
 "National Playing Fields Association Publications"~2
 "Ministry of Agriculture, Fisheries and Food Publications"~2
 "Ministry of Food Publications"~2
-"National Economic Development Office: Publications" 
+"National Economic Publications"~3
 "NEDO Publications" 
-"Air Publications (Naval)" 
-"Air Publications and Reports" 
-"Advisory Committee on Legal Education and Conduct: Publications" 
-"Office of Water Services: Occasional Publications" 
-"Ministry of Housing and Local Government: Circulars and Publications" 
-"General Nursing Council for England and Wales: Registrar: Circulars, Reports and Publications" 
-"Resettlement Agency: Annual Reports and Related Publications" 
-"Aviation (Av. P.) Publications" 
-"Publications of the House of Lords" 
-"Publications of the House of Commons" 
+"Air Publications" 
+"Advisory Committee on Legal Education and Conduct Publications" 
+"Office of Water Services Publications"~1
+"Government Circulars and Publications" 
+"General Nursing Council Reports and Publications"~7
+"Resettlement Agency Annual Reports" 
+"Aviation Av. P. Publications" 
+"Publications of the House of"  
 "Official Documents Website"
-"House of Lords Sessional Papers"~2
-"House of Commons Sessional Papers"~2
-"House of Lords Parliamentary Debates"~2
-"House of Commons Parliamentary Debates"~2
+"Lords Sessional Papers"~2
+"Commons Sessional Papers"~2
+"Lords Parliamentary Debates"~2
+"Commons Parliamentary Debates"~2
 "extracts from Hansard" 
-"extract from Hansard" 
-"publication in Hansard" 
+"publication in Hansard"
 "copy of hansard" 
-"copies of hansard"
 "Hansard extract*"~1
 "Hansard press"~1
 "Hansard report*"~1
@@ -293,24 +227,19 @@
 "Hansard debate*"~1
 "Hansard digest"~1
 "Hansard vol"~1
-"Commons Hansard" 
-"Hansard Commons" 
-"Hansard House" 
-"Lords Hansard" 
-"Hansard Lords" 
+"Commons Hansard" ~1
+"Hansard House"~1
+"Lords Hansard"~1
 "Report Hansard" 
-"printed reports of Parliamentary debates" 
-"Parliamentary Debates (Hansard)" 
-"Publication* Royal Greenwich Observatory"~5
-"Publication* Royal Observatory"~5
-"Publication* H M Nautical Almanac Office"~5
-"Publication* H M Almanac Office"~5
+"printed reports Parliamentary debates"~1
+"Parliamentary Debates Hansard" 
+"Publication* Royal Observatory"~6
+"Publication* H M Almanac Office"~6
 "Publication* Carlsberg Automatic Meridian Circle"~5
-"Publication* Associated Astronomical Societies and other bodies"~5
-"Publication* Particle Physics and Astronomy Research Council: Papers"~5
-"Museum Natural History Publications Correspondence"~5
-"Museum Natural History Keeper's Publication"~5
-"Miscellaneous Printed Extracts from Records" 
+"Publication* Associated Astronomical"~5
+"Publication* Research Council Papers"~10
+"Museum Natural History Publications"~5
+"Printed Extracts from Records" 
 "General Periodicals"~2
 "Railway Periodicals"~2
 "London Transport Periodicals"~2
@@ -321,3 +250,4 @@
 -"papers personal" 
 -"periodical return*" 
 -"periodical report*"
+

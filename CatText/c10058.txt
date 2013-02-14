@@ -22,11 +22,11 @@
 "atlas* miscellaneous"~5
 "atlas* geographical"~5
 "atlas* historical"~5
-"atlas*") 
+"atlas*"
 "plan attached"~1
 "plans attached"~1
 "sheet OS"~1
-"plan OS"~1)
+"plan OS"~1
 "sealed plan"
 "sealed plans" 
 "includes plan" 
