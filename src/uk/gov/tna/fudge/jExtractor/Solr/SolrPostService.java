@@ -69,7 +69,7 @@ public class SolrPostService {
         query.addSortField("DREREFERENCE", SolrQuery.ORDER.asc);
         query.setRows(10);
         query.setStart(0);
-        //query.setParam("shards", "http://localhost:8080/solr/discovery1,http://localhost:8080/solr/discovery2");
+        query.setParam("shards", "localhost:8080/solr/discovery1,localhost:8080/solr/discovery2");
         try {
             QueryResponse rsp = this.server.query( query );
             SolrDocumentList docs = rsp.getResults();

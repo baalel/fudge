@@ -166,11 +166,9 @@
 "war office Beale Colvin"
 "war office denis daly"~5
 "war office Henry George Hart"~5
-"War Office Lieutenant General Sir Harry G W Smith"~100
-"War Office Field Marshal Viscount Garnet Joseph Wolseley"~100
-"War Office Field Marshal Sir John Greer Dill"~100
+"War Office Lieutenant General"~100
+"War Office Field Marshal"~100
 "War Office General Miles Christopher Dempsey"~100
-"War Office Field Marshal Sir Douglas Haig"~100
 "War Office Treasury Thomas Archer"~100
 "War Office Major J S Rothwell"~100
 "Special Collections Briggs"~2
@@ -178,11 +176,11 @@
 "Special Collections Fairbank"~2
 "Special Collections Leeman"~2
 "Special Collections Tomlinson"~2
-"Special Collections Earl of Bradford's Collection"~4
+"Special Collections Earl"~4
 "Special Collections I K Brunel"~4
 "Special Collections F P Cockshott"~4
 "Special Collections Sir Arthur Elton"~4
-"Special Collections Retired Railway Officers' Society"~4
+"Special Collections Retired Railway Society"~5
 "Cabinet Secretary Notebooks"~2
 "Blundell Notebooks"~2
 "Papers of Sir"~2
