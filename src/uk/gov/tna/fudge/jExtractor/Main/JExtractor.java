@@ -113,6 +113,9 @@ public class JExtractor {
             case "POST":
                 this.post();
                 break;
+            case "FILEPOST":
+                this.filepost();
+                break;
             default:
                 System.out.println("Supported modes are POST, QUERY and PULL");
                 break;
@@ -314,6 +317,17 @@ public class JExtractor {
         sDoc.addField("CLOSURESTATUS","open");
         
         postie.postDocument(sDoc,true);
+    }
+    
+    /**
+     * Calls class to load data from file and Post to solr
+     */
+    public void filepost()
+    {
+        IndexFromFiles fileIndexer=new IndexFromFiles(this.localProp);
+        fileIndexer.load();
+        fileIndexer.run();
+        
     }
     
     /**
